@@ -278,6 +278,12 @@ window.HPLAY_POSTBOX = '1851de0b-3432-44a0-9c75-81463fb7beb2';
   </header>
 
   <form id="form" novalidate>
+    <!-- Not for you. Bots fill in every field they find; this one is hidden from the page
+         and from screen readers, so anything that ticks it is not a person. -->
+    <label class="sr-only" aria-hidden="true" style="position:absolute;left:-9999px;top:0">
+      Leave this untouched
+      <input type="checkbox" id="botcheck" name="botcheck" tabindex="-1" autocomplete="off">
+    </label>
 
     <div class="chrome"><span class="n">1</span><h2 data-t="sec1"></h2><span class="batt"><i></i></span></div>
 
@@ -487,6 +493,9 @@ window.HPLAY_POSTBOX = '1851de0b-3432-44a0-9c75-81463fb7beb2';
       privacy:'Your answers go to Iwo and nowhere else. Nothing is sent until you press Send, nothing but this form goes with it, and there is no tracking, no email address and no account.',
       errBoth:'Two questions are required: the first ten seconds, and what annoyed you.',
       errOne:'One left: what annoyed you? Even a small thing helps.',
+      limitSame:'Those are the same notes you just sent. Change something, or use the email button below.',
+      limitWait:'Just a moment — {s} seconds before the next one can go. Your notes are below and still mailable.',
+      limitDay:'That is {n} lots of notes today, which is plenty. Use the email button below, or come back tomorrow.',
       thanks:'Thank you, genuinely.',
       savedBadge:'Saved', manualBadge:"Ready to send",
       doneSaved:'Your notes went straight through. Thank you for taking the time.',
@@ -546,6 +555,9 @@ window.HPLAY_POSTBOX = '1851de0b-3432-44a0-9c75-81463fb7beb2';
       privacy:'Odpowiedzi trafiają do Iwo i nigdzie indziej. Nic nie wysyła się, zanim nie naciśniesz Wyślij, nic poza tym formularzem z tym nie idzie — żadnego śledzenia, maila ani konta.',
       errBoth:'Dwa pytania są obowiązkowe: pierwsze dziesięć sekund i to, co Cię wkurzało.',
       errOne:'Zostało jedno: co Cię wkurzało? Nawet drobiazg pomaga.',
+      limitSame:'To te same uwagi, które przed chwilą wysłałeś. Zmień coś albo użyj przycisku maila poniżej.',
+      limitWait:'Chwilkę — jeszcze {s} sekund do następnej wysyłki. Uwagi są poniżej i nadal możesz je wysłać mailem.',
+      limitDay:'To już {n} zestawy uwag dzisiaj, w zupełności wystarczy. Użyj przycisku maila poniżej albo wróć jutro.',
       thanks:'Dzięki, serio.',
       savedBadge:'Zapisane', manualBadge:"Gotowe do wysłania",
       doneSaved:'Uwagi doszły. Dzięki za poświęcony czas.',
@@ -566,6 +578,70 @@ window.HPLAY_POSTBOX = '1851de0b-3432-44a0-9c75-81463fb7beb2';
   var done = document.getElementById('done');
   var errEl = document.getElementById('err');
   var sendBtn = document.getElementById('send');
+
+
+  /* ---------------------------------------------------------------------------
+     HOW OFTEN THE NOTES CAN BE SENT.
+
+     The relay's free allowance is a few hundred a month and they all land in one
+     inbox, so one person leaning on the Send button could use up both. Three
+     rules, in the order they bite:
+
+       - the same notes twice running are refused. This is the one that actually
+         happens: a slow connection, nothing seems to occur, and the button gets
+         pressed again
+       - a minute between sends
+       - five a day
+
+     This is kept in the browser, so somebody determined can clear it and carry
+     on. That is fine — it is here to stop accidents and idle hammering, not a
+     person who has decided to be a nuisance. The relay does its own spam
+     filtering, and the honeypot below catches the bots that fill in every field
+     they find.
+
+     When a send is refused the notes are never lost: the page shows them written
+     out with the button that opens an email, exactly as it does when the relay
+     is down.
+     --------------------------------------------------------------------------- */
+  var SEND_GAP_MS = 60 * 1000;      // between one send and the next
+  var SEND_PER_DAY = 5;
+
+  function sendLog(){
+    try { return JSON.parse(localStorage.getItem('hplay-sent') || '{}') || {}; }
+    catch (e) { return {}; }
+  }
+  /* The summary has the time of writing in it, so two identical sets of answers produce
+     two different strings. What we want to know is whether the ANSWERS are the same, so
+     the time is the one thing left out. */
+  function answerPrint(a){
+    var copy = {}, k;
+    for (k in a) if (Object.prototype.hasOwnProperty.call(a, k) && k !== 'submittedAt') copy[k] = a[k];
+    try { return JSON.stringify(copy); } catch (e) { return ''; }
+  }
+  function noteSend(print){
+    try {
+      var g = sendLog(), today = new Date().toISOString().slice(0, 10);
+      if (g.day !== today) { g.day = today; g.count = 0; g.last = ''; }   // a new day, a clean slate
+      g.count = (g.count || 0) + 1;
+      g.at = Date.now();
+      g.last = print.slice(0, 4000);
+      localStorage.setItem('hplay-sent', JSON.stringify(g));
+    } catch (e) {
+      // a browser with storage switched off just gets no limiting, which is no worse
+      // than the page was before there was any
+    }
+  }
+  /** '' when it may go, otherwise the reason to show. */
+  function tooSoon(print){
+    var g = sendLog();
+    if (!g.at) return '';
+    if (g.last && g.last === print.slice(0, 4000)) return t('limitSame');
+    var wait = SEND_GAP_MS - (Date.now() - g.at);
+    if (wait > 0) return t('limitWait').replace('{s}', Math.ceil(wait / 1000));
+    if (g.day === new Date().toISOString().slice(0, 10) && (g.count || 0) >= SEND_PER_DAY)
+      return t('limitDay').replace('{n}', SEND_PER_DAY);
+    return '';
+  }
 
   var db = null;
   var lang = 'en';
@@ -684,9 +760,25 @@ window.HPLAY_POSTBOX = '1851de0b-3432-44a0-9c75-81463fb7beb2';
       errEl.textContent = t('errOne'); errEl.hidden = false;
       document.getElementById('annoyed').focus(); return;
     }
+    /* A bot that fills in every field it can find trips this; a person never sees it.
+       Silently treated as sent, because telling a bot it failed only invites a retry. */
+    var pot = document.getElementById('botcheck');
+    if (pot && pot.checked) { finish(true, answers); return; }
+
+    var notes = asText(answers);
+    var print = answerPrint(answers);
+    var refuse = tooSoon(print);
+    if (refuse) {
+      errEl.textContent = refuse;
+      errEl.hidden = false;
+      finish(false, answers);          // the notes are still written out, and still mailable
+      return;
+    }
+
     sendBtn.disabled = true;
     sendBtn.textContent = t('sending');
     var done = function(ok){
+      if (ok) noteSend(print);
       finish(ok, answers);
       sendBtn.disabled = false;
       sendBtn.textContent = t('send');
@@ -706,7 +798,7 @@ window.HPLAY_POSTBOX = '1851de0b-3432-44a0-9c75-81463fb7beb2';
     var POSTBOX = window.HPLAY_POSTBOX || '';
     if (POSTBOX) {
       var payload = { access_key: POSTBOX, subject: 'Hplay tester notes (' + (answers.appVersion || 'alpha') + ')',
-                      from_name: 'Hplay feedback', message: asText(answers) };
+                      from_name: 'Hplay feedback', message: notes };
       var gaveUp = false;
       var bail = setTimeout(function(){ gaveUp = true; done(false); }, 12000);
       fetch('https://api.web3forms.com/submit', {
