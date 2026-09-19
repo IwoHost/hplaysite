@@ -1,0 +1,762 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="Tester notes for the Hplay alpha, in English or Polish.">
+<meta name="theme-color" content="#1b6fd0">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%231b6fd0%22/><circle cx=%2216%22 cy=%2216%22 r=%229%22 fill=%22none%22 stroke=%22white%22 stroke-width=%223%22/></svg>">
+<style>
+  *{ box-sizing:border-box; }
+  html{ -webkit-text-size-adjust:100%; }
+  body{ margin:0; }
+  img{ max-width:100%; }
+  [hidden]{ display:none !important; }
+  .backhome{
+    max-width:960px; margin:0 auto; padding:14px 20px 0;
+    font-family:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+    font-size:12px; letter-spacing:.08em; text-transform:uppercase;
+  }
+  .backhome a{ color:#1b6fd0; text-decoration:none; }
+  .backhome a:hover{ text-decoration:underline; }
+  @media (prefers-color-scheme: dark){ .backhome a{ color:#64a6f0; } }
+</style>
+<title>Hplay Tester Notes</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@112,600;112,700;112,800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<script>
+/* ---------------------------------------------------------------------------
+   WHERE TESTER NOTES GO.
+
+   To have them emailed to you:
+     1. go to web3forms.com, put in hostlabosupport@gmail.com, press the button
+     2. they email you an access key — a long string that looks like a uuid
+     3. paste it between the quotes below, and push
+
+   Leave it empty and nothing breaks. The page falls back to what it does today:
+   it writes the notes out as text with a button that opens an email with them
+   already filled in.
+
+   The key is not a secret. It only means "send to the address that asked for
+   this key" — it cannot be used to read anything — which is why it is safe
+   sitting in a public page. Your email address is NOT in here, which is the
+   other reason to use a key rather than posting straight to an address.
+   --------------------------------------------------------------------------- */
+window.HPLAY_POSTBOX = '1851de0b-3432-44a0-9c75-81463fb7beb2';
+</script>
+</head>
+<body>
+<a class="skiplink" href="#main">Skip to the form</a>
+<div class="backhome"><a href="index.html">&#8592; Hplay</a></div>
+<style>
+  :root{
+    --ground:#e9ebf0; --panel:#fff; --panel-2:#f3f5f9;
+    --ink:#0f131b; --ink-soft:#333c4a; --muted:#5c6674;
+    --line:#ccd2dc; --line-soft:#dfe3ea;
+    --accent:#1b6fd0; --accent-ink:#0f4fa8; --accent-soft:#dbe8f8;
+    --good:#3d8f18; --good-soft:#e2f2da;
+    --chrome-1:#fdfdfd; --chrome-2:#dadce0; --chrome-3:#c3c7cd;
+    --chrome-line:#9aa0a8; --chrome-ink:#1c1f24;
+    --shadow:0 1px 2px rgba(12,22,40,.06), 0 8px 24px -12px rgba(12,22,40,.26);
+    --display:"Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;
+    --body:"IBM Plex Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#0a0d13; --panel:#141a24; --panel-2:#101620;
+      --ink:#e6eaf1; --ink-soft:#c3cad6; --muted:#8b95a5;
+      --line:#242e3c; --line-soft:#1b232e;
+      --accent:#64a6f0; --accent-ink:#9cc8f7; --accent-soft:#132437;
+      --good:#6bc24a; --good-soft:#15251a;
+      --chrome-1:#2e3138; --chrome-2:#1c1f25; --chrome-3:#15171c;
+      --chrome-line:#05060a; --chrome-ink:#ced4dc;
+      --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 30px -14px rgba(0,0,0,.8);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#0a0d13; --panel:#141a24; --panel-2:#101620;
+    --ink:#e6eaf1; --ink-soft:#c3cad6; --muted:#8b95a5;
+    --line:#242e3c; --line-soft:#1b232e;
+    --accent:#64a6f0; --accent-ink:#9cc8f7; --accent-soft:#132437;
+    --good:#6bc24a; --good-soft:#15251a;
+    --chrome-1:#2e3138; --chrome-2:#1c1f25; --chrome-3:#15171c;
+    --chrome-line:#05060a; --chrome-ink:#ced4dc;
+    --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 30px -14px rgba(0,0,0,.8);
+  }
+
+  body{ background:var(--ground); color:var(--ink); font-family:var(--body);
+        font-size:16.5px; line-height:1.55; -webkit-font-smoothing:antialiased; }
+  .wrap{ max-width:640px; margin:0 auto; padding-inline:18px; padding-block:0 60px; }
+
+  /* ---- language switch, first thing on the page ---- */
+  .lang{ display:flex; justify-content:flex-end; gap:0; padding-block:16px 0; }
+  .lang .seg{ display:flex; border:1px solid var(--line); border-radius:999px;
+              overflow:hidden; background:var(--panel); }
+  .lang button{
+    font-family:var(--mono); font-size:12.5px; letter-spacing:.08em; text-transform:uppercase;
+    padding:9px 15px; min-height:40px; border:0; background:none; color:var(--muted);
+    cursor:pointer; border-radius:0;
+  }
+  .lang button[aria-pressed="true"]{ background:var(--accent); color:#fff; font-weight:500; }
+  .lang button:focus-visible{ outline:2px solid var(--accent); outline-offset:-2px; }
+
+  header{ padding-block:22px 8px; }
+  .eyebrow{ font-family:var(--mono); font-size:11.5px; letter-spacing:.14em;
+            text-transform:uppercase; color:var(--muted); margin-bottom:12px; }
+  h1{ font-family:var(--display); font-size:clamp(34px,8vw,46px); font-weight:800;
+      letter-spacing:-.02em; line-height:1.05; margin-bottom:12px; text-wrap:balance; }
+  .intro{ color:var(--ink-soft); max-width:52ch; }
+  .intro + .intro{ margin-top:12px; }
+
+  .chrome{ display:flex; align-items:center; gap:10px; margin:36px 0 20px;
+    padding:8px 13px; border:1px solid var(--chrome-line); border-radius:7px;
+    background:linear-gradient(180deg,var(--chrome-1) 0%,var(--chrome-2) 46%,var(--chrome-3) 52%,var(--chrome-2) 100%);
+    color:var(--chrome-ink); box-shadow:var(--shadow); }
+  .chrome h2{ flex:1; text-align:center; font-family:var(--display); font-size:15.5px;
+              font-weight:700; margin:0; color:var(--chrome-ink); }
+  .chrome .n{ font-family:var(--mono); font-size:11.5px; color:var(--muted); min-width:2.2em; }
+  .batt{ width:24px; height:12px; border:1.5px solid var(--chrome-line); border-radius:2.5px;
+         position:relative; flex:0 0 auto; background:var(--chrome-3); }
+  .batt::after{ content:""; position:absolute; right:-4px; top:2.5px; width:2px; height:5px;
+                background:var(--chrome-line); border-radius:0 1px 1px 0; }
+  .batt i{ position:absolute; inset:1.5px; width:86%; border-radius:1px;
+           background:linear-gradient(180deg,#a4ec74,#4fb022 55%,#3d8f18); }
+
+  .q{ margin-bottom:26px; }
+  .q > label, .q .qlab{ display:block; font-weight:600; font-size:16.5px; margin-bottom:4px; }
+  .q .hint{ display:block; font-size:14px; color:var(--muted); margin-bottom:11px; }
+  .req{ font-family:var(--mono); font-size:11px; color:var(--accent);
+        letter-spacing:.08em; text-transform:uppercase; margin-left:7px; }
+
+  input[type=text], textarea{
+    width:100%; font-family:inherit; font-size:16px; color:var(--ink);
+    background:var(--panel); border:1px solid var(--line); border-radius:9px;
+    padding:12px 13px; line-height:1.5;
+  }
+  textarea{ min-height:92px; resize:vertical; }
+  input[type=text]:focus-visible, textarea:focus-visible,
+  .pill:focus-within, .chip:focus-within{
+    outline:2px solid var(--accent); outline-offset:2px;
+  }
+  ::placeholder{ color:var(--muted); opacity:.75; }
+
+  .scale{ display:flex; gap:8px; flex-wrap:wrap; }
+  .pill{ flex:1 1 56px; }
+  .pill input, .chip input, .radio input{ position:absolute; opacity:0; pointer-events:none; }
+  .pill span{
+    display:block; text-align:center; padding:12px 6px; min-height:46px;
+    border:1px solid var(--line); border-radius:9px; background:var(--panel);
+    font-family:var(--mono); font-size:15px; cursor:pointer; user-select:none;
+    line-height:1.4;
+  }
+  .pill input:checked + span{
+    background:linear-gradient(180deg,#84bef0 0%,#4390e0 46%,#2064c6 52%,#3a7ad1 100%);
+    border-color:var(--accent-ink); color:#fff; font-weight:500;
+  }
+  .ends{ display:flex; justify-content:space-between; font-size:13px; color:var(--muted); margin-top:7px; }
+
+  .chips{ display:flex; flex-wrap:wrap; gap:8px; }
+  .chip span{
+    padding:10px 14px; min-height:44px; display:flex; align-items:center;
+    border:1px solid var(--line); border-radius:999px; background:var(--panel);
+    font-size:15px; cursor:pointer; user-select:none;
+  }
+  .chip input:checked + span{ background:var(--good-soft); border-color:var(--good); color:var(--ink); font-weight:500; }
+
+  .radios{ display:grid; gap:8px; }
+  .radio span{
+    display:block; padding:12px 14px; min-height:46px;
+    border:1px solid var(--line); border-radius:9px; background:var(--panel);
+    font-size:15.5px; cursor:pointer; user-select:none;
+  }
+  .radio input:checked + span{ background:var(--accent-soft); border-color:var(--accent); font-weight:500; }
+
+  .actions{ margin-top:34px; display:flex; flex-wrap:wrap; gap:12px; align-items:center; }
+  button{
+    font-family:var(--body); font-size:16px; font-weight:600; cursor:pointer;
+    border-radius:10px; padding:14px 22px; min-height:50px; border:1px solid transparent;
+  }
+  .send{ background:var(--accent); color:#fff; border-color:var(--accent-ink); flex:1 1 200px; }
+  .send:disabled{ opacity:.6; cursor:progress; }
+  .ghost{ background:var(--panel); color:var(--ink); border-color:var(--line); }
+  button:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+
+  .note{ font-size:14px; color:var(--muted); margin-top:14px; max-width:52ch; }
+  .err{ color:#b3372c; font-size:14.5px; margin-top:12px; }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .err{ color:#e2685a; } }
+
+  /* ---- the thank-you state ---- */
+  #done[hidden]{ display:none; }
+  #done{ padding-block:40px 0; }
+  .card{ background:var(--panel); border:1px solid var(--line-soft); border-radius:12px;
+         padding:24px; box-shadow:var(--shadow); }
+  .saved{ display:inline-flex; align-items:center; gap:9px; font-family:var(--mono);
+          font-size:12px; letter-spacing:.1em; text-transform:uppercase;
+          color:var(--good); margin-bottom:14px; }
+  .saved .dot{ width:9px; height:9px; border-radius:50%; background:var(--good); }
+  .saved.manual{ color:var(--accent); } .saved.manual .dot{ background:var(--accent); }
+  .card h2{ font-family:var(--display); font-size:26px; font-weight:700; margin-bottom:10px; }
+  #summary{
+    width:100%; min-height:220px; font-family:var(--mono); font-size:13px; line-height:1.6;
+    background:var(--panel-2); border:1px solid var(--line-soft); border-radius:9px;
+    padding:14px; color:var(--ink); margin-top:14px; white-space:pre; overflow:auto;
+  }
+  footer{ margin-top:48px; padding-top:20px; border-top:1px solid var(--line);
+          font-family:var(--mono); font-size:12px; color:var(--muted); }
+
+  /* ---- phones: this is the surface it is actually filled in on ---- */
+  @media (max-width:480px){
+    body{ font-size:16px; }
+    .wrap{ padding-inline:15px; padding-block:0 44px; }
+    .lang{ padding-block:12px 0; }
+    header{ padding-block:16px 4px; }
+    h1{ font-size:30px; }
+    .intro{ font-size:15.5px; }
+    .chrome{ margin:28px 0 16px; }
+    .q{ margin-bottom:22px; }
+    .q > label, .q .qlab{ font-size:16px; }
+    .scale{ gap:6px; }
+    .pill{ flex:1 1 0; min-width:0; }
+    .pill span{ padding:13px 2px; font-size:16px; }
+    .ends{ font-size:12.5px; }
+    .chip span{ padding:11px 13px; font-size:15px; }
+    .radio span{ padding:13px 13px; }
+    textarea{ min-height:104px; }
+    .actions{ margin-top:26px; }
+    .send{ flex:1 1 100%; padding:16px 22px; min-height:54px; font-size:17px; }
+    .ghost{ flex:1 1 100%; }
+    #summary{ min-height:260px; font-size:12px; }
+    .card{ padding:20px 17px; }
+    .card h2{ font-size:22px; }
+  }
+  @media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important; } }
+
+  /* ---- reachable by keyboard, readable by everyone ----
+     Every colour here clears 4.5:1 against the worst part of whatever is behind it, in the
+     light theme and the dark one, measured rather than eyeballed. */
+  .sr-only{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+  .skiplink{
+    position:absolute; left:8px; top:-60px; z-index:100;
+    background:#0f4fa8; color:#fff; font-weight:600;
+    padding:10px 16px; border-radius:0 0 8px 8px; text-decoration:none;
+  }
+  .skiplink:focus{ top:0; }
+  :focus-visible{ outline:3px solid var(--accent); outline-offset:2px; border-radius:4px; }
+  .chrome .n{ color:#3d4550; }
+  .backhome a{ color:#0f4fa8; padding:6px 4px; display:inline-block; min-height:24px; }
+  .req{ color:#0f4fa8; }
+  .send{ background:var(--accent-ink); border-color:var(--accent-ink); }
+  :root[data-theme="dark"] .chrome .n{ color:#a2acbb; }
+  :root[data-theme="dark"] .backhome a{ color:#9cc8f7; }
+  :root[data-theme="dark"] .req{ color:#9cc8f7; }
+  :root[data-theme="dark"] .send{ background:var(--accent); border-color:var(--accent); color:#06243f; }
+  :root[data-theme="dark"] .lang button[aria-pressed="true"]{ color:#06243f; }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) .chrome .n{ color:#a2acbb; }
+    :root:not([data-theme="light"]) .backhome a{ color:#9cc8f7; }
+    :root:not([data-theme="light"]) .req{ color:#9cc8f7; }
+    :root:not([data-theme="light"]) .send{ background:var(--accent); border-color:var(--accent); color:#06243f; }
+    :root:not([data-theme="light"]) .lang button[aria-pressed="true"]{ color:#06243f; }
+  }
+</style>
+
+<main class="wrap" id="main">
+
+  <div class="lang">
+    <div class="seg" role="group" id="langGroup">
+      <button type="button" id="langEn" aria-pressed="true">English</button>
+      <button type="button" id="langPl" aria-pressed="false">Polski</button>
+    </div>
+  </div>
+
+  <header>
+    <div class="eyebrow" data-t="eyebrow"></div>
+    <h1 data-t="h1"></h1>
+    <p class="intro" data-t="intro1"></p>
+    <p class="intro" data-t="intro2"></p>
+  </header>
+
+  <form id="form" novalidate>
+
+    <div class="chrome"><span class="n">1</span><h2 data-t="sec1"></h2><span class="batt"><i></i></span></div>
+
+    <div class="q">
+      <label for="first"><span data-t="qFirst"></span><span class="req" data-t="required"></span></label>
+      <span class="hint" data-t="qFirstHint"></span>
+      <textarea id="first" name="first" data-tph="qFirstPh"></textarea>
+    </div>
+
+    <div class="q">
+      <span class="qlab" data-t="qWheel"></span>
+      <span class="hint" data-t="qWheelHint"></span>
+      <div class="radios">
+        <label class="radio"><input type="radio" name="wheel" value="Straight away"><span data-t="wheel1"></span></label>
+        <label class="radio"><input type="radio" name="wheel" value="Took a moment"><span data-t="wheel2"></span></label>
+        <label class="radio"><input type="radio" name="wheel" value="Needed telling"><span data-t="wheel3"></span></label>
+        <label class="radio"><input type="radio" name="wheel" value="Still awkward"><span data-t="wheel4"></span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <span class="qlab" data-t="qFound"></span>
+      <span class="hint" data-t="qFoundHint"></span>
+      <div class="chips">
+        <label class="chip"><input type="checkbox" name="found" value="Now Playing"><span>Now Playing</span></label>
+        <label class="chip"><input type="checkbox" name="found" value="Vinyl mode"><span>Vinyl</span></label>
+        <label class="chip"><input type="checkbox" name="found" value="Search"><span>Search</span></label>
+        <label class="chip"><input type="checkbox" name="found" value="Playlists"><span>Playlists</span></label>
+        <label class="chip"><input type="checkbox" name="found" value="Sleep timer"><span>Sleep Timer</span></label>
+        <label class="chip"><input type="checkbox" name="found" value="Screen modes"><span>Screen</span></label>
+        <label class="chip"><input type="checkbox" name="found" value="Audio toys"><span>Audio Toys</span></label>
+        <label class="chip"><input type="checkbox" name="found" value="Statistics"><span>Statistics</span></label>
+        <label class="chip"><input type="checkbox" name="found" value="Changelog"><span>Changelog</span></label>
+        <label class="chip"><input type="checkbox" name="found" value="Notes"><span>Notes</span></label>
+      </div>
+    </div>
+
+    <div class="chrome"><span class="n">2</span><h2 data-t="sec2"></h2><span class="batt"><i></i></span></div>
+
+    <div class="q">
+      <span class="qlab" data-t="qLook"></span>
+      <div class="scale" role="group">
+        <label class="pill"><input type="radio" name="look" value="1"><span>1</span></label>
+        <label class="pill"><input type="radio" name="look" value="2"><span>2</span></label>
+        <label class="pill"><input type="radio" name="look" value="3"><span>3</span></label>
+        <label class="pill"><input type="radio" name="look" value="4"><span>4</span></label>
+        <label class="pill"><input type="radio" name="look" value="5"><span>5</span></label>
+      </div>
+      <div class="ends"><span data-t="lookLo"></span><span data-t="lookHi"></span></div>
+    </div>
+
+    <div class="q">
+      <span class="qlab" data-t="qFeel"></span>
+      <div class="scale" role="group">
+        <label class="pill"><input type="radio" name="feel" value="1"><span>1</span></label>
+        <label class="pill"><input type="radio" name="feel" value="2"><span>2</span></label>
+        <label class="pill"><input type="radio" name="feel" value="3"><span>3</span></label>
+        <label class="pill"><input type="radio" name="feel" value="4"><span>4</span></label>
+        <label class="pill"><input type="radio" name="feel" value="5"><span>5</span></label>
+      </div>
+      <div class="ends"><span data-t="feelLo"></span><span data-t="feelHi"></span></div>
+    </div>
+
+    <div class="q">
+      <span class="qlab" data-t="qSpeed"></span>
+      <div class="scale" role="group">
+        <label class="pill"><input type="radio" name="speed" value="1"><span>1</span></label>
+        <label class="pill"><input type="radio" name="speed" value="2"><span>2</span></label>
+        <label class="pill"><input type="radio" name="speed" value="3"><span>3</span></label>
+        <label class="pill"><input type="radio" name="speed" value="4"><span>4</span></label>
+        <label class="pill"><input type="radio" name="speed" value="5"><span>5</span></label>
+      </div>
+      <div class="ends"><span data-t="speedLo"></span><span data-t="speedHi"></span></div>
+    </div>
+
+    <div class="q">
+      <label for="liked" data-t="qLiked"></label>
+      <span class="hint" data-t="qLikedHint"></span>
+      <textarea id="liked" name="liked" data-tph="qLikedPh"></textarea>
+    </div>
+
+    <div class="q">
+      <label for="annoyed"><span data-t="qAnnoyed"></span><span class="req" data-t="required"></span></label>
+      <span class="hint" data-t="qAnnoyedHint"></span>
+      <textarea id="annoyed" name="annoyed" data-tph="qAnnoyedPh"></textarea>
+    </div>
+
+    <div class="chrome"><span class="n">3</span><h2 data-t="sec3"></h2><span class="batt"><i></i></span></div>
+
+    <div class="q">
+      <label for="broke" data-t="qBroke"></label>
+      <span class="hint" data-t="qBrokeHint"></span>
+      <textarea id="broke" name="broke" data-tph="qBrokePh"></textarea>
+    </div>
+
+    <div class="q">
+      <label for="missing" data-t="qMissing"></label>
+      <textarea id="missing" name="missing" data-tph="qMissingPh"></textarea>
+    </div>
+
+    <div class="q">
+      <span class="qlab" data-t="qKeep"></span>
+      <div class="radios">
+        <label class="radio"><input type="radio" name="keep" value="Yes"><span data-t="keep1"></span></label>
+        <label class="radio"><input type="radio" name="keep" value="Sometimes"><span data-t="keep2"></span></label>
+        <label class="radio"><input type="radio" name="keep" value="Not yet"><span data-t="keep3"></span></label>
+        <label class="radio"><input type="radio" name="keep" value="No"><span data-t="keep4"></span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <label for="changefirst" data-t="qChange"></label>
+      <textarea id="changefirst" name="changefirst" data-tph="qChangePh"></textarea>
+    </div>
+
+    <div class="q">
+      <label for="device" data-t="qDevice"></label>
+      <span class="hint" data-t="qDeviceHint"></span>
+      <input type="text" id="device" name="device" data-tph="qDevicePh">
+    </div>
+
+    <div class="q">
+      <label for="who" data-t="qWho"></label>
+      <span class="hint" data-t="qWhoHint"></span>
+      <input type="text" id="who" name="who" data-tph="qWhoPh">
+    </div>
+
+    <div class="actions">
+      <button type="submit" class="send" id="send" data-t="send"></button>
+    </div>
+    <p class="note" id="mode" data-t="privacy"></p>
+    <p class="err" id="err" role="alert" hidden></p>
+  </form>
+
+  <div id="done" hidden>
+    <div class="card">
+      <span class="saved" id="savedBadge"><span class="dot"></span><span id="savedText"></span></span>
+      <h2 data-t="thanks"></h2>
+      <p style="color:var(--ink-soft);" id="doneMsg"></p>
+      <div id="manualBlock" hidden>
+        <p style="color:var(--ink-soft); margin-top:14px;" data-t="manualMsg"></p>
+        <label class="sr-only" for="summary" data-t="summaryLabel">Your notes, as text</label>
+        <textarea id="summary" readonly></textarea>
+        <div class="actions">
+          <button type="button" class="send" id="mailit" data-t="mailit"></button>
+          <button type="button" class="ghost" id="copy" data-t="copy"></button>
+          <button type="button" class="ghost" id="reopen" data-t="back"></button>
+        </div>
+      </div>
+      <div class="actions" id="doneActions">
+        <button type="button" class="ghost" id="reopen2" data-t="change"></button>
+      </div>
+    </div>
+  </div>
+
+  <footer role="contentinfo" data-t="footer"></footer>
+</main>
+
+<script>
+(function(){
+  /* Everything the page says, in both languages. The Polish is written to avoid gendered
+     verb forms wherever it can, because a tester should not have to read a form that assumes
+     their gender, and "wypełniłeś/aś" everywhere reads terribly. */
+  var T = {
+    en: {
+      mailit: "Send it to me by email",
+      summaryLabel: "Your notes, as text",
+      eyebrow:'Hplay · v38.11 “Barney” · alpha test',
+      h1:'What did you actually think?',
+      intro1:'This is Hplay, a music player built to work like the classic click-wheel players. It is an <b>alpha build</b>: about two months old, unfinished on purpose, and you are one of the first people outside the project to touch it.',
+      intro2:'Be blunt. “I didn\'t get it” and “this bit annoyed me” are worth more than “nice job”. Things being broken is expected at this stage. Saying <em>which</em> things is the useful part. Two questions are required, the rest you can skip. Takes about three minutes.',
+      sec1:'First Contact', sec2:'The Verdict', sec3:'Breakages',
+      required:'required',
+      qFirst:'What went through your head in the first ten seconds?',
+      qFirstHint:'Before you worked anything out. First reaction, however dumb.',
+      qFirstPh:'It looked like…',
+      qWheel:'Did the wheel make sense without being told?',
+      qWheelHint:'Spinning your thumb around it to move through the list.',
+      wheel1:'Straight away', wheel2:'Took a moment, then it clicked',
+      wheel3:'Someone had to tell me', wheel4:'I get it, but it still feels awkward',
+      qFound:'Which of these did you find without being shown?',
+      qFoundHint:'Tap everything you came across yourself. Leaving most of these blank is useful information, not a failure.',
+      qLook:'How it looks', lookLo:'rough', lookHi:'looks real',
+      qFeel:'How it feels to use', feelLo:'fighting it', feelHi:'effortless',
+      qSpeed:'How fast it felt', speedLo:'laggy', speedHi:'instant',
+      qLiked:'What was the best bit?',
+      qLikedHint:'The thing worth mentioning if you were describing it to someone else.',
+      qLikedPh:'Probably the…',
+      qAnnoyed:'What annoyed you?',
+      qAnnoyedHint:'The honest one. Anything confusing, ugly, slow, fiddly, or just wrong. Small complaints count. Those are usually the fixable ones.',
+      qAnnoyedPh:'It bugged me that…',
+      qBroke:'Did anything break, freeze, or do something clearly wrong?',
+      qBrokeHint:'If you can, say what was happening right before. That is the part that makes it fixable.',
+      qBrokePh:'After I pressed…',
+      qMissing:'What is missing? Was there something you could not find?',
+      qMissingPh:'I went looking for…',
+      qKeep:'Honestly, would this stay on your phone?',
+      keep1:'Yes, I would use it day to day', keep2:'Sometimes, for the novelty',
+      keep3:'Not yet, but maybe after a few changes', keep4:'No, I will stick with what I use',
+      qChange:'If he could change only one thing, what should it be?',
+      qChangePh:'Fix / add / remove…',
+      qDevice:'What phone did you try it on?',
+      qDeviceHint:'Model and Android version if you know them. Helps work out whether a bug is yours or everyone\'s.',
+      qDevicePh:'e.g. Pixel 7a, Android 15',
+      qWho:'Your name', qWhoHint:'Optional. A nickname is fine.', qWhoPh:'Who should he thank?',
+      send:'Send my notes', sending:'Sending…',
+      privacy:'Your answers go to Iwo and nowhere else. Nothing is sent until you press Send, nothing but this form goes with it, and there is no tracking, no email address and no account.',
+      errBoth:'Two questions are required: the first ten seconds, and what annoyed you.',
+      errOne:'One left: what annoyed you? Even a small thing helps.',
+      thanks:'Thank you, genuinely.',
+      savedBadge:'Saved', manualBadge:"Ready to send",
+      doneSaved:'Your notes went straight through. Thank you for taking the time.',
+      doneManual:"Almost there.",
+      manualMsg:"Press the button and your mail app opens with everything already written out, addressed to hostlabosupport@gmail.com. Or copy the text and send it however you like.",
+      copy:'Copy my answers', copied:'Copied. Now paste it to Iwo',
+      back:'Back to the form', change:'Change something',
+      footer:'Hplay v38.11 · alpha test · September 2026',
+      sumTitle:'HPLAY TESTER NOTES', sumFrom:'From', sumAnon:'(anonymous)', sumPhone:'Phone',
+      sumFirst:'FIRST TEN SECONDS', sumWheel:'THE WHEEL', sumFound:'FOUND ALONE', sumNothing:'nothing',
+      sumRatings:'RATINGS', sumLook:'looks', sumFeel:'feels', sumSpeed:'speed',
+      sumKeep:'WOULD KEEP IT', sumBest:'BEST BIT', sumAnnoyed:'WHAT ANNOYED ME',
+      sumBroke:'WHAT BROKE', sumMissing:'WHAT WAS MISSING', sumChange:'CHANGE THIS FIRST', sumEmpty:'(blank)',
+    },
+    pl: {
+      mailit: "Wyślij mi to mailem",
+      summaryLabel: "Twoje uwagi, jako tekst",
+      eyebrow:'Hplay · v38.11 „Barney” · test alfa',
+      h1:'Co o tym naprawdę myślisz?',
+      intro1:'To jest Hplay, odtwarzacz muzyki zrobiony tak, żeby działał jak klasyczne odtwarzacze z kółkiem. To <b>wersja alfa</b>: ma jakieś dwa miesiące, jest celowo niedokończona, a Ty jesteś jedną z pierwszych osób spoza projektu, które jej dotykają.',
+      intro2:'Pisz wprost. „Nie rozumiem tego” i „to mnie wkurzało” są warte więcej niż „fajne”. Na tym etapie to, że coś jest zepsute, jest normalne. Najważniejsze jest powiedzieć, <em>co dokładnie</em>. Dwa pytania są obowiązkowe, resztę możesz pominąć. Zajmie jakieś trzy minuty.',
+      sec1:'Pierwszy kontakt', sec2:'Werdykt', sec3:'Co się zepsuło',
+      required:'wymagane',
+      qFirst:'Co Ci przeszło przez głowę w pierwszych dziesięciu sekundach?',
+      qFirstHint:'Zanim cokolwiek stało się jasne. Pierwsza reakcja, choćby najgłupsza.',
+      qFirstPh:'Wyglądało jak…',
+      qWheel:'Czy kółko dało się rozgryźć bez podpowiedzi?',
+      qWheelHint:'Kręcenie kciukiem dookoła, żeby przewijać listę.',
+      wheel1:'Od razu', wheel2:'Chwilę zajęło, ale tak',
+      wheel3:'Ktoś musiał mi powiedzieć', wheel4:'Rozumiem je, ale dalej jest niewygodne',
+      qFound:'Co z tego udało Ci się znaleźć bez podpowiedzi?',
+      qFoundHint:'Zaznacz wszystko, na co udało Ci się trafić. Zostawienie większości pustych to przydatna informacja, a nie porażka.',
+      qLook:'Jak wygląda', lookLo:'słabo', lookHi:'jak prawdziwy',
+      qFeel:'Jak się tego używa', feelLo:'walka z tym', feelHi:'samo płynie',
+      qSpeed:'Jak szybko działa', speedLo:'tnie', speedHi:'natychmiast',
+      qLiked:'Co było najlepsze?',
+      qLikedHint:'To, o czym warto wspomnieć, opisując to komuś innemu.',
+      qLikedPh:'Chyba…',
+      qAnnoyed:'Co Cię wkurzało?',
+      qAnnoyedHint:'Ta szczera odpowiedź. Cokolwiek mylącego, brzydkiego, wolnego, upierdliwego albo po prostu złego. Drobne uwagi się liczą. Zwykle to właśnie je da się naprawić.',
+      qAnnoyedPh:'Wkurzało mnie, że…',
+      qBroke:'Czy coś się zepsuło, zawiesiło albo zachowało ewidentnie źle?',
+      qBrokeHint:'Jeśli możesz, napisz, co działo się tuż przedtem. Właśnie to pozwala to naprawić.',
+      qBrokePh:'Po naciśnięciu…',
+      qMissing:'Czego brakuje? Czy było coś, czego nie dało się znaleźć?',
+      qMissingPh:'Brakowało mi…',
+      qKeep:'Szczerze: czy to zostałoby na Twoim telefonie?',
+      keep1:'Tak, używałbym tego na co dzień', keep2:'Czasem, dla zabawy',
+      keep3:'Jeszcze nie, ale po kilku zmianach może tak', keep4:'Nie, zostaję przy swoim',
+      qChange:'Gdyby mógł zmienić tylko jedną rzecz, co to powinno być?',
+      qChangePh:'Napraw / dodaj / usuń…',
+      qDevice:'Na jakim telefonie to działało?',
+      qDeviceHint:'Model i wersja Androida, jeśli wiesz. Pomaga ustalić, czy błąd jest tylko u Ciebie, czy u wszystkich.',
+      qDevicePh:'np. Pixel 7a, Android 15',
+      qWho:'Twoje imię', qWhoHint:'Opcjonalne. Ksywka też może.', qWhoPh:'Komu podziękować?',
+      send:'Wyślij uwagi', sending:'Wysyłanie…',
+      privacy:'Odpowiedzi trafiają do Iwo i nigdzie indziej. Nic nie wysyła się, zanim nie naciśniesz Wyślij, nic poza tym formularzem z tym nie idzie — żadnego śledzenia, maila ani konta.',
+      errBoth:'Dwa pytania są obowiązkowe: pierwsze dziesięć sekund i to, co Cię wkurzało.',
+      errOne:'Zostało jedno: co Cię wkurzało? Nawet drobiazg pomaga.',
+      thanks:'Dzięki, serio.',
+      savedBadge:'Zapisane', manualBadge:"Gotowe do wysłania",
+      doneSaved:'Uwagi doszły. Dzięki za poświęcony czas.',
+      doneManual:"Prawie gotowe.",
+      manualMsg:"Naciśnij przycisk, a otworzy się twoja aplikacja pocztowa z już gotowym tekstem, zaadresowanym na hostlabosupport@gmail.com. Albo skopiuj tekst i wyślij go jak chcesz.",
+      copy:'Skopiuj odpowiedzi', copied:'Skopiowane. Teraz wklej to Iwo',
+      back:'Wróć do formularza', change:'Zmień coś',
+      footer:'Hplay v38.11 · test alfa · wrzesień 2026',
+      sumTitle:'HPLAY: UWAGI TESTERA', sumFrom:'Od', sumAnon:'(anonimowo)', sumPhone:'Telefon',
+      sumFirst:'PIERWSZE DZIESIĘĆ SEKUND', sumWheel:'KÓŁKO', sumFound:'ZNALEZIONE SAMODZIELNIE', sumNothing:'nic',
+      sumRatings:'OCENY', sumLook:'wygląd', sumFeel:'obsługa', sumSpeed:'szybkość',
+      sumKeep:'CZY ZOSTAŁOBY NA TELEFONIE', sumBest:'NAJLEPSZE', sumAnnoyed:'CO MNIE WKURZAŁO',
+      sumBroke:'CO SIĘ ZEPSUŁO', sumMissing:'CZEGO BRAKOWAŁO', sumChange:'ZMIENIĆ W PIERWSZEJ KOLEJNOŚCI', sumEmpty:'(brak)',
+    }
+  };
+
+  var form = document.getElementById('form');
+  var done = document.getElementById('done');
+  var errEl = document.getElementById('err');
+  var sendBtn = document.getElementById('send');
+
+  var db = null;
+  var lang = 'en';
+  var lastAnswers = null;
+
+  if (window.claude && typeof window.claude.use === 'function') {
+    window.claude.use('db').then(function(d){ db = d; }).catch(function(){ db = null; });
+  }
+
+  function t(k){ return (T[lang] && T[lang][k]) || T.en[k] || ''; }
+
+  function apply(){
+    document.documentElement.lang = lang;
+    var nodes = document.querySelectorAll('[data-t]');
+    for (var i = 0; i < nodes.length; i++) nodes[i].innerHTML = t(nodes[i].getAttribute('data-t'));
+    var ph = document.querySelectorAll('[data-tph]');
+    for (var j = 0; j < ph.length; j++) ph[j].placeholder = t(ph[j].getAttribute('data-tph'));
+    document.getElementById('langEn').setAttribute('aria-pressed', String(lang === 'en'));
+    document.getElementById('langPl').setAttribute('aria-pressed', String(lang === 'pl'));
+    if (!sendBtn.disabled) sendBtn.textContent = t('send');
+    // if they switch language on the thank-you screen, redo that too
+    if (!done.hidden && lastAnswers) {
+      document.getElementById('summary').value = asText(lastAnswers);
+      var manual = !document.getElementById('manualBlock').hidden;
+      document.getElementById('savedText').textContent = manual ? t('manualBadge') : t('savedBadge');
+      document.getElementById('doneMsg').textContent = manual ? t('doneManual') : t('doneSaved');
+    }
+  }
+  function setLang(next){
+    lang = next;
+    try { localStorage.setItem('hplayFeedbackLang', next); } catch (e) {}
+    apply();
+  }
+  document.getElementById('langEn').addEventListener('click', function(){ setLang('en'); });
+  document.getElementById('langPl').addEventListener('click', function(){ setLang('pl'); });
+
+  // a Polish phone gets Polish first, without anyone having to think about it
+  var saved = null;
+  try { saved = localStorage.getItem('hplayFeedbackLang'); } catch (e) {}
+  lang = (saved === 'pl' || saved === 'en') ? saved
+       : (/^pl\b/i.test(navigator.language || '') ? 'pl' : 'en');
+  apply();
+
+  function val(name){
+    var el = form.elements[name];
+    if (!el) return '';
+    if (el.value !== undefined && !el.length) return el.value.trim();
+    var picked = form.querySelector('[name="' + name + '"]:checked');
+    return picked ? picked.value : '';
+  }
+  function checked(name){
+    return Array.prototype.map.call(
+      form.querySelectorAll('[name="' + name + '"]:checked'), function(i){ return i.value; });
+  }
+  function collect(){
+    return {
+      submittedAt: new Date().toISOString(),
+      appVersion: 'v38.11 Barney (alpha)',
+      language: lang,
+      first: val('first'), wheel: val('wheel'), found: checked('found'),
+      look: val('look'), feel: val('feel'), speed: val('speed'),
+      liked: val('liked'), annoyed: val('annoyed'),
+      broke: val('broke'), missing: val('missing'),
+      keep: val('keep'), changeFirst: val('changefirst'),
+      device: val('device'), who: val('who')
+    };
+  }
+  function asText(a){
+    var r = function(v){ return v ? v + '/5' : t('sumEmpty'); };
+    var lines = [
+      t('sumTitle') + '  ·  ' + a.appVersion,
+      t('sumFrom') + ': ' + (a.who || t('sumAnon'))
+    ];
+    if (a.device) lines.push(t('sumPhone') + ': ' + a.device);
+    lines.push(new Date(a.submittedAt).toLocaleString(lang === 'pl' ? 'pl-PL' : undefined));
+    lines.push('', t('sumFirst'), a.first || t('sumEmpty'));
+    lines.push('', t('sumWheel') + ': ' + (a.wheel || t('sumEmpty')));
+    lines.push(t('sumFound') + ': ' + (a.found.length ? a.found.join(', ') : t('sumNothing')));
+    lines.push('', t('sumRatings') + '  ' + t('sumLook') + ' ' + r(a.look) +
+                   '   ' + t('sumFeel') + ' ' + r(a.feel) + '   ' + t('sumSpeed') + ' ' + r(a.speed));
+    lines.push(t('sumKeep') + ': ' + (a.keep || t('sumEmpty')));
+    lines.push('', t('sumBest'), a.liked || t('sumEmpty'));
+    lines.push('', t('sumAnnoyed'), a.annoyed || t('sumEmpty'));
+    lines.push('', t('sumBroke'), a.broke || t('sumEmpty'));
+    lines.push('', t('sumMissing'), a.missing || t('sumEmpty'));
+    lines.push('', t('sumChange'), a.changeFirst || t('sumEmpty'));
+    return lines.join('\n');
+  }
+
+  function finish(savedOk, answers){
+    lastAnswers = answers;
+    document.getElementById('summary').value = asText(answers);
+    var badge = document.getElementById('savedBadge');
+    var manual = document.getElementById('manualBlock');
+    var doneActions = document.getElementById('doneActions');
+    badge.className = savedOk ? 'saved' : 'saved manual';
+    document.getElementById('savedText').textContent = savedOk ? t('savedBadge') : t('manualBadge');
+    document.getElementById('doneMsg').textContent = savedOk ? t('doneSaved') : t('doneManual');
+    manual.hidden = savedOk;
+    doneActions.hidden = !savedOk;
+    form.hidden = true;
+    document.getElementById('mode').hidden = true;
+    done.hidden = false;
+    window.scrollTo(0, 0);
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    errEl.hidden = true;
+    var answers = collect();
+    if (!answers.first && !answers.annoyed) {
+      errEl.textContent = t('errBoth'); errEl.hidden = false;
+      document.getElementById('first').focus(); return;
+    }
+    if (!answers.annoyed) {
+      errEl.textContent = t('errOne'); errEl.hidden = false;
+      document.getElementById('annoyed').focus(); return;
+    }
+    sendBtn.disabled = true;
+    sendBtn.textContent = t('sending');
+    var done = function(ok){
+      finish(ok, answers);
+      sendBtn.disabled = false;
+      sendBtn.textContent = t('send');
+    };
+
+    /* Two ways for notes to reach Iwo, tried in order, and a third that always works.
+
+       1. POSTBOX below: a form-to-email relay. This page is a plain file on GitHub Pages
+          with no server behind it, so there is nowhere here to save anything — the relay
+          takes the notes and emails them on. Nothing is sent until Send is pressed, and
+          nothing but what is in the form goes with it.
+       2. the artifact database, if this copy happens to be running somewhere that has one.
+       3. and if neither answers, the notes are shown as text with a button that opens an
+          email with them already written out. That is the path this page has always taken
+          and it still works with no service involved at all. */
+    // read when it is needed, not cached at startup, so setting it takes effect either way
+    var POSTBOX = window.HPLAY_POSTBOX || '';
+    if (POSTBOX) {
+      var payload = { access_key: POSTBOX, subject: 'Hplay tester notes (' + (answers.appVersion || 'alpha') + ')',
+                      from_name: 'Hplay feedback', message: asText(answers) };
+      var gaveUp = false;
+      var bail = setTimeout(function(){ gaveUp = true; done(false); }, 12000);
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      }).then(function(r){ return r.json(); })
+        .then(function(j){ if (!gaveUp) { clearTimeout(bail); done(!!j.success); } })
+        .catch(function(){ if (!gaveUp) { clearTimeout(bail); done(false); } });
+      return;
+    }
+
+    if (!db) { done(false); return; }
+    var id = String(Date.now()) + '-' + Math.random().toString(36).slice(2, 8);
+    db.collection('feedback').doc(id).set(answers).then(function(){ done(true); })
+      .catch(function(){ done(false); });
+  });
+
+  document.getElementById('copy').addEventListener('click', function(){
+    var box = document.getElementById('summary');
+    var btn = this;
+    var ok = function(){ btn.textContent = t('copied'); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(box.value).then(ok, function(){ box.select(); });
+    } else { box.select(); document.execCommand('copy'); ok(); }
+  });
+  function backToForm(){
+    done.hidden = true; form.hidden = false;
+    document.getElementById('mode').hidden = false;
+    window.scrollTo(0, 0);
+  }
+
+  // Served as a plain file there is nothing to save into, so the finished notes
+  // go out as an email instead. The text is already assembled in the summary box.
+  (function(){
+    var btn = document.getElementById('mailit');
+    if (!btn) return;
+    btn.addEventListener('click', function(){
+      var body = document.getElementById('summary').value;
+      var subj = (lang === 'pl' ? 'Hplay: uwagi testera' : 'Hplay tester notes')
+               + ' (' + (lastAnswers && lastAnswers.appVersion || 'alpha') + ')';
+      location.href = 'mailto:hostlabosupport@gmail.com?subject=' + encodeURIComponent(subj)
+                    + '&body=' + encodeURIComponent(body);
+    });
+  })();
+
+  document.getElementById('reopen').addEventListener('click', backToForm);
+  document.getElementById('reopen2').addEventListener('click', backToForm);
+})();
+</script>
+
+</body>
+</html>

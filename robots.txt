@@ -1,0 +1,76 @@
+# The words and the screenshots are public and there is nothing to hide from a crawler.
+# The photographs of a person are a different matter: they are on the page for anyone who
+# reads it, and that is not the same as wanting them in an image search for years. Blocking
+# the folder is the documented way to keep pictures out of Google Images.
+User-agent: *
+Allow: /
+Disallow: /img/photos/
+
+# Named explicitly as well, because some of these read the wildcard rule and some do not,
+# and being listed by name is the difference between being summarised correctly and being
+# summarised from somebody else's guess.
+User-agent: Googlebot
+Allow: /
+Disallow: /img/photos/
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /img/photos/
+
+User-agent: Bingbot
+Allow: /
+Disallow: /img/photos/
+
+User-agent: DuckDuckBot
+Allow: /
+Disallow: /img/photos/
+
+User-agent: GPTBot
+Allow: /
+Disallow: /img/photos/
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /img/photos/
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /img/photos/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /img/photos/
+
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /img/photos/
+
+User-agent: Claude-User
+Allow: /
+Disallow: /img/photos/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /img/photos/
+
+User-agent: Applebot
+Allow: /
+Disallow: /img/photos/
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /img/photos/
+
+User-agent: Amazonbot
+Allow: /
+Disallow: /img/photos/
+
+User-agent: meta-externalagent
+Allow: /
+Disallow: /img/photos/
+
+User-agent: CCBot
+Allow: /
+Disallow: /img/photos/
+
+Sitemap: https://iwohost.github.io/hplaysite/sitemap.xml

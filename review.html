@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="How Hplay was built over sixty days, what broke, and what the first alpha tester said.">
+<meta name="theme-color" content="#1b6fd0">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%231b6fd0%22/><circle cx=%2216%22 cy=%2216%22 r=%229%22 fill=%22none%22 stroke=%22white%22 stroke-width=%223%22/></svg>">
+<style>
+  *{ box-sizing:border-box; }
+  html{ -webkit-text-size-adjust:100%; }
+  body{ margin:0; }
+  img{ max-width:100%; }
+  [hidden]{ display:none !important; }
+  .backhome{
+    max-width:960px; margin:0 auto; padding:14px 20px 0;
+    font-family:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+    font-size:12px; letter-spacing:.08em; text-transform:uppercase;
+  }
+  .backhome a{ color:#1b6fd0; text-decoration:none; }
+  .backhome a:hover{ text-decoration:underline; }
+  @media (prefers-color-scheme: dark){ .backhome a{ color:#64a6f0; } }
+
+</style>
+<title>Hplay at Sixty Days</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@112,500;112,600;112,700;112,800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+</head>
+<body>
+<a class="skiplink" href="#main">Skip to the content</a>
+<div class="backhome"><a href="index.html">&#8592; Hplay</a></div>
+<style>
+  :root{
+    --ground:#e9ebf0;
+    --panel:#ffffff;
+    --panel-2:#f3f5f9;
+    --ink:#0f131b;
+    --ink-soft:#333c4a;
+    --muted:#5c6674;
+    --line:#ccd2dc;
+    --line-soft:#dfe3ea;
+    --accent:#1b6fd0;
+    --accent-ink:#0f4fa8;
+    --accent-soft:#dbe8f8;
+    --good:#3d8f18;
+    --warn:#a76a12;
+    --bad:#b3372c;
+    --chrome-1:#fdfdfd;
+    --chrome-2:#dadce0;
+    --chrome-3:#c3c7cd;
+    --chrome-line:#9aa0a8;
+    --chrome-ink:#1c1f24;
+    --shadow:0 1px 2px rgba(12,22,40,.06), 0 8px 24px -12px rgba(12,22,40,.28);
+    --display:"Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;
+    --body:"IBM Plex Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#0a0d13;
+      --panel:#141a24;
+      --panel-2:#101620;
+      --ink:#e6eaf1;
+      --ink-soft:#c3cad6;
+      --muted:#8b95a5;
+      --line:#242e3c;
+      --line-soft:#1b232e;
+      --accent:#64a6f0;
+      --accent-ink:#9cc8f7;
+      --accent-soft:#132437;
+      --good:#6bc24a;
+      --warn:#d9a441;
+      --bad:#e2685a;
+      --chrome-1:#2e3138;
+      --chrome-2:#1c1f25;
+      --chrome-3:#15171c;
+      --chrome-line:#05060a;
+      --chrome-ink:#ced4dc;
+      --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 30px -14px rgba(0,0,0,.8);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#0a0d13;
+    --panel:#141a24;
+    --panel-2:#101620;
+    --ink:#e6eaf1;
+    --ink-soft:#c3cad6;
+    --muted:#8b95a5;
+    --line:#242e3c;
+    --line-soft:#1b232e;
+    --accent:#64a6f0;
+    --accent-ink:#9cc8f7;
+    --accent-soft:#132437;
+    --good:#6bc24a;
+    --warn:#d9a441;
+    --bad:#e2685a;
+    --chrome-1:#2e3138;
+    --chrome-2:#1c1f25;
+    --chrome-3:#15171c;
+    --chrome-line:#05060a;
+    --chrome-ink:#ced4dc;
+    --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 30px -14px rgba(0,0,0,.8);
+  }
+
+  body{
+    background:var(--ground);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:17px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{ max-width:960px; margin:0 auto; padding-inline:20px; padding-block:0 72px; }
+  p{ max-width:66ch; }
+  a{ color:var(--accent); }
+  h1,h2,h3{ font-family:var(--display); text-wrap:balance; line-height:1.1; }
+  strong{ font-weight:600; color:var(--ink); }
+
+  /* ---- hero: the device on its own field of Hplay blue ---- */
+  .hero{
+    display:grid; grid-template-columns:minmax(0,300px) minmax(0,1fr);
+    gap:40px; align-items:center;
+    padding-block:56px 48px;
+  }
+  .hero-shot{
+    position:relative; border-radius:14px; overflow:hidden;
+    background:linear-gradient(170deg,#5aa8ee,#12559f 48%,#07305f);
+    box-shadow:var(--shadow);
+    padding:0;
+  }
+  .hero-shot img{ display:block; width:100%; height:auto; mix-blend-mode:normal; }
+  .eyebrow{
+    font-family:var(--mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--muted); margin-bottom:14px;
+  }
+  h1{ font-size:clamp(46px,9vw,78px); font-weight:800; letter-spacing:-.02em; margin-bottom:10px; }
+  .dek{ font-size:clamp(18px,2.4vw,21px); color:var(--ink-soft); max-width:36ch; }
+  .stamp{
+    display:flex; flex-wrap:wrap; gap:8px; margin-top:24px;
+    font-family:var(--mono); font-size:12.5px;
+  }
+  .stamp span{
+    border:1px solid var(--line); border-radius:999px; padding:5px 11px;
+    color:var(--muted); background:var(--panel);
+  }
+  .stamp span.now{ color:#fff; background:var(--accent); border-color:var(--accent); font-weight:500; }
+
+  /* ---- the section header, built like the player's own chrome bar ---- */
+  .chrome{
+    display:flex; align-items:center; gap:10px;
+    margin:56px 0 28px;
+    padding:9px 14px;
+    background:linear-gradient(180deg,var(--chrome-1) 0%,var(--chrome-2) 46%,var(--chrome-3) 52%,var(--chrome-2) 100%);
+    border:1px solid var(--chrome-line); border-radius:7px;
+    color:var(--chrome-ink);
+    box-shadow:var(--shadow);
+  }
+  .chrome .n{ font-family:var(--mono); font-size:12px; color:var(--muted); min-width:2.4em; }
+  .chrome h2{
+    flex:1; text-align:center; font-size:17px; font-weight:700; letter-spacing:.01em;
+    margin:0; color:var(--chrome-ink);
+  }
+  .batt{
+    width:26px; height:13px; border:1.5px solid var(--chrome-line); border-radius:2.5px;
+    position:relative; flex:0 0 auto; background:var(--chrome-3);
+  }
+  .batt::after{ content:""; position:absolute; right:-4px; top:3px; width:2px; height:5px;
+    background:var(--chrome-line); border-radius:0 1px 1px 0; }
+  .batt i{ position:absolute; inset:1.5px; width:86%; border-radius:1px;
+    background:linear-gradient(180deg,#a4ec74,#4fb022 55%,#3d8f18); }
+
+  .lede{ font-size:19px; color:var(--ink-soft); }
+  section > p + p{ margin-top:16px; }
+  h3{ font-size:20px; font-weight:700; margin:30px 0 10px; letter-spacing:-.01em; }
+
+  /* ---- spec sheet ---- */
+  .spec{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:1px; background:var(--line-soft);
+    border:1px solid var(--line-soft); border-radius:10px; overflow:hidden;
+    margin-top:26px;
+  }
+  .spec div{ background:var(--panel); padding:16px 18px; }
+  .spec dt{ font-family:var(--mono); font-size:11.5px; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--muted); margin-bottom:6px; }
+  .spec dd{ font-family:var(--display); font-size:27px; font-weight:700;
+    font-variant-numeric:tabular-nums; letter-spacing:-.01em; }
+  .spec dd small{ font-family:var(--body); font-size:14px; font-weight:400; color:var(--muted); }
+
+  /* ---- gallery ---- */
+  figure{ margin:0; }
+  .shots{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:26px; margin-top:8px; }
+  .shots img, .strip img{
+    display:block; width:100%; height:auto; border-radius:9px;
+    background:var(--panel-2);
+  }
+  figcaption{ font-size:14.5px; color:var(--muted); margin-top:10px; max-width:46ch; }
+  figcaption b{ color:var(--ink); font-weight:600; }
+  .strip{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:22px; }
+  .strip figcaption{ font-family:var(--mono); font-size:11.5px; letter-spacing:.06em;
+    text-transform:uppercase; margin-top:8px; }
+
+  /* ---- timeline ---- */
+  .months{ display:grid; gap:22px; margin-top:26px; }
+  .month{
+    display:grid; grid-template-columns:104px minmax(0,1fr); gap:20px; align-items:start;
+    padding-bottom:22px; border-bottom:1px solid var(--line-soft);
+  }
+  .month:last-child{ border-bottom:0; padding-bottom:0; }
+  .month .when{ font-family:var(--mono); font-size:13px; color:var(--muted); padding-top:2px; }
+  .month .when b{ display:block; font-family:var(--display); font-size:19px; color:var(--ink);
+    font-weight:700; letter-spacing:-.01em; }
+  .bar{ height:7px; border-radius:4px; background:var(--accent); margin:10px 0 12px; min-width:6px; }
+  .bar.quiet{ background:var(--line); }
+  .month p{ margin:0; font-size:16px; }
+  .month .count{ font-family:var(--mono); font-size:12px; color:var(--muted); }
+
+  /* ---- version ladder ---- */
+  .ladder{ margin-top:24px; border-top:1px solid var(--line-soft); }
+  .rung{
+    display:grid; grid-template-columns:78px 118px minmax(0,1fr); gap:16px; align-items:baseline;
+    padding:13px 4px; border-bottom:1px solid var(--line-soft);
+  }
+  .rung .v{ font-family:var(--mono); font-size:13.5px; color:var(--muted); font-variant-numeric:tabular-nums; }
+  .rung .name{ font-family:var(--display); font-weight:700; font-size:16px; letter-spacing:-.005em; }
+  .rung .what{ font-size:16px; color:var(--ink-soft); }
+  .rung.head{ font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--muted); padding-block:8px; }
+  .rung.now{ background:linear-gradient(180deg,#3572c9 0%,#2a66bd 46%,#1f57a8 52%,#2a63b5 100%);
+    color:#fff; border-radius:5px; border-bottom-color:transparent; padding-inline:10px; }
+  .rung.now .v, .rung.now .what{ color:#fff; }
+  .rung.now .name{ color:#fff; }
+
+  /* ---- war stories ---- */
+  .story{
+    background:var(--panel); border:1px solid var(--line-soft); border-radius:11px;
+    padding:22px 24px; margin-top:18px; box-shadow:var(--shadow);
+  }
+  .story h3{ margin:0 0 8px; font-size:18.5px; }
+  .story p{ margin:0 0 12px; font-size:16px; }
+  .story p:last-child{ margin-bottom:0; }
+  .story .tag{
+    font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--accent); display:block; margin-bottom:7px;
+  }
+  code{ font-family:var(--mono); font-size:.88em; background:var(--panel-2);
+    border:1px solid var(--line-soft); border-radius:4px; padding:1px 5px; }
+
+  /* ---- verdict ---- */
+  .cols{ display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:24px; margin-top:24px; }
+  .cols h3{ margin-top:0; display:flex; align-items:center; gap:9px; font-size:17px; }
+  .dot{ width:9px; height:9px; border-radius:50%; flex:0 0 auto; }
+  .dot.g{ background:var(--good); } .dot.w{ background:var(--warn); }
+  .cols ul{ list-style:none; display:grid; gap:11px; }
+  .cols li{ font-size:15.5px; color:var(--ink-soft); padding-left:16px; position:relative; }
+  .cols li::before{ content:""; position:absolute; left:0; top:.62em; width:6px; height:1.5px;
+    background:var(--line); }
+
+
+  footer{
+    margin-top:64px; padding-top:22px; border-top:1px solid var(--line);
+    font-family:var(--mono); font-size:12.5px; color:var(--muted);
+    display:flex; flex-wrap:wrap; gap:6px 18px;
+  }
+
+  @media (max-width:720px){
+    .hero{ grid-template-columns:1fr; gap:28px; padding-block:36px 32px; }
+    .hero-shot{ max-width:280px; }
+    .rung{ grid-template-columns:70px 1fr; gap:8px 14px; }
+    .rung .what{ grid-column:1 / -1; }
+    .rung.head .what{ display:none; }
+    .month{ grid-template-columns:1fr; gap:10px; }
+  }
+  @media (max-width:480px){
+    body{ font-size:16px; line-height:1.58; }
+    .wrap{ padding-inline:16px; padding-block:0 48px; }
+    h1{ font-size:38px; }
+    .dek{ font-size:17px; }
+    .stamp{ font-size:11.5px; gap:6px; }
+    .stamp span{ padding:4px 9px; }
+    .lede{ font-size:17px; }
+    h3{ font-size:18px; margin:24px 0 8px; }
+    .chrome{ margin:38px 0 20px; padding:8px 11px; }
+    .chrome h2{ font-size:15px; }
+    .spec{ grid-template-columns:repeat(2,1fr); }
+    .spec div{ padding:13px 14px; }
+    .spec dd{ font-size:23px; }
+    .shots{ gap:22px; }
+    figcaption{ font-size:14px; }
+    .strip{ grid-template-columns:repeat(2,1fr); gap:12px; }
+    .story{ padding:18px 17px; }
+    .story p, .cols li{ font-size:15.5px; }
+    .month .when b{ font-size:17px; }
+    .rung{ padding:11px 2px; }
+    footer{ font-size:11.5px; }
+  }
+  @media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important; } }
+  /* ---- reachable by keyboard, readable by everyone ---- */
+  .skiplink{
+    position:absolute; left:8px; top:-60px; z-index:100;
+    background:#0f4fa8; color:#fff; font-weight:600;
+    padding:10px 16px; border-radius:0 0 8px 8px; text-decoration:none;
+  }
+  .skiplink:focus{ top:0; }
+  :focus-visible{ outline:3px solid var(--accent); outline-offset:2px; border-radius:4px; }
+  /* the number on a section bar sits over the darkest part of that bar's gradient */
+  .chrome .n{ color:#3d4550; }
+  :root[data-theme="dark"] .chrome .n{ color:#a2acbb; }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .chrome .n{ color:#a2acbb; } }
+  /* the back link was 4.16:1 and 14px tall */
+  .backhome a{ color:#0f4fa8; padding:6px 4px; display:inline-block; min-height:24px; }
+  :root[data-theme="dark"] .backhome a{ color:#9cc8f7; }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .backhome a{ color:#9cc8f7; } }
+  .stamp span.now{ background:var(--accent-ink); border-color:var(--accent-ink); }
+  :root[data-theme="dark"] .stamp span.now{ color:#06243f; }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .stamp span.now{ color:#06243f; } }
+</style>
+
+<main class="wrap" id="main">
+
+  <header class="hero">
+    <div class="hero-shot">
+      <img src="img/device.jpg" alt="The Hplay player: a click wheel music player with a blue aluminium body, showing its main menu and a rotating album cover.">
+    </div>
+    <div>
+      <div class="eyebrow">Project review · alpha · 14 September 2026</div>
+      <h1>Hplay</h1>
+      <p class="dek">A classic click-wheel music player, rebuilt from scratch for Android, and handed to its first alpha tester today.</p>
+      <div class="stamp">
+        <span class="now">v38.0 “Barney”</span>
+        <span>alpha</span>
+        <span>60 days old</span>
+        <span>69 commits</span>
+        <span>Android</span>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <p class="lede">It started on 16 July 2026 at 1,703 lines. Sixty days later it is 3,520 lines, has 50 screens, plays video, spins a vinyl record with a tonearm that tracks inward as the song runs down, and keeps a year of listening history it never sends anywhere.</p>
+    <p>The thing that makes it unusual is the constraint. No framework, no component library, nothing pulled in from a package manager. The click wheel physics, the audio graph, the library storage, the marketplace client: all of it written by hand, and all of it shipping as an app you install on a phone.</p>
+
+    <dl class="spec">
+      <div><dt>Lines</dt><dd>3,520</dd></div>
+      <div><dt>Size</dt><dd>185 <small>KB</small></dd></div>
+      <div><dt>Screens</dt><dd>50</dd></div>
+      <div><dt>Settings</dt><dd>24</dd></div>
+      <div><dt>Body colours</dt><dd>6</dd></div>
+      <div><dt>Dependencies</dt><dd>1</dd></div>
+    </dl>
+    <p style="margin-top:14px; font-size:14.5px; color:var(--muted);">The one dependency is <code>jsmediatags</code>, for reading ID3 tags and embedded cover art. Everything else is hand-written: the limiter, the reverb, the wheel acceleration, the vinyl.</p>
+  </section>
+
+  <div class="chrome"><span class="n">1</span><h2>The Tour</h2><span class="batt"><i></i></span></div>
+
+  <section>
+    <p>This is what it actually looks like, running. Nothing here is a mockup.</p>
+
+    <div class="shots">
+      <figure>
+        <img src="img/np-cover.jpg" alt="Now Playing showing a tilted album cover with a reflection, track title, artist, album and a progress bar.">
+        <figcaption><b>Now Playing, cover style.</b> The artwork tilts, catches a shadow and casts a reflection. It sways gently unless you turn that off.</figcaption>
+      </figure>
+      <figure>
+        <img src="img/np-vinyl.jpg" alt="Now Playing showing a black vinyl record with the album art as its label, a tonearm resting on it, and the track details to the right.">
+        <figcaption><b>Now Playing, vinyl style.</b> The record turns with the music and stops when you pause. The tonearm tracks inward as the track runs down and bobs while it plays.</figcaption>
+      </figure>
+      <figure>
+        <img src="img/np-vinyl-dark.jpg" alt="The same vinyl view on the dark screen, the record lit by a soft halo.">
+        <figcaption><b>The same record, dark screen.</b> A black disc on a black screen needed its own halo and a sheen that doesn't turn with the record.</figcaption>
+      </figure>
+      <figure>
+        <img src="img/menu-vinyl.jpg" alt="The main menu with a small spinning record in the right-hand pane.">
+        <figcaption><b>The menu keeps turning.</b> As of v38 the split pane shows the record too. It used to show a flat sleeve, which made the setting look half-applied.</figcaption>
+      </figure>
+      <figure>
+        <img src="img/songs.jpg" alt="The song list, with one row highlighted in blue.">
+        <figcaption><b>The list.</b> Wheel acceleration kicks in past 25 rows, and a big letter flashes up so you can find your way alphabetically.</figcaption>
+      </figure>
+      <figure>
+        <img src="img/quick.jpg" alt="The Quick Settings screen with a sleep timer clock and rows for dim screen, speed, tape pitch, effect, bass and sound protect.">
+        <figcaption><b>Hold play/pause.</b> The one screen you can reach without leaving what you're doing, so the sleep timer shares it with speed, effects and the loudness limiter.</figcaption>
+      </figure>
+      <figure>
+        <img src="img/stats.jpg" alt="The Statistics screen listing times opened, tracks played, listening time, finish rate, favourite song and artist.">
+        <figcaption><b>Statistics.</b> Counted for fun, kept on the phone, never sent. Twelve months of history roll forward and the thirteenth is deleted.</figcaption>
+      </figure>
+      <figure>
+        <img src="img/changelog.jpg" alt="The in-app changelog listing version 38.0 Barney and its changes.">
+        <figcaption><b>Its own changelog.</b> 25 versions, each with a codename, readable on the device. The wheel steps version by version rather than line by line.</figcaption>
+      </figure>
+    </div>
+
+    <h3>Five screens, one player</h3>
+    <div class="strip">
+      <figure><img src="img/mode-light.jpg" alt="The menu in Light mode, white screen with dark text."><figcaption>Light</figcaption></figure>
+      <figure><img src="img/mode-dark.jpg" alt="The menu in Dark mode, near-black screen with pale text."><figcaption>Dark</figcaption></figure>
+      <figure><img src="img/mode-hicon.jpg" alt="The menu in High Contrast mode, pure black and white with ruled rows."><figcaption>High Contrast</figcaption></figure>
+      <figure><img src="img/mode-night.jpg" alt="The menu in Night mode, warm amber text on a very dark brown screen."><figcaption>Night</figcaption></figure>
+      <figure><img src="img/mode-paper.jpg" alt="The menu in Paper mode, warm off-white screen with brown-black text."><figcaption>Paper</figcaption></figure>
+    </div>
+  </section>
+
+  <div class="chrome"><span class="n">2</span><h2>How It Got Here</h2><span class="batt"><i></i></span></div>
+
+  <section>
+    <p>Sixty days, unevenly spent. The shape of the commit history tells the story better than a summary does.</p>
+
+    <div class="months">
+      <div class="month">
+        <div class="when"><b>July</b>16th on</div>
+        <div>
+          <div class="bar" style="width:100%"></div>
+          <span class="count">38 commits</span>
+          <p>Everything at once. The player, the click wheel, the library in IndexedDB, lyrics, themes, the marketplace, the Android build, decals you could drag around the body. Built fast and broadly. The skeleton of nearly every feature the app has today was laid down in two weeks.</p>
+        </div>
+      </div>
+      <div class="month">
+        <div class="when"><b>August</b>quiet</div>
+        <div>
+          <div class="bar quiet" style="width:8%"></div>
+          <span class="count">3 commits</span>
+          <p>Almost nothing. The project sat untouched for a month and then picked back up without a rewrite. Most side projects die in that month.</p>
+        </div>
+      </div>
+      <div class="month">
+        <div class="when"><b>September</b>to the 14th</div>
+        <div>
+          <div class="bar" style="width:74%"></div>
+          <span class="count">28 commits</span>
+          <p>The depth pass. Sound Protect, accessibility, usage stats, coloured action rows, settings that get their own screens, video playback, audio toys, the changelog, the entire vinyl mode, the top-bar clock, five screen modes. Also the first proper architecture cleanup, which cut a settings change from seven coordinated edits down to one.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>Twelve codenames</h3>
+    <p>Versions are named off the Valve roster, in order. Each one is a real release with its own changelog entry on the device.</p>
+
+    <div class="ladder">
+      <div class="rung head"><span class="v">Version</span><span class="name">Codename</span><span class="what">Headline</span></div>
+      <div class="rung"><span class="v">v27.0</span><span class="name">Scout</span><span class="what">First build with a codename. Sleep timer lets the phone sleep.</span></div>
+      <div class="rung"><span class="v">v28.0</span><span class="name">Sniper</span><span class="what">Sound Protect limiter, and accessibility: size, motion, haptics.</span></div>
+      <div class="rung"><span class="v">v29.0</span><span class="name">Gordan</span><span class="what">Usage data you can stop or wipe. Streaks, peak hour, wheel clicks.</span></div>
+      <div class="rung"><span class="v">v30.0</span><span class="name">Alex</span><span class="what">Action rows colour their own highlight: green adds, red deletes.</span></div>
+      <div class="rung"><span class="v">v31.0</span><span class="name">Luis</span><span class="what">Settings with three or more options get a screen of their own.</span></div>
+      <div class="rung"><span class="v">v32.0</span><span class="name">Heavy</span><span class="what">Video plays in the artwork slot: mp4, m4v, mov, webm.</span></div>
+      <div class="rung"><span class="v">v33.0</span><span class="name">Demoman</span><span class="what">Audio Toys: speed, tape pitch, reverb, radio, echo, bass. And this changelog.</span></div>
+      <div class="rung"><span class="v">v34.0</span><span class="name">Pyro</span><span class="what">Vinyl cover style, with a tonearm that tracks inward as the song plays.</span></div>
+      <div class="rung"><span class="v">v35.0</span><span class="name">Spy</span><span class="what">A new record rolls in on every track change. Optional top-bar clock.</span></div>
+      <div class="rung"><span class="v">v36.0</span><span class="name">Medic</span><span class="what">Video washes the screen behind the record instead of fighting the label.</span></div>
+      <div class="rung"><span class="v">v37.0</span><span class="name">Engineer</span><span class="what">Sharp video in the slot, blurred behind. Settings described in one place.</span></div>
+      <div class="rung now"><span class="v">v38.0</span><span class="name">Barney</span><span class="what">Five screen modes, vinyl on the menu, quick settings, a rolling year of stats.</span></div>
+    </div>
+  </section>
+
+  <div class="chrome"><span class="n">3</span><h2>Four Hard Problems</h2><span class="batt"><i></i></span></div>
+
+  <section>
+    <p>Every project has a few problems that take far longer than they should. Here are four of them.</p>
+
+    <div class="story">
+      <span class="tag">The tonearm that kept sinking</span>
+      <h3>A transform is enough to trap a z-index</h3>
+      <p>The tonearm has to paint above the text panel that the record slides behind. It had <code>z-index: 3</code>, which should have settled it, and it kept disappearing anyway.</p>
+      <p>The cause is a CSS rule that catches people out. A transform, a filter or a <code>will-change</code> on an ancestor creates a stacking context, and a child's z-index can never escape it. Removing the wrapper's own z-index wasn't enough, because the base artwork rule re-applied a <em>sway animation</em>, and an animated transform does the same thing. The fix was an explicit <code>animation: none</code> on the vinyl container. It looks like a line that does nothing.</p>
+    </div>
+
+    <div class="story">
+      <span class="tag">The record that stuttered once a second</span>
+      <h3>Don't re-derive an animation's phase. Carry it.</h3>
+      <p>Now Playing rebuilds itself every second, so the spinning record restarted every second too. The obvious fix was to compute where the record <em>should</em> be from the track position and set the animation delay to match. It stuttered: the disc jumped a degree or two, every second, forever.</p>
+      <p>CSS animations don't start the instant you insert the element. They start a frame later, and that one frame of drift compounds against a clock taken from somewhere else. The answer was to stop deriving anything and carry each animation's own <code>currentTime</code> across the rebuild via <code>getAnimations()</code>. After that it measured steady to within 17 milliseconds.</p>
+    </div>
+
+    <div class="story">
+      <span class="tag">The backdrop that never advanced</span>
+      <h3>The engine won't decode a video nobody can see</h3>
+      <p>The plan for video was to sample frames onto a canvas and blur them behind the screen. It produced exactly one frame and then froze. The video element was tried at one pixel, at sixty-four pixels, at zero opacity, at one percent opacity, behind everything in the stacking order. Same result every time.</p>
+      <p>Chrome stops producing frames for a video that isn't really being rendered, and hiding it more cleverly can't help, because the hiding <em>is</em> the problem. So the whole approach went in the bin. Instead a second, silent copy of the file plays as the backdrop, nudged back into step whenever it drifts more than a third of a second.</p>
+    </div>
+
+    <div class="story">
+      <span class="tag">The screen that changed size</span>
+      <h3>Absolute positioning measures from the padding box</h3>
+      <p>Playing an MP4 made the screen appear to grow, with a second set of corners inside the bezel. It looked like a rendering glitch. It was arithmetic.</p>
+      <p>The video stage was <code>inset: 0</code> inside the bezel. But an absolutely positioned box measures from its ancestor's <em>padding</em> box, not its content box. The bezel has 3vw of padding for the black border, so the picture spread 12.6 pixels past the screen on every side and painted its own corners out in the trim. Both now share the padding as one variable.</p>
+    </div>
+  </section>
+
+  <div class="chrome"><span class="n">4</span><h2>The State Of It</h2><span class="batt"><i></i></span></div>
+
+  <section>
+    <p>An honest read, on the day it goes to someone else for the first time. It's an <strong>alpha</strong>, and the list on the right is why. A real, working player with real holes in it.</p>
+
+    <div class="cols">
+      <div>
+        <h3><span class="dot g"></span>Solid</h3>
+        <ul>
+          <li>Playback, the click wheel and navigation are stable and have been for weeks.</li>
+          <li>Settings are defined in one table, so adding one is a single edit. It used to be seven.</li>
+          <li>All 24 settings round-trip through storage, reject rubbish, and survive a reload. Checked automatically, not by hand.</li>
+          <li>Every screen mode is legible selected and unselected, measured against a contrast ratio rather than eyeballed.</li>
+          <li>Usage data stays on the device, can be switched off, and can be wiped.</li>
+          <li>It survived a month of neglect and picked straight back up.</li>
+        </ul>
+      </div>
+      <div>
+        <h3><span class="dot w"></span>Rough</h3>
+        <ul>
+          <li>Song IDs are regenerated on every folder rescan, but playlists and the resume point store IDs. A rescan while music is playing can break next and previous. This is the most important thing left to fix.</li>
+          <li>Deleting a song from a scanned folder doesn't stick; it comes back on the next scan.</li>
+          <li>There's no export or backup. Everything lives in one database on one phone.</li>
+          <li>Resume-on-restart doesn't work yet.</li>
+          <li>The build the testers have is five changes behind the current one, including the file filter that lets video through.</li>
+          <li>No test suite in the repo. The checks exist, but they live outside it.</li>
+        </ul>
+      </div>
+    </div>
+
+  </section>
+
+  <footer role="contentinfo">
+    <span>Hplay v38.0 “Barney” · alpha</span>
+    <span>16 July to 14 September 2026</span>
+    <span>69 commits · 25 versions</span>
+    <span>iwohost.github.io/hplaysite</span>
+  </footer>
+
+</main>
+
+</body>
+</html>

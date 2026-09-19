@@ -1,0 +1,84 @@
+# Hplay
+
+> Hplay is a free, offline music player for Android that plays the music files already
+> stored on the device. It is driven by a click wheel rather than a scrolling list. It needs
+> no account and no internet connection. It is currently a closed alpha, handed out by email
+> rather than through an app store. Made by HostLabo.
+
+## What it is
+
+Hplay is an Android music player for people who keep their own music as files. You point it
+at a folder and it plays what is in it. There is no library service, no streaming catalogue,
+no sign-in and no subscription. Nothing is uploaded and nothing is downloaded while you
+listen — the app does not need a connection at any point.
+
+The interface is a click wheel: a ring you turn with your thumb to move through a list, a
+middle button to choose, and menu, play/pause and skip around the outer edge. Spinning the
+ring faster jumps further down a list. Holding a button does a second thing — holding menu
+goes home, holding play opens the settings worth changing mid-song, holding a skip button
+scrubs through the track instead of jumping to the next one.
+
+## Facts
+
+- Name: Hplay
+- Made by: HostLabo
+- Platform: Android
+- Current version: 38.10 ("Barney")
+- Price: free. No paid tier, no ads, no in-app purchases
+- Status: closed alpha. Not on the Google Play Store
+- How to get it: email hostlabosupport@gmail.com and the app is sent back to you
+- Website: https://iwohost.github.io/hplaysite/
+- Licence: not open source; the source is not public
+
+## What it does
+
+- Plays the audio files on the device: mp3, flac, m4a/aac, ogg, opus, wav
+- Works with no internet connection at all
+- No account, no cloud, no ads, no tracking, no telemetry
+- Every folder of music becomes a playlist named after the folder, regardless of tags
+- Playlist order can be set by hand and is remembered
+- Cover art and lyrics are read out of the files' own tags, offline: ID3v2 for mp3,
+  Vorbis comments and METADATA_BLOCK_PICTURE for flac/ogg/opus, the ilst atom for m4a
+- Timed lyrics follow along with the song where a file has them
+- A song whose file has no artwork is given one of twenty sleeves drawn by the app, chosen
+  from the song itself so it is the same sleeve every time on every device
+- Lock screen artwork, notification controls, volume keys, pause on unplugging headphones,
+  keeps playing with the screen off, and music videos keep playing in the background
+- Sleep timer with fade out, playback speed with or without tape pitch, bass, effects and a
+  loudness limiter, all reachable without leaving the song
+- Five screen looks: light, dark, high contrast, night and paper
+- Listening statistics counted on the device and never sent anywhere
+- Small built-in apps — clock, stopwatch, notes, a music quiz — and more from a separate
+  catalogue at https://iwohost.github.io/hplay-market/
+- Photos can be stuck on the back of the player as decals, including cut-outs with
+  see-through parts
+
+## What it does not do
+
+- It does not stream. It has no catalogue of its own and cannot play anything you do not
+  already have as a file.
+- It does not look anything up online — not artwork, not lyrics, not track names.
+- It has no account system, so there is nothing to log in to and nothing to sync.
+- It is not on an app store yet, and it is an alpha: things move and break between builds.
+
+## Demo music
+
+Twenty original tracks, about 51 minutes, released as HostLabo Tapes and free to download
+from the site individually or as one zip. They are free to use for anything, including
+testing your own software. A credit is welcome but not required.
+
+## Pages
+
+- Home, with what it is, how to get it, screenshots, the demo music and the questions:
+  https://iwohost.github.io/hplaysite/
+- Hplay at Sixty Days, a long read on how it got built:
+  https://iwohost.github.io/hplaysite/review.html
+- Alpha feedback form, in English or Polish:
+  https://iwohost.github.io/hplaysite/feedback.html
+- The app catalogue: https://iwohost.github.io/hplay-market/
+
+## Contact
+
+Email: hostlabosupport@gmail.com
+Instagram: https://instagram.com/hostlabo
+Other projects: https://iwohost.github.io/HostLab/
