@@ -1,7 +1,7 @@
 # Hplay
 
 > Hplay is a free, offline music player for Android that plays the music files already
-> stored on the device. It is driven by a click wheel rather than a scrolling list. It needs
+> stored on the device. It is driven by a wheel you turn rather than a list you scroll. It needs
 > no account and no internet connection. It is currently a closed alpha, handed out by email
 > rather than through an app store. Made by HostLabo.
 
@@ -12,7 +12,7 @@ at a folder and it plays what is in it. There is no library service, no streamin
 no sign-in and no subscription. Nothing is uploaded and nothing is downloaded while you
 listen — the app does not need a connection at any point.
 
-The interface is a click wheel: a ring you turn with your thumb to move through a list, a
+The interface is a scroll wheel: a ring you turn with your thumb to move through a list, a
 middle button to choose, and menu, play/pause and skip around the outer edge. Spinning the
 ring faster jumps further down a list. Holding a button does a second thing — holding menu
 goes home, holding play opens the settings worth changing mid-song, holding a skip button
@@ -37,9 +37,8 @@ scrubs through the track instead of jumping to the next one.
 - No account, no cloud, no ads, no tracking, no telemetry
 - Every folder of music becomes a playlist named after the folder, regardless of tags
 - Playlist order can be set by hand and is remembered
-- Cover art and lyrics are read out of the files' own tags, offline: ID3v2 for mp3,
+- Cover art is read out of the files' own tags, offline: ID3v2 for mp3,
   Vorbis comments and METADATA_BLOCK_PICTURE for flac/ogg/opus, the ilst atom for m4a
-- Timed lyrics follow along with the song where a file has them
 - A song whose file has no artwork is given one of twenty sleeves drawn by the app, chosen
   from the song itself so it is the same sleeve every time on every device
 - Lock screen artwork, notification controls, volume keys, pause on unplugging headphones,
@@ -57,7 +56,7 @@ scrubs through the track instead of jumping to the next one.
 
 - It does not stream. It has no catalogue of its own and cannot play anything you do not
   already have as a file.
-- It does not look anything up online — not artwork, not lyrics, not track names.
+- It does not look anything up online — not artwork, not track names.
 - It has no account system, so there is nothing to log in to and nothing to sync.
 - It is not on an app store yet, and it is an alpha: things move and break between builds.
 
