@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="What you may and may not do with Hplay. Free to use forever, not open source. Written in plain words.">
+<meta name="theme-color" content="#1b6fd0">
+<meta name="author" content="Iwo Dec (HostLabo)">
+<meta name="copyright" content="© 2026 Iwo Dec. All rights reserved.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%231b6fd0%22/><circle cx=%2216%22 cy=%2216%22 r=%229%22 fill=%22none%22 stroke=%22white%22 stroke-width=%223%22/></svg>">
+<title>Hplay Licence</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@112,500;112,600;112,700;112,800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+  *{ box-sizing:border-box; }
+  html{ -webkit-text-size-adjust:100%; }
+  body{ margin:0; }
+  img{ max-width:100%; }
+  [hidden]{ display:none !important; }
+
+  :root{
+    --ground:#e9ebf0; --panel:#ffffff; --panel-2:#f3f5f9;
+    --ink:#0f131b; --ink-soft:#333c4a; --muted:#5c6674;
+    --line:#ccd2dc; --line-soft:#dfe3ea;
+    --accent:#1b6fd0; --accent-ink:#0f4fa8; --accent-soft:#dbe8f8;
+    --good:#357c14; --bad:#a32e24;
+    --shadow:0 1px 2px rgba(12,22,40,.06), 0 8px 24px -12px rgba(12,22,40,.28);
+    --display:"Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;
+    --body:"IBM Plex Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#0a0d13; --panel:#141a24; --panel-2:#101620;
+      --ink:#e6eaf1; --ink-soft:#c3cad6; --muted:#8b95a5;
+      --line:#242e3c; --line-soft:#1b232e;
+      --accent:#64a6f0; --accent-ink:#9cc8f7; --accent-soft:#132437;
+      --good:#6bc24a; --bad:#e2685a;
+      --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 30px -14px rgba(0,0,0,.8);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#0a0d13; --panel:#141a24; --panel-2:#101620;
+    --ink:#e6eaf1; --ink-soft:#c3cad6; --muted:#8b95a5;
+    --line:#242e3c; --line-soft:#1b232e;
+    --accent:#64a6f0; --accent-ink:#9cc8f7; --accent-soft:#132437;
+    --good:#6bc24a; --bad:#e2685a;
+    --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 30px -14px rgba(0,0,0,.8);
+  }
+
+  body{
+    background:var(--ground); color:var(--ink);
+    font-family:var(--body); font-size:16.5px; line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  .skiplink{
+    position:absolute; left:-9999px; top:0; background:#0f4fa8; color:#fff;
+    padding:10px 16px; z-index:20; border-radius:0 0 4px 0;
+  }
+  .skiplink:focus{ left:0; }
+  .backhome{
+    max-width:820px; margin:0 auto; padding:14px 22px 0;
+    font-family:var(--mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase;
+  }
+  .backhome a{
+    color:var(--accent-ink); text-decoration:none;
+    display:inline-flex; align-items:center; min-height:24px;
+  }
+  .backhome a:hover{ text-decoration:underline; }
+
+  main{ max-width:820px; margin:0 auto; padding:26px 22px 70px; }
+  h1{
+    font-family:var(--display); font-weight:800; letter-spacing:-.025em;
+    font-size:clamp(30px,6vw,46px); line-height:1.05; margin:0 0 12px; text-wrap:balance;
+  }
+  .lede{ color:var(--ink-soft); font-size:17.5px; margin:0 0 6px; max-width:60ch; }
+  .stamp{
+    font-family:var(--mono); font-size:12.5px; color:var(--muted);
+    margin:18px 0 0; padding-top:16px; border-top:1px solid var(--line);
+  }
+  h2{
+    font-family:var(--display); font-weight:700; letter-spacing:-.015em;
+    font-size:clamp(20px,3.4vw,25px); line-height:1.2; margin:44px 0 10px;
+  }
+  p{ margin:0 0 14px; color:var(--ink-soft); }
+  p.tight{ margin-bottom:8px; }
+  strong{ color:var(--ink); font-weight:600; }
+  a{ color:var(--accent-ink); }
+
+  .box{
+    background:var(--panel); border:1px solid var(--line); border-radius:6px;
+    padding:22px 24px; box-shadow:var(--shadow); margin:18px 0 0;
+  }
+  .box.free{ border-left:3px solid var(--good); }
+
+  ul{ margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:11px; }
+  li{ display:grid; grid-template-columns:22px 1fr; gap:12px; color:var(--ink-soft); }
+  li .m{
+    font-family:var(--mono); font-weight:600; font-size:15px; line-height:1.6;
+    text-align:center;
+  }
+  .yes li .m{ color:var(--good); }
+  .no  li .m{ color:var(--bad); }
+
+  .ask{
+    margin-top:22px; background:var(--accent-soft); border:1px solid var(--line);
+    border-radius:6px; padding:16px 18px; color:var(--ink-soft); font-size:15.5px;
+  }
+  .ask strong{ color:var(--accent-ink); }
+
+  .fine{ font-size:14.5px; color:var(--muted); }
+  .third{
+    font-family:var(--mono); font-size:13px; color:var(--muted);
+    display:flex; flex-direction:column; gap:7px;
+  }
+  footer{
+    max-width:820px; margin:0 auto; padding:0 22px 60px;
+    display:flex; flex-wrap:wrap; gap:7px 22px;
+    font-family:var(--mono); font-size:11.5px; color:var(--muted);
+    border-top:1px solid var(--line); padding-top:20px;
+  }
+  @media (max-width:520px){ main{ padding-top:18px; } }
+</style>
+</head>
+<body>
+<a class="skiplink" href="#main">Skip to the content</a>
+<div class="backhome"><a href="index.html">&#8592; Hplay</a></div>
+
+<main id="main">
+  <h1>The Hplay licence</h1>
+  <p class="lede">Hplay is free to use and always will be. It is not open source. Here is what you can and cannot do with it, in plain words, because a licence nobody reads protects nobody.</p>
+  <p class="stamp">Hplay &nbsp;·&nbsp; Copyright &copy; 2026 Iwo Dec, trading as HostLabo &nbsp;·&nbsp; All rights reserved</p>
+
+  <div class="box free">
+    <h2 style="margin-top:0">Free, forever</h2>
+    <p class="tight">Install it on any device you own, for as long as you like, for nothing. There is no trial, no paid tier, no feature held back and no ads. Updates are free too. This will not change later.</p>
+    <p style="margin-bottom:0">If you want to support the work you can. You never have to, and nothing in Hplay behaves differently if you do.</p>
+  </div>
+
+  <h2>You may</h2>
+  <div class="box">
+    <ul class="yes">
+      <li><span class="m">&check;</span><span>Use Hplay for anything you like, including at work.</span></li>
+      <li><span class="m">&check;</span><span>Install it on every device you own.</span></li>
+      <li><span class="m">&check;</span><span>Change your own copy, for your own use, however you want.</span></li>
+      <li><span class="m">&check;</span><span>Take screenshots, record video, write about it, review it, show it to people.</span></li>
+      <li><span class="m">&check;</span><span>Send anyone the official download link.</span></li>
+    </ul>
+  </div>
+
+  <h2>You may not, without asking first</h2>
+  <div class="box">
+    <ul class="no">
+      <li><span class="m">&times;</span><span><strong>Redistribute it.</strong> No re-uploading the APK, no mirrors, no other app stores or download sites, no bundling it with something else, and no passing around a build you changed.</span></li>
+      <li><span class="m">&times;</span><span><strong>Sell it.</strong> Not the app, not a copy, not access to it, not something with it inside, not a device with it preinstalled.</span></li>
+      <li><span class="m">&times;</span><span><strong>Reuse the source.</strong> No copying, translating or adapting any part of the code, the artwork, the generated sleeves or the wording into another project. That includes using it as training data for a machine learning model.</span></li>
+      <li><span class="m">&times;</span><span><strong>Take the name off.</strong> The credit to Iwo Dec and HostLabo stays where it is.</span></li>
+      <li><span class="m">&times;</span><span><strong>Use the names.</strong> Hplay and HostLabo are not yours to put on something else.</span></li>
+    </ul>
+    <p class="ask">Asking is genuinely fine and costs you nothing. Write to <strong><a href="mailto:hostlabosupport@gmail.com?subject=Hplay%20permission">hostlabosupport@gmail.com</a></strong>. The answer is usually yes, and it comes back quicker than you would think.</p>
+  </div>
+
+  <h2>No warranty</h2>
+  <p>Hplay is an alpha. It is given to you as it is, with no promise that it works, that it keeps working, or that it suits what you want it for. Things will break and things will change between builds.</p>
+  <p>To the extent the law allows, Iwo Dec is not liable for anything that happens from using it, including lost files, lost settings or a phone that misbehaves. Keep your own backup of your music. Hplay only ever reads your files, but you should not take any one person's word for that.</p>
+  <p class="fine">Nothing on this page removes rights you already have under the law where you live.</p>
+
+  <h2>Your music and your data</h2>
+  <p>Your music stays on your device. There is no account, no cloud, no analytics and no tracking. The listening statistics are counted on the device, are never sent anywhere, and you can switch them off or wipe them in Settings &rsaquo; Statistics &rsaquo; Usage Data.</p>
+
+  <h2>Other people's work</h2>
+  <p class="tight">Almost all of Hplay is hand written, with no framework and no build step. This is what is in it that somebody else made.</p>
+  <div class="box">
+    <div class="third">
+      <span><strong>jsmediatags 3.9.5</strong> &nbsp;BSD 3-Clause &nbsp;&copy; Ant&oacute;nio Afonso</span>
+      <span><strong>Archivo</strong> &nbsp;SIL Open Font Licence 1.1 &nbsp;&copy; 2020 The Archivo Project Authors</span>
+      <span><strong>IBM Plex Sans</strong> &nbsp;SIL Open Font Licence 1.1 &nbsp;&copy; 2019 IBM Corp.</span>
+      <span><strong>IBM Plex Mono</strong> &nbsp;SIL Open Font Licence 1.1 &nbsp;&copy; 2017 IBM Corp.</span>
+    </div>
+  </div>
+  <p class="fine" style="margin-top:14px">The typefaces are used on this website only. jsmediatags fills in tags the app's own reader missed; Hplay reads tags out of the file bytes itself, which is why cover art still works with no signal.</p>
+
+  <h2>The demo music</h2>
+  <p>HostLabo Tapes, the twenty tracks on the <a href="index.html#music">music page</a>, are written and recorded by HostLabo. They are free to download, free to keep and free to use in your own things, including commercially, with no credit required. They are not covered by the terms above.</p>
+
+  <h2>If this page changes</h2>
+  <p>Later versions may say something different, but the terms you were given with a build are the terms for that build. Nothing here is taken back afterwards.</p>
+</main>
+
+<footer>
+  <span>Hplay v39.4 &ldquo;Chell&rdquo;</span>
+  <span>&copy; 2026 Iwo Dec</span>
+  <span>HostLabo</span>
+  <span>Not affiliated with, or endorsed by, Apple Inc.</span>
+</footer>
+
+<script>
+  // the home page's toggle writes this key; honour it so the two pages agree
+  try{
+    var t = localStorage.getItem('hplaysite-theme');
+    if(t === 'dark' || t === 'light') document.documentElement.dataset.theme = t;
+  }catch(e){}
+</script>
+</body>
+</html>

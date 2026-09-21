@@ -7,7 +7,8 @@
 <meta name="description" content="Hplay is a free offline music player for Android that plays the music files already on your phone. A wheel you turn instead of a list you scroll. No account, no cloud, no ads, no tracking. Reads cover art out of your own files. Currently a closed alpha.">
 <link rel="canonical" href="https://iwohost.github.io/hplaysite/">
 <meta name="theme-color" content="#1b6fd0">
-<meta name="author" content="HostLabo">
+<meta name="author" content="Iwo Dec (HostLabo)">
+<meta name="copyright" content="© 2026 Iwo Dec. All rights reserved.">
 <meta property="og:site_name" content="Hplay">
 <meta property="og:title" content="Hplay — offline scroll-wheel music player for Android">
 <meta property="og:description" content="A free offline music player for Android, for the music files you already own. A wheel you turn instead of a list you scroll. No account, no cloud, no ads.">
@@ -70,13 +71,25 @@
       },
       "isAccessibleForFree": true,
       "inLanguage": "en",
-      "author": { "@id": "https://iwohost.github.io/hplaysite/#hostlabo" },
-      "publisher": { "@id": "https://iwohost.github.io/hplaysite/#hostlabo" }
+      "author": { "@id": "https://iwohost.github.io/hplaysite/#iwodec" },
+      "publisher": { "@id": "https://iwohost.github.io/hplaysite/#hostlabo" },
+      "copyrightHolder": { "@id": "https://iwohost.github.io/hplaysite/#iwodec" },
+      "copyrightYear": "2026",
+      "copyrightNotice": "Copyright 2026 Iwo Dec, trading as HostLabo. All rights reserved.",
+      "license": "https://iwohost.github.io/hplaysite/license.html"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://iwohost.github.io/hplaysite/#iwodec",
+      "name": "Iwo Dec",
+      "url": "https://iwohost.github.io/hplaysite/",
+      "worksFor": { "@id": "https://iwohost.github.io/hplaysite/#hostlabo" }
     },
     {
       "@type": "Organization",
       "@id": "https://iwohost.github.io/hplaysite/#hostlabo",
       "name": "HostLabo",
+      "founder": { "@id": "https://iwohost.github.io/hplaysite/#iwodec" },
       "url": "https://iwohost.github.io/hplaysite/",
       "email": "hostlabosupport@gmail.com",
       "sameAs": [
@@ -121,6 +134,11 @@
           "@type": "Question",
           "name": "How does Hplay handle playlists?",
           "acceptedAnswer": { "@type": "Answer", "text": "A folder is a playlist. Point Hplay at a folder of music and every folder inside it becomes a playlist named after that folder, whatever the tags inside the files say. Renaming a folder renames the playlist, and the order of songs within one can be set by hand and is remembered." }
+        },
+        {
+          "@type": "Question",
+          "name": "Who makes Hplay?",
+          "acceptedAnswer": { "@type": "Answer", "text": "One person: Iwo Dec, working as HostLabo. It is written by hand, with no framework and no build step, and it is not open source. Hplay is copyright 2026 Iwo Dec, all rights reserved. Hplay is free to use forever, but it may not be redistributed, sold, or have its source reused without permission." }
         },
         {
           "@type": "Question",
@@ -515,7 +533,13 @@
   footer{
     margin-top:64px; padding-top:22px; border-top:1px solid var(--line);
     font-family:var(--mono); font-size:12.5px; color:var(--muted);
-    display:flex; flex-wrap:wrap; gap:6px 18px;
+    display:flex; flex-wrap:wrap; align-items:center; gap:6px 18px;
+  }
+  /* a link down here is still a link somebody has to hit, so it carries a 24px target
+     of its own rather than inheriting the footer's 15px line box */
+  footer a{
+    color:var(--accent-ink); display:inline-flex; align-items:center;
+    min-height:24px; padding:2px 0;
   }
 
   @media (max-width:720px){
@@ -1046,6 +1070,10 @@
         <p>A folder is a playlist. Point Hplay at a folder of music and every folder inside it becomes a playlist named after that folder, whatever the tags inside the files say. Renaming a folder renames the playlist, and the order of songs within one can be set by hand and is remembered.</p>
       </div>
       <div class="qa">
+        <h3>Who makes Hplay?</h3>
+        <p>One person: Iwo Dec, working as HostLabo. It is written by hand, with no framework and no build step, and it is not open source. Hplay is copyright &copy; 2026 Iwo Dec, all rights reserved. You can read the <a href="license.html">full licence</a>, which is short.</p>
+      </div>
+      <div class="qa">
         <h3>Is Hplay free?</h3>
         <p>Yes. Free, with no paid tier, no ads and nothing to buy inside it. The twenty demo tracks on this site are free to download and free to use as well.</p>
       </div>
@@ -1107,6 +1135,11 @@
         <h3>HostLabo Tapes</h3>
         <p>All twenty demo tracks, tagged and sleeved, in one zip or one at a time.</p>
       </a>
+      <a class="card" href="license.html">
+        <span class="kind">Terms</span>
+        <h3>Licence</h3>
+        <p>Free to use forever, and not open source. What you may and may not do, in plain words.</p>
+      </a>
       <a class="card" href="https://iwohost.github.io/HostLab/">
         <span class="kind">Elsewhere</span>
         <h3>HostLab</h3>
@@ -1132,6 +1165,11 @@
         <span class="who"><b>HostLab</b><span>The other site</span></span>
       </a>
       <div class="soc soon">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 8h12v6.5a4.5 4.5 0 0 1-4.5 4.5H9a4.5 4.5 0 0 1-4.5-4.5z"/><path d="M16.5 9.5h1.6a2.4 2.4 0 0 1 0 4.8h-1.6"/><path d="M7.6 2.9v2.2M11 2.9v2.2M14.4 2.9v2.2"/></svg></span>
+        <span class="who"><b>Buy me a coffee</b><span>Not up yet</span></span>
+        <span class="pill">soon</span>
+      </div>
+      <div class="soc soon">
         <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13.4 3v11.6a3.2 3.2 0 1 1-2.9-3.19"/><path d="M13.4 3.2c.45 2.75 2.1 4.4 4.9 4.72"/></svg></span>
         <span class="who"><b>TikTok</b><span>Not up yet</span></span>
         <span class="pill">soon</span>
@@ -1150,9 +1188,11 @@
   </section>
 
   <footer role="contentinfo">
-    <span>Hplay v39.3 &ldquo;Chell&rdquo;</span>
+    <span>Hplay v39.4 &ldquo;Chell&rdquo;</span>
     <span>Alpha</span>
-    <span>Built by HostLabo</span>
+    <span>Built by Iwo Dec &middot; HostLabo</span>
+    <span>&copy; 2026 Iwo Dec. All rights reserved</span>
+    <span><a href="license.html">Licence</a></span>
     <span>Demo music: HostLabo Tapes</span>
     <span>No trackers on this page</span>
     <span>Hplay is not affiliated with, or endorsed by, Apple Inc.</span>
