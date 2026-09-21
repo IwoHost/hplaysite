@@ -1148,6 +1148,18 @@
     </div>
   </section>
 
+  <!-- Supporters.
+       Adding a name here is instant, which is the point: the list inside the app only moves
+       when a new build goes out, and that can be weeks. Copy a <li> and type the name. -->
+  <section id="supporters">
+    <div class="chrome"><span class="n">09</span><h2>Supporters</h2><span class="batt"><i></i></span></div>
+    <p>People who bought a coffee. They get their name here, their name in the app, a rank on the Discord when there is one, and a skin. Nothing else, because nothing else is held back.</p>
+    <ul class="sup" id="sup">
+      <!-- <li>Name</li> -->
+    </ul>
+    <p class="supnone" id="supnone">Nobody yet. <a href="https://buymeacoffee.com/iwohost">You could be first.</a></p>
+  </section>
+
   <section id="contact">
     <div class="chrome"><span class="n">09</span><h2>Get in touch</h2><span class="batt"><i></i></span></div>
     <p>Bug reports, ideas and complaints are all welcome. The fastest way is email.</p>
@@ -1186,6 +1198,21 @@
       </div>
     </div>
   </section>
+
+  <style>
+    #supporters .sup{
+      list-style:none; margin:16px 0 0; padding:0;
+      display:flex; flex-wrap:wrap; gap:8px 10px;
+    }
+    #supporters .sup li{
+      font-family:var(--mono); font-size:13px; color:var(--ink-soft);
+      background:var(--panel); border:1px solid var(--line); border-radius:999px;
+      padding:6px 14px; min-height:28px; display:inline-flex; align-items:center;
+    }
+    #supporters .sup:empty + .supnone{ display:block; }
+    #supporters .sup:not(:empty) + .supnone{ display:none; }
+    #supporters .supnone{ color:var(--muted); font-size:15px; margin-top:14px; }
+  </style>
 
   <footer role="contentinfo">
     <span>Hplay v39.5 &ldquo;Chell&rdquo;</span>
