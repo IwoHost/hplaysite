@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="Open a Hplay supporter skin. Tap the button and the skin is on.">
+<meta name="theme-color" content="#1b6fd0">
+<meta name="author" content="Iwo Dec (HostLabo)">
+<meta name="copyright" content="© 2026 Iwo Dec. All rights reserved.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%231b6fd0%22/><circle cx=%2216%22 cy=%2216%22 r=%229%22 fill=%22none%22 stroke=%22white%22 stroke-width=%223%22/></svg>">
+<title>Your Hplay Skin</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@112,500;112,600;112,700;112,800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+  *{ box-sizing:border-box; }
+  html{ -webkit-text-size-adjust:100%; }
+  body{ margin:0; }
+  img{ max-width:100%; }
+  [hidden]{ display:none !important; }
+
+  :root{
+    --ground:#e9ebf0; --panel:#ffffff; --panel-2:#f3f5f9;
+    --ink:#0f131b; --ink-soft:#333c4a; --muted:#5c6674;
+    --line:#ccd2dc; --line-soft:#dfe3ea;
+    --accent:#1b6fd0; --accent-ink:#0f4fa8; --accent-soft:#dbe8f8;
+    --good:#357c14; --bad:#a32e24;
+    --shadow:0 1px 2px rgba(12,22,40,.06), 0 8px 24px -12px rgba(12,22,40,.28);
+    /* the button is a filled block, so its ink has to come from the same pair as its fill;
+       --accent-ink flips to a pale blue in the dark theme and white on that is unreadable */
+    --btn-bg:#0f4fa8; --btn-ink:#ffffff;
+    --display:"Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;
+    --body:"IBM Plex Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#0a0d13; --panel:#141a24; --panel-2:#101620;
+      --ink:#e6eaf1; --ink-soft:#c3cad6; --muted:#8b95a5;
+      --line:#242e3c; --line-soft:#1b232e;
+      --accent:#64a6f0; --accent-ink:#9cc8f7; --accent-soft:#132437;
+      --good:#6bc24a; --bad:#e2685a;
+      --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 30px -14px rgba(0,0,0,.8);
+      --btn-bg:#9cc8f7; --btn-ink:#08101c;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#0a0d13; --panel:#141a24; --panel-2:#101620;
+    --ink:#e6eaf1; --ink-soft:#c3cad6; --muted:#8b95a5;
+    --line:#242e3c; --line-soft:#1b232e;
+    --accent:#64a6f0; --accent-ink:#9cc8f7; --accent-soft:#132437;
+    --good:#6bc24a; --bad:#e2685a;
+    --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 30px -14px rgba(0,0,0,.8);
+    --btn-bg:#9cc8f7; --btn-ink:#08101c;
+  }
+
+  body{
+    background:var(--ground); color:var(--ink);
+    font-family:var(--body); font-size:16.5px; line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  .skiplink{
+    position:absolute; left:-9999px; top:0; background:#0f4fa8; color:#fff;
+    padding:10px 16px; z-index:20; border-radius:0 0 4px 0;
+  }
+  .skiplink:focus{ left:0; }
+  .backhome{
+    max-width:620px; margin:0 auto; padding:14px 22px 0;
+    font-family:var(--mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase;
+  }
+  .backhome a{
+    color:var(--accent-ink); text-decoration:none;
+    display:inline-flex; align-items:center; min-height:24px;
+  }
+  .backhome a:hover{ text-decoration:underline; }
+
+  main{ max-width:620px; margin:0 auto; padding:26px 22px 70px; }
+  .eyebrow{
+    font-family:var(--mono); font-size:12px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--muted); margin:0 0 10px;
+  }
+  h1{
+    font-family:var(--display); font-weight:800; letter-spacing:-.025em;
+    font-size:clamp(28px,6vw,42px); line-height:1.05; margin:0 0 12px; text-wrap:balance;
+  }
+  p{ margin:0 0 14px; color:var(--ink-soft); }
+  strong{ color:var(--ink); font-weight:600; }
+  a{ color:var(--accent-ink); }
+
+  /* the skin itself, drawn the way the player draws it: a body with a wheel on it */
+  .preview{
+    display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+    background:var(--panel); border:1px solid var(--line); border-radius:6px;
+    padding:22px 24px; box-shadow:var(--shadow); margin:22px 0 0;
+  }
+  .chip{
+    width:104px; height:132px; border-radius:11px; flex:none; position:relative;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.35), 0 2px 8px rgba(0,0,0,.25);
+  }
+  .chip i{
+    position:absolute; left:50%; bottom:17px; transform:translateX(-50%);
+    width:64px; height:64px; border-radius:50%;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.25), 0 1px 3px rgba(0,0,0,.35);
+  }
+  .chip i::after{
+    content:""; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+    width:24px; height:24px; border-radius:50%;
+  }
+  .chip b{
+    position:absolute; left:10px; right:10px; top:11px; height:52px;
+    border-radius:3px; background:#f7f8fa; border:1px solid rgba(0,0,0,.35);
+  }
+  .pname{ font-family:var(--display); font-weight:700; font-size:22px; margin:0 0 2px; }
+  .pwhat{ color:var(--muted); font-size:15px; margin:0; }
+
+  .go{
+    display:inline-flex; align-items:center; justify-content:center;
+    min-height:52px; padding:0 30px; margin:22px 0 0;
+    background:var(--btn-bg); color:var(--btn-ink); text-decoration:none;
+    font-family:var(--display); font-weight:700; font-size:17px;
+    border-radius:6px; border:1px solid transparent;
+  }
+  .go:hover{ filter:brightness(1.08); }
+  .go:focus-visible{ outline:3px solid var(--accent); outline-offset:3px; }
+
+  .fallback{
+    margin-top:26px; background:var(--panel-2); border:1px solid var(--line);
+    border-radius:6px; padding:16px 18px; font-size:15px; color:var(--ink-soft);
+  }
+  .fallback p:last-child{ margin-bottom:0; }
+  code{
+    font-family:var(--mono); font-weight:600; font-size:15px;
+    background:var(--accent-soft); color:var(--accent-ink);
+    padding:2px 7px; border-radius:4px; letter-spacing:.06em;
+  }
+  .fine{ font-size:14.5px; color:var(--muted); }
+  footer{
+    max-width:620px; margin:0 auto; padding:0 22px 60px;
+    display:flex; flex-wrap:wrap; gap:7px 22px;
+    font-family:var(--mono); font-size:11.5px; color:var(--muted);
+    border-top:1px solid var(--line); padding-top:20px;
+  }
+</style>
+</head>
+<body>
+<a class="skiplink" href="#main">Skip to the content</a>
+<div class="backhome"><a href="index.html">&#8592; Hplay</a></div>
+
+<main id="main">
+  <p class="eyebrow" id="eyebrow">Thank you</p>
+  <h1 id="head">Your skin is ready</h1>
+  <p id="lede">Tap the button and it is on. Nothing to type, nothing to set up.</p>
+
+  <div class="preview" id="preview" hidden>
+    <div class="chip" id="chip"><b></b><i></i></div>
+    <div>
+      <p class="pname" id="pname"></p>
+      <p class="pwhat" id="pwhat"></p>
+    </div>
+  </div>
+
+  <a class="go" id="go" href="#" hidden>Open it in Hplay</a>
+
+  <div class="fallback" id="fallback" hidden>
+    <p><strong>Nothing happened?</strong> That means Hplay is not on this device yet, or you
+      are reading this on a computer. Open this same link on the phone Hplay is on.</p>
+    <p>You can also type it in by hand, which does exactly the same thing:
+      <strong>Settings &rsaquo; Look &rsaquo; Body Color &rsaquo; Redeem a Code</strong>, then
+      <code id="code"></code>.</p>
+    <p class="fine">Haven't got Hplay? It is still an alpha and goes out by email &mdash;
+      <a href="mailto:hostlabosupport@gmail.com?subject=Hplay%20alpha">ask for a build</a>.</p>
+  </div>
+
+  <div class="fallback" id="nocode" hidden>
+    <p>This page opens a supporter skin, and this link did not bring one with it.</p>
+    <p>If you bought a coffee, the link you were sent has a code on the end of it &mdash; use
+      that one. If something looks wrong with it,
+      <a href="mailto:hostlabosupport@gmail.com?subject=Hplay%20skin">tell me</a> and I will
+      sort it out.</p>
+    <p class="fine">Hplay is free either way. The skins are a thank-you, not a feature: nothing
+      the player does sits behind them.</p>
+  </div>
+</main>
+
+<footer>
+  <span>Hplay v40.2 &ldquo;Pyro&rdquo;</span>
+  <span>&copy; 2026 Iwo Dec</span>
+  <span>HostLabo</span>
+  <span>Not affiliated with, or endorsed by, Apple Inc.</span>
+</footer>
+
+<script>
+  // the home page's toggle writes this key; honour it so the pages agree
+  try{
+    var t = localStorage.getItem('hplaysite-theme');
+    if(t === 'dark' || t === 'light') document.documentElement.dataset.theme = t;
+  }catch(e){}
+
+  /* The same two skins the app ships, so the page can show what is coming rather than
+     naming it. Kept here on purpose and nowhere near the link: the link carries a code,
+     and the app decides what that code means from its own copy. If these ever drift, the
+     preview is wrong and the skin is still right, which is the way round it should be. */
+  var SKINS = {
+    GOLDEN: { name:'Golden Supporter', what:'Gold body, graphite wheel',
+              b:['#f8e3a0','#dcae33','#8e6112','#2c1c04'],
+              w:['#454038','#322e28','#221f1a','#12100d'], c:'#a97f22' },
+    COFFEE: { name:'Coffee Supporter', what:'Crema body, espresso wheel',
+              b:['#eddbc0','#c9a271','#8a5e34','#3a2313'],
+              w:['#3d2c1e','#2b1e14','#1c130c','#0e0906'], c:'#9a7345' }
+  };
+
+  function codeFromUrl(){
+    var p = new URLSearchParams(location.search).get('c');
+    var raw = (p || location.hash.replace(/^#/, '') || '').trim().toUpperCase();
+    return /^[A-Z0-9]{1,24}$/.test(raw) ? raw : '';
+  }
+
+  var code = codeFromUrl();
+  var skin = code && Object.prototype.hasOwnProperty.call(SKINS, code) ? SKINS[code] : null;
+
+  if(!code){
+    document.getElementById('eyebrow').textContent = 'Supporter skins';
+    document.getElementById('head').textContent = 'No skin on this link';
+    document.getElementById('lede').hidden = true;
+    document.getElementById('nocode').hidden = false;
+  } else {
+    /* An unknown code still gets the button. The app holds the real list, and this page
+       being out of date is not a reason to tell somebody their gift is not real. */
+    var go = document.getElementById('go');
+    go.href = 'hplay://gift/' + encodeURIComponent(code);
+    go.hidden = false;
+    document.getElementById('code').textContent = code;
+    document.getElementById('fallback').hidden = false;
+
+    if(skin){
+      var chip = document.getElementById('chip');
+      chip.style.background = 'linear-gradient(180deg,' + skin.b.join(',') + ')';
+      var wheel = chip.querySelector('i');
+      wheel.style.background = 'radial-gradient(circle at 50% 40%,' + skin.w.join(',') + ')';
+      wheel.style.setProperty('--c', skin.c);
+      var dot = document.createElement('style');
+      dot.textContent = '#chip i::after{ background:' + skin.c + '; }';
+      document.head.appendChild(dot);
+      document.getElementById('pname').textContent = skin.name;
+      document.getElementById('pwhat').textContent = skin.what;
+      document.getElementById('preview').hidden = false;
+      document.title = skin.name;
+      document.getElementById('head').textContent = skin.name + ' is ready';
+    }
+  }
+</script>
+</body>
+</html>
