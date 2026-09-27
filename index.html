@@ -350,6 +350,9 @@
   .getunder a:hover{ color:var(--accent); }
   .getunder .dot{ opacity:.45; }
 
+  /* the closing note signs off, so the last line is set apart from the argument above it */
+  #why .sig{ font-family:var(--mono); font-size:13.5px; color:var(--muted); margin-top:20px; }
+
   /* and once the hero has scrolled past, it is still one tap away in the bar */
   .top .topget{
     display:inline-flex; align-items:center; gap:6px; margin-left:14px;
@@ -1252,7 +1255,7 @@
   </section>
 
   <section id="contact">
-    <div class="chrome"><span class="n">09</span><h2>Get in touch</h2><span class="batt"><i></i></span></div>
+    <div class="chrome"><span class="n">10</span><h2>Get in touch</h2><span class="batt"><i></i></span></div>
     <p>Bug reports, ideas and complaints are all welcome. The fastest way is email.</p>
     <div class="social">
       <a class="soc" href="mailto:hostlabosupport@gmail.com">
@@ -1288,6 +1291,16 @@
         <span class="pill">soon</span>
       </div>
     </div>
+  </section>
+
+  <!-- Last, on purpose. The rest of the page is what Hplay does; this is why it exists, and
+       it reads better after somebody already knows what they are being told the reason for. -->
+  <section id="why">
+    <div class="chrome"><span class="n">11</span><h2>Why it exists</h2><span class="batt"><i></i></span></div>
+    <p class="lede">I made Hplay because everything now is too much.</p>
+    <p>Every app wants an account, a subscription, a feed and your attention. A music player should want a folder. So Hplay opens on one screen, with one wheel, and nothing to set up before it plays something.</p>
+    <p>Simple was the point. Thin was not. Underneath it there are stations built out of what you actually replay, six ways to watch the sound, a theme system that colours the icon on your home screen, and an accessibility screen with real controls in it rather than a toggle and an apology. Nothing is in your way. Nothing is missing either.</p>
+    <p class="sig">&mdash; Iwo</p>
   </section>
 
   <style>
