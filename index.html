@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Hplay — free offline scroll-wheel music player for Android</title>
-<meta name="description" content="Hplay is a free offline music player for Android that plays the music files already on your phone. A wheel you turn instead of a list you scroll. No account, no cloud, no ads, no tracking. Reads cover art out of your own files. Currently a closed alpha.">
+<meta name="description" content="Hplay is a free offline music player for Android that plays the music files already on your phone. A wheel you turn instead of a list you scroll. No account, no cloud, no ads, no tracking. Reads cover art out of your own files. Free to download as an APK.">
 <link rel="canonical" href="https://iwohost.github.io/hplaysite/">
 <meta name="theme-color" content="#1b6fd0">
 <meta name="author" content="Iwo Dec (HostLabo)">
@@ -39,11 +39,13 @@
       "applicationCategory": "MultimediaApplication",
       "applicationSubCategory": "Music player",
       "operatingSystem": "Android",
-      "softwareVersion": "38.11",
-      "releaseNotes": "https://iwohost.github.io/hplaysite/#about",
+      "softwareVersion": "42.3",
+      "releaseNotes": "https://iwohost.github.io/hplaysite/changelog.html",
       "url": "https://iwohost.github.io/hplaysite/",
-      "installUrl": "https://iwohost.github.io/hplaysite/#start",
-      "description": "Hplay is an offline music player for Android that plays the music files already on the device. It is driven by a wheel you turn rather than a list you scroll. It needs no account and no internet connection, reads cover art out of the files themselves, and treats each folder of music as a playlist. It is free and currently a closed alpha, handed out by email rather than through an app store.",
+      "installUrl": "https://hplay.hosttost.workers.dev/hplay-latest.apk",
+      "downloadUrl": "https://hplay.hosttost.workers.dev/hplay-latest.apk",
+      "softwareRequirements": "Android 7.0 or newer",
+      "description": "Hplay is an offline music player for Android that plays the music files already on the device. It is driven by a wheel you turn rather than a list you scroll. It needs no account and no internet connection, reads cover art out of the files themselves, and treats each folder of music as a playlist. It is free, and it is downloaded as an APK from this site rather than from an app store.",
       "featureList": [
         "Plays music files stored on the device — mp3, flac, m4a, ogg, opus and wav",
         "Works with no internet connection at all",
@@ -148,7 +150,7 @@
         {
           "@type": "Question",
           "name": "How do I get Hplay?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Hplay is a closed alpha, so it is handed out one person at a time rather than downloaded from a store. Email hostlabosupport@gmail.com and the app is sent back to you to install yourself. There is no waiting list and no form." }
+          "acceptedAnswer": { "@type": "Answer", "text": "Download the APK from the Hplay site and open it on your phone. Android asks whether you trust an app from outside the Play Store; say yes and it installs like any other. There is no account, no waiting list and no form." }
         },
         {
           "@type": "Question",
@@ -640,17 +642,17 @@
     <div>
       <div class="eyebrow">A music player by HostLabo &middot; alpha</div>
       <h1>Hplay</h1>
-      <p class="dek">An Android music player with a scroll wheel, for the songs you already own. No account, no cloud, no ads.</p>
+      <p class="dek">An Android music player with a scroll wheel, for the songs you already own. No account, no cloud, no ads. Download it and it is yours.</p>
       <div class="stamp">
-        <span class="now">v38.11 &ldquo;Barney&rdquo;</span>
+        <span class="now" id="verNow">v42.3 &ldquo;Medic&rdquo;</span>
         <span>alpha</span>
-        <span>Android</span>
+        <span>Android 7+</span>
         <span>works offline</span>
         <span>free</span>
       </div>
       <div class="cta">
-        <a class="btn primary" href="#music">Demo music <small>51 min, free</small></a>
-        <a class="btn" href="#start">How to get it</a>
+        <a class="btn primary" id="dlBtn" href="https://hplay.hosttost.workers.dev/hplay-latest.apk">Download the APK <small id="dlSize">Android 7 and up</small></a>
+        <a class="btn" href="changelog.html">What&rsquo;s new</a>
       </div>
     </div>
   </div>
@@ -662,8 +664,8 @@
     <p>It behaves like a music app should on a phone. It holds the lock screen with the cover art on it, puts controls in the notification shade, takes the volume keys, pauses when you pull your headphones out, and keeps playing with the screen off.</p>
 
     <dl class="spec">
-      <div><dt>Version</dt><dd>38.11 <small>Barney</small></dd></div>
-      <div><dt>Runs on</dt><dd>Android</dd></div>
+      <div><dt>Version</dt><dd id="verSpec">42.3 <small>Medic</small></dd></div>
+      <div><dt>Runs on</dt><dd>Android 7+</dd></div>
       <div><dt>Screen looks</dt><dd>5 <small>light to paper</small></dd></div>
       <div><dt>Demo tracks</dt><dd>20 <small>51 minutes</small></dd></div>
       <div><dt>Accounts</dt><dd>0</dd></div>
@@ -678,19 +680,25 @@
 
   <section id="start">
     <div class="chrome"><span class="n">02</span><h2>How to get it</h2><span class="batt"><i></i></span></div>
-    <p class="lede">Hplay is in a closed alpha, so it is handed out one person at a time rather than downloaded from here.</p>
-    <p>Send me an email and I will send the app straight back to you. It is not on the Play Store yet, so you install it yourself. There is no waiting list and no form to fill in. All I ask is that you tell me afterwards what worked and what did not, which is what the feedback page is for.</p>
+    <p class="lede">Download it here. No account, no waiting list, no form.</p>
+    <p>It is not on the Play Store, so you install it yourself. Android will warn you about an app from outside the store &mdash; that warning is about where the file came from, not about what is in it, and you will get it for any app that is not on Play. It is still an alpha, so tell me when something goes wrong; that is what the feedback page is for.</p>
     <div class="cta">
-      <a class="btn primary" href="mailto:hostlabosupport@gmail.com?subject=Hplay%20alpha">Ask for the alpha</a>
-      <a class="btn" href="feedback.html">Already tried it?</a>
+      <a class="btn primary" href="https://hplay.hosttost.workers.dev/hplay-latest.apk">Download the APK <small id="dlSize2">Android 7 and up</small></a>
+      <a class="btn" href="changelog.html">What changed</a>
+      <a class="btn" href="feedback.html">Tell me how it went</a>
     </div>
+    <p class="fine" style="color:var(--muted); font-size:.86rem; margin-top:14px">
+      Every build stays up under its own number, so you can go back to one that worked for you.
+      Each has a <code>.sha256</code> next to it if you want to check the file arrived whole.
+      <a href="https://hplay.hosttost.workers.dev/latest.json">latest.json</a> says what the newest one is.
+    </p>
 
     <h3>Once you have it</h3>
     <div class="steps">
       <div class="step">
         <span class="num">Step one</span>
         <h3>Install it</h3>
-        <p>Your phone will ask whether you trust an app from outside the store. Say yes, and it installs like any other. Nothing to register, no account to make.</p>
+        <p>Open the file you downloaded. Your phone will ask whether you trust an app from outside the store &mdash; say yes, and it installs like any other. Nothing to register, no account to make.</p>
       </div>
       <div class="step">
         <span class="num">Step two</span>
@@ -1079,11 +1087,11 @@
       </div>
       <div class="qa">
         <h3>How do I get Hplay?</h3>
-        <p>Hplay is a closed alpha, so it is handed out one person at a time rather than downloaded from a store. Email <a href="mailto:hostlabosupport@gmail.com">hostlabosupport@gmail.com</a> and the app is sent back to you to install yourself. There is no waiting list and no form.</p>
+        <p>Download the APK from <a href="#start">How to get it</a> and open it on your phone. Android asks whether you trust an app from outside the Play Store; say yes and it installs like any other. There is no account, no waiting list and no form. It is still an alpha, so things move between builds &mdash; <a href="changelog.html">the changelog</a> says what.</p>
       </div>
       <div class="qa">
         <h3>Is Hplay on the Google Play Store?</h3>
-        <p>Not yet. While it is in alpha it is distributed by email as an APK you install yourself. That is also why the version numbers move quickly and why things change between builds.</p>
+        <p>Not yet. While it is in alpha it is an APK you download and install yourself. That is also why the version numbers move quickly and why things change between builds.</p>
       </div>
       <div class="qa">
         <h3>What does a scroll wheel player mean?</h3>
@@ -1124,6 +1132,11 @@
         <span class="kind">Long read</span>
         <h3>Hplay at Sixty Days</h3>
         <p>How the player got built, what broke along the way, and what the first tester said about it.</p>
+      </a>
+      <a class="card" href="changelog.html">
+        <span class="kind">Every release</span>
+        <h3>Changelog</h3>
+        <p>All 72 releases, newest first, with a few lines on what each numbered run was for.</p>
       </a>
       <a class="card" href="feedback.html">
         <span class="kind">Form</span>
@@ -1308,5 +1321,59 @@
 })();
 </script>
 
+<script>
+/* The version on this page used to be typed in by hand, which is why it sat at v38.11 for
+   months after v38 stopped being the version. Now it is asked for: release.py writes a
+   latest.json next to the APK and serves it with an open CORS header, so the page reads it.
+
+   Everything below is an improvement on what is already in the HTML, never a replacement
+   for it. If the fetch fails, is slow, is blocked, or the host is down, the page keeps the
+   version it shipped with and the download link still points at a real file. A download
+   button that waits for a network call before it works is worse than one that is a week
+   out of date. */
+(function(){
+  var BASE = 'https://hplay.hosttost.workers.dev';
+  function kb(n){
+    if (!(n > 0)) return null;
+    return n >= 1048576 ? (n / 1048576).toFixed(1) + ' MB' : Math.round(n / 1024) + ' KB';
+  }
+  function set(id, text){
+    var el = document.getElementById(id);
+    if (el && text) el.textContent = text;
+  }
+  try {
+    fetch(BASE + '/latest.json', { cache: 'no-cache' })
+      .then(function(r){ return r.ok ? r.json() : null; })
+      .then(function(j){
+        if (!j || !j.version) return;
+        var name = j.codename ? ' \u201c' + j.codename + '\u201d' : '';
+        set('verNow', 'v' + j.version + name);
+        set('verSpec', j.version + (j.codename ? ' ' : ''));
+        var spec = document.getElementById('verSpec');
+        if (spec && j.codename) {
+          var small = document.createElement('small');
+          small.textContent = j.codename;
+          spec.appendChild(small);
+        }
+        var size = kb(j.size);
+        if (size) {
+          var when = j.released ? ' \u00b7 ' + j.released : '';
+          set('dlSize', size + when);
+          set('dlSize2', size + when);
+        }
+        /* Point the buttons at the build latest.json actually names. hplay-latest.apk is
+           the same bytes, but a versioned link is the one worth sending to somebody: it
+           keeps working after the next release. */
+        if (j.url) {
+          var href = j.url.indexOf('http') === 0 ? j.url : BASE + '/' + j.url;
+          Array.prototype.forEach.call(
+            document.querySelectorAll('a[href$="hplay-latest.apk"]'),
+            function(a){ a.href = href; });
+        }
+      })
+      .catch(function(){ /* keep what the page shipped with */ });
+  } catch (e) { /* no fetch, no problem */ }
+})();
+</script>
 </body>
 </html>

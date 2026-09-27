@@ -1,0 +1,923 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="Every Hplay release, newest first, with what each numbered run was for.">
+<meta name="theme-color" content="#1b6fd0">
+<meta name="author" content="Iwo Dec (HostLabo)">
+<meta name="copyright" content="© 2026 Iwo Dec. All rights reserved.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%231b6fd0%22/><circle cx=%2216%22 cy=%2216%22 r=%229%22 fill=%22none%22 stroke=%22white%22 stroke-width=%223%22/></svg>">
+<title>Hplay Changelog</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@112,500;112,600;112,700;112,800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+  *{ box-sizing:border-box; }
+  html{ -webkit-text-size-adjust:100%; }
+  body{ margin:0; }
+  [hidden]{ display:none !important; }
+
+  :root{
+    --ground:#e9ebf0; --panel:#ffffff; --panel-2:#f3f5f9;
+    --ink:#0f131b; --ink-soft:#333c4a; --muted:#5c6674;
+    --line:#ccd2dc; --line-soft:#dfe3ea;
+    --accent:#1b6fd0; --accent-ink:#0f4fa8; --accent-soft:#dbe8f8;
+    --shadow:0 1px 2px rgba(12,22,40,.06), 0 8px 24px -12px rgba(12,22,40,.28);
+    --display:"Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;
+    --body:"IBM Plex Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#0a0d13; --panel:#141a24; --panel-2:#101620;
+      --ink:#e6eaf1; --ink-soft:#c3cad6; --muted:#8b95a5;
+      --line:#242e3c; --line-soft:#1b232e;
+      --accent:#64a6f0; --accent-ink:#9cc8f7; --accent-soft:#132437;
+      --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 30px -14px rgba(0,0,0,.8);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#0a0d13; --panel:#141a24; --panel-2:#101620;
+    --ink:#e6eaf1; --ink-soft:#c3cad6; --muted:#8b95a5;
+    --line:#242e3c; --line-soft:#1b232e;
+    --accent:#64a6f0; --accent-ink:#9cc8f7; --accent-soft:#132437;
+    --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 30px -14px rgba(0,0,0,.8);
+  }
+
+  body{ background:var(--ground); color:var(--ink); font-family:var(--body);
+        font-size:16px; line-height:1.62; }
+  main{ max-width:52rem; margin:0 auto; padding:34px 20px 80px; }
+  @media (max-width:520px){ main{ padding:18px 16px 60px; } }
+
+  .skiplink{ position:absolute; left:-999px; }
+  .skiplink:focus{ left:8px; top:8px; background:var(--panel); padding:8px 12px;
+                   border-radius:8px; z-index:9; }
+  .backhome{ max-width:52rem; margin:0 auto; padding:14px 20px 0; }
+  .backhome a{ color:var(--muted); text-decoration:none; font-size:.9rem; }
+  .backhome a:hover{ color:var(--accent); }
+
+  h1{ font-family:var(--display); font-size:clamp(1.9rem,5vw,2.7rem); margin:0 0 .3rem;
+      letter-spacing:-.02em; text-wrap:balance; }
+  .lede{ color:var(--ink-soft); font-size:1.08rem; margin:0 0 .6rem; max-width:44rem; }
+  .stamp{ font-family:var(--mono); font-size:.76rem; color:var(--muted);
+          margin:0 0 30px; }
+
+  .run{ background:var(--panel); border:1px solid var(--line); border-radius:14px;
+        box-shadow:var(--shadow); padding:20px 22px; margin:0 0 20px; }
+  .run.now{ border-color:var(--accent); }
+  @media (max-width:520px){ .run{ padding:16px; } }
+
+  .runhead{ display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;
+            margin-bottom:.5rem; }
+  .runhead h2{ font-family:var(--display); font-size:1.5rem; margin:0;
+               letter-spacing:-.01em; }
+  .runhead .code{ color:var(--muted); font-size:1.02rem; font-weight:600; }
+  .runhead .count{ font-family:var(--mono); font-size:.74rem; color:var(--muted);
+                   margin-left:auto; white-space:nowrap; }
+  .tag{ font-family:var(--mono); font-size:.66rem; letter-spacing:.06em;
+        text-transform:uppercase; background:var(--accent-soft); color:var(--accent-ink);
+        border-radius:999px; padding:3px 9px; }
+
+  .about{ margin:0 0 4px; padding:0; list-style:none; }
+  .about li{ color:var(--ink-soft); padding:3px 0 3px 18px; position:relative; }
+  .about li::before{ content:""; position:absolute; left:2px; top:.78em; width:7px;
+                     height:2px; background:var(--accent); border-radius:2px; }
+
+  details{ margin-top:14px; border-top:1px solid var(--line-soft); padding-top:12px; }
+  summary{ cursor:pointer; color:var(--muted); font-size:.9rem; list-style:none; }
+  summary::-webkit-details-marker{ display:none; }
+  summary::before{ content:"\25B8 "; display:inline-block; transition:transform .15s; }
+  details[open] summary::before{ transform:rotate(90deg); }
+  summary:hover{ color:var(--accent); }
+
+  .rel{ margin:14px 0 0; }
+  .rel h3{ font-family:var(--mono); font-size:.82rem; font-weight:600; margin:0 0 .2rem;
+           color:var(--ink); }
+  .rel ul{ margin:0 0 12px; padding-left:18px; color:var(--ink-soft); font-size:.95rem; }
+  .rel li{ margin:.14rem 0; }
+
+  footer{ max-width:52rem; margin:0 auto; padding:0 20px 46px; color:var(--muted);
+          font-size:.8rem; display:flex; gap:14px; flex-wrap:wrap;
+          border-top:1px solid var(--line); padding-top:20px; }
+</style>
+</head>
+<body>
+<a class="skiplink" href="#main">Skip to the content</a>
+<div class="backhome"><a href="index.html">&#8592; Hplay</a></div>
+
+<main id="main">
+  <h1>Changelog</h1>
+  <p class="lede">Every release, newest first. Each number gets a few lines on what the whole run was for, and its releases underneath.</p>
+  <p class="stamp">72 releases across 16 numbered runs &nbsp;·&nbsp; newest v42.3 “Medic” &nbsp;·&nbsp; written from the app's own changelog on 2026-09-27</p>
+
+  <div class="run now">
+    <div class="runhead">
+      <h2>v42</h2>
+      <span class="code">Medic</span>
+      <span class="tag">current</span>
+      <span class="count">4 releases &nbsp;v42.0&ndash;42.3</span>
+    </div>
+    <ul class="about">
+      <li>Music plays again</li>
+      <li>The focus is left alone while the page holds it</li>
+      <li>A gold icon and a coffee one for the skins</li>
+      <li>The widget is an Hplay with the cover big on it</li>
+    </ul>
+    <details open>
+      <summary>All 4 releases</summary>
+      <div class="rel">
+        <h3>v42.3</h3>
+        <ul>
+          <li>The widget is an Hplay again, with the cover big on it</li>
+          <li>A sliver of the wheel comes in at the bottom</li>
+          <li>Corners less round than they were</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v42.2</h3>
+        <ul>
+          <li>The widget is the cover now, and nothing else</li>
+          <li>It takes any size and shape you give it</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v42.1</h3>
+        <ul>
+          <li>The supporter skins have a home screen icon of their own</li>
+          <li>The changelog opens on the numbers, not every release</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v42.0</h3>
+        <ul>
+          <li>Music plays again — it was stopping itself half a second in</li>
+          <li>A call or another app stops it properly while it is away</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+
+  <div class="run">
+    <div class="runhead">
+      <h2>v41</h2>
+      <span class="code">Spy</span>
+      <span class="count">6 releases &nbsp;v41.0&ndash;41.5</span>
+    </div>
+    <ul class="about">
+      <li>Six releases about how it sounds</li>
+      <li>The processor no longer dozes off mid-track</li>
+      <li>Sound Protect quietens instead of making things louder</li>
+      <li>The music goes out to the real player while you are away</li>
+    </ul>
+    <details>
+      <summary>All 6 releases</summary>
+      <div class="rel">
+        <h3>v41.5</h3>
+        <ul>
+          <li>Nothing newer than Android 7 without a check</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v41.4</h3>
+        <ul>
+          <li>Music moves to the real player while you are away</li>
+          <li>It keeps going track after track out there</li>
+          <li>Effects and speed keep it where it is, as before</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v41.3</h3>
+        <ul>
+          <li>Sound Protect quietens instead of making it louder</li>
+          <li>Hplay gives way to calls and other apps</li>
+          <li>Opening a changed folder is much quicker</li>
+          <li>Reading tags no longer breaks up the music</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v41.2</h3>
+        <ul>
+          <li>The processor stays awake while music plays</li>
+          <li>Nothing is redrawn while the app is away</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v41.1</h3>
+        <ul>
+          <li>Hplay notices when the music folder changed</li>
+          <li>Unchanged folders are not read again</li>
+          <li>Rescan Folder exists on the phone now</li>
+          <li>The visualizer waits to be turned on</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v41.0</h3>
+        <ul>
+          <li>High Contrast goes back to the screen you had</li>
+          <li>Speak Selection has a voice behind it now</li>
+          <li>It says so when the phone has no voice</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+
+  <div class="run">
+    <div class="runhead">
+      <h2>v40</h2>
+      <span class="code">Pyro</span>
+      <span class="count">5 releases &nbsp;v40.0&ndash;40.4</span>
+    </div>
+    <ul class="about">
+      <li>Every theme carries its own icon colour</li>
+      <li>Supporter skins went two-tone, and redeem by link</li>
+      <li>Stations builds mixes out of your own library</li>
+    </ul>
+    <details>
+      <summary>All 5 releases</summary>
+      <div class="rel">
+        <h3>v40.4</h3>
+        <ul>
+          <li>Stations, under Music</li>
+          <li>Six cuts of your own library, and why</li>
+          <li>Worked out here, sent nowhere</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v40.3</h3>
+        <ul>
+          <li>The visualizer stays on between songs</li>
+          <li>One Visualizer row in Look, picture and all</li>
+          <li>The cover is cropped into the ring, not squashed</li>
+          <li>Hold a supporter skin for its other finishes</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v40.2</h3>
+        <ul>
+          <li>A supporter link turns the skin on for you</li>
+          <li>No code to type in unless you want to</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v40.1</h3>
+        <ul>
+          <li>The supporter skins are two-tone now</li>
+          <li>A theme can name both halves of its icon</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v40.0</h3>
+        <ul>
+          <li>Store themes get the right home screen icon</li>
+          <li>Pick the icon colour yourself, per theme</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+
+  <div class="run">
+    <div class="runhead">
+      <h2>v39</h2>
+      <span class="code">Chell</span>
+      <span class="count">12 releases &nbsp;v39.0&ndash;39.11</span>
+    </div>
+    <ul class="about">
+      <li>Twelve releases</li>
+      <li>Four thousand songs scroll instantly</li>
+      <li>Accessibility got a screen of its own</li>
+      <li>The terms and the credits got written down</li>
+    </ul>
+    <details>
+      <summary>All 12 releases</summary>
+      <div class="rel">
+        <h3>v39.11</h3>
+        <ul>
+          <li>Two supporter skins, Golden and Coffee</li>
+          <li>Redeem a code under Look, Body Color</li>
+          <li>The old Gold theme is gone from the store</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v39.10</h3>
+        <ul>
+          <li>A Thank You list for anyone who buys a coffee</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v39.9</h3>
+        <ul>
+          <li>A coffee row at the top of About, if you want it</li>
+          <li>Erase Everything looks dangerous in every screen mode</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v39.8</h3>
+        <ul>
+          <li>Big libraries are quick now, not sluggish</li>
+          <li>A four thousand song list scrolls instantly</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v39.7</h3>
+        <ul>
+          <li>Accessibility has a screen of its own</li>
+          <li>It can read the highlighted row out loud</li>
+          <li>Mono sound, balance, a steadier wheel</li>
+          <li>Rescanning no longer renumbers your songs</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v39.6</h3>
+        <ul>
+          <li>Nine more apps swapped the wheel for the d-pad</li>
+          <li>Holding an arm repeats, for apps that ask</li>
+          <li>Minefield can flag a square with B</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v39.5</h3>
+        <ul>
+          <li>About says who made this and on what terms</li>
+          <li>Free to use forever. Please do not resell it</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v39.4</h3>
+        <ul>
+          <li>Visualizer: a third Now Playing screen</li>
+          <li>Four pictures, turn the wheel to swap</li>
+          <li>It takes its colour from the cover</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v39.3</h3>
+        <ul>
+          <li>About now has a Legal page</li>
+          <li>Wording avoids a trademark that is not ours</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v39.2</h3>
+        <ul>
+          <li>Changing colour no longer throws you out</li>
+          <li>Leaving Look asks before swapping the icon</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v39.1</h3>
+        <ul>
+          <li>A played video no longer sits over later covers</li>
+          <li>The restart question fits on the screen</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v39.0</h3>
+        <ul>
+          <li>The cover really shows behind the words now</li>
+          <li>Pale covers get dark writing instead of white</li>
+          <li>Hold a setting to peek, let go to put it away</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+
+  <div class="run">
+    <div class="runhead">
+      <h2>v38</h2>
+      <span class="code">Barney</span>
+      <span class="count">20 releases &nbsp;v38.0&ndash;38.19</span>
+    </div>
+    <ul class="about">
+      <li>Twenty releases, the longest run</li>
+      <li>Five screen modes, and vinyl on the menu</li>
+      <li>Quick settings, and a rolling year of stats</li>
+    </ul>
+    <details>
+      <summary>All 20 releases</summary>
+      <div class="rel">
+        <h3>v38.19</h3>
+        <ul>
+          <li>Your Year, Wrapped, under Statistics</li>
+          <li>A slideshow of your listening, on the website</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v38.18</h3>
+        <ul>
+          <li>The cover can wash across the screen, blurred</li>
+          <li>Offers to restart when the home screen icon changes</li>
+          <li>The hold-for-help card stops closing by itself</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v38.17</h3>
+        <ul>
+          <li>Shorter, plainer wording on every setting</li>
+          <li>No more dashes in the middle of sentences</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v38.16</h3>
+        <ul>
+          <li>Hold the middle button on a setting to see what it does</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v38.15</h3>
+        <ul>
+          <li>Lyrics are gone for now. They looked bad here</li>
+          <li>Long names walk across at a readable pace</li>
+          <li>Scrolling Names can be switched off under Feel</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v38.14</h3>
+        <ul>
+          <li>The icon follows where you stop, not what you scroll past</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v38.13</h3>
+        <ul>
+          <li>The home screen icon copies your body and wheel</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v38.12</h3>
+        <ul>
+          <li>The home screen icon can follow your body colour</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v38.11</h3>
+        <ul>
+          <li>Open a music file from anywhere and it plays here</li>
+          <li>A file opened that way is played, not kept</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v38.10</h3>
+        <ul>
+          <li>The strip at the bottom scrolls too</li>
+          <li>Tips that are actually worth doing</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v38.9</h3>
+        <ul>
+          <li>Long names scroll instead of being cut off</li>
+          <li>Back from the first track goes to the last</li>
+          <li>Songs with words say so properly, and read better</li>
+          <li>The tutorial starts you at the main menu</li>
+          <li>One turn of the wheel is one tutorial step</li>
+          <li>It takes you into Music and Settings itself</li>
+          <li>Tips, under Settings, About Hplay</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v38.8</h3>
+        <ul>
+          <li>Apps stop restarting themselves</li>
+          <li>Apps can save where you got to</li>
+          <li>See-through photos stay see-through</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v38.7</h3>
+        <ul>
+          <li>Music videos keep playing with the screen off</li>
+          <li>They come back on screen at the same spot</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v38.6</h3>
+        <ul>
+          <li>Folders are your playlists again</li>
+          <li>A longer tutorial you actually try things in</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v38.5</h3>
+        <ul>
+          <li>Covers are back on songs from your folder</li>
+          <li>Songs are not read again every time you open it</li>
+          <li>Covers work on older phones too</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v38.4</h3>
+        <ul>
+          <li>Adding a photo works properly now</li>
+          <li>A photo that cannot be saved says so</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v38.3</h3>
+        <ul>
+          <li>Cover art is read from the song itself now</li>
+          <li>Artwork works with no internet at all</li>
+          <li>mp3, flac, m4a, ogg and opus, art and lyrics</li>
+          <li>Songs that lost their cover offline get it back</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v38.2</h3>
+        <ul>
+          <li>Songs with no cover get one of Hplay’s own</li>
+          <li>Twenty sleeves, and a song always lands on the same one</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v38.1</h3>
+        <ul>
+          <li>Songs list is alphabetical at last</li>
+          <li>The big letter only shows where it means something</li>
+          <li>Songs can no longer be deleted from here</li>
+          <li>Statistics are kept until you delete them</li>
+          <li>Bass no longer drags a reverb along with it</li>
+          <li>Settings sorted into Playback, Sound, Look and Feel</li>
+          <li>Extras folded in with Apps</li>
+          <li>Apps can add one line to Statistics</li>
+          <li>Apps can ask for a d-pad instead of the wheel</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v38.0</h3>
+        <ul>
+          <li>Five screen modes, not two</li>
+          <li>Vinyl reaches the main menu</li>
+          <li>Video no longer resizes the screen</li>
+          <li>Lists loop if you ask them twice</li>
+          <li>Quick settings behind play/pause</li>
+          <li>Sleep timer can dim as it runs</li>
+          <li>Stats keep a rolling year</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+
+  <div class="run">
+    <div class="runhead">
+      <h2>v37</h2>
+      <span class="code">Engineer</span>
+      <span class="count">4 releases &nbsp;v37.0&ndash;37.3</span>
+    </div>
+    <ul class="about">
+      <li>Sharp video in the slot, blurred behind</li>
+      <li>Every setting described in one place</li>
+    </ul>
+    <details>
+      <summary>All 4 releases</summary>
+      <div class="rel">
+        <h3>v37.3</h3>
+        <ul>
+          <li>Cover art reaches the lock screen</li>
+          <li>Backspace no longer closes Search</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v37.2</h3>
+        <ul>
+          <li>Erase Everything now clears notes too</li>
+          <li>Settings described in one place</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v37.1</h3>
+        <ul>
+          <li>Cover style plays the video again</li>
+          <li>Sharp in the slot, blurred behind</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v37.0</h3>
+        <ul>
+          <li>Video plays behind both cover styles</li>
+          <li>Full frame rate, barely blurred</li>
+          <li>Now Playing goes light over a video</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+
+  <div class="run">
+    <div class="runhead">
+      <h2>v36</h2>
+      <span class="code">Medic</span>
+      <span class="count">2 releases &nbsp;v36.0&ndash;36.1</span>
+    </div>
+    <ul class="about">
+      <li>Video washes the screen behind the record</li>
+    </ul>
+    <details>
+      <summary>All 2 releases</summary>
+      <div class="rel">
+        <h3>v36.1</h3>
+        <ul>
+          <li>Backdrop sharper and more visible</li>
+          <li>Labels never flash pale any more</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v36.0</h3>
+        <ul>
+          <li>Videos wash the screen behind the record</li>
+          <li>Artwork keeps the label to itself</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+
+  <div class="run">
+    <div class="runhead">
+      <h2>v35</h2>
+      <span class="code">Spy</span>
+      <span class="count">5 releases &nbsp;v35.0&ndash;35.4</span>
+    </div>
+    <ul class="about">
+      <li>A new record rolls in on every track change</li>
+      <li>An optional clock in the top bar</li>
+    </ul>
+    <details>
+      <summary>All 5 releases</summary>
+      <div class="rel">
+        <h3>v35.4</h3>
+        <ul>
+          <li>Video labels show their first frame</li>
+          <li>No more pale flash as a record rolls in</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v35.3</h3>
+        <ul>
+          <li>Needle sits above the text backdrop</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v35.2</h3>
+        <ul>
+          <li>Shading rolls in with the record</li>
+          <li>Smoother roll, no more restarting</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v35.1</h3>
+        <ul>
+          <li>Optional clock in the top bar</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v35.0</h3>
+        <ul>
+          <li>A new record rolls in on track change</li>
+          <li>Videos play on the record label</li>
+          <li>Bigger artwork, steadier spin</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+
+  <div class="run">
+    <div class="runhead">
+      <h2>v34</h2>
+      <span class="code">Pyro</span>
+      <span class="count">4 releases &nbsp;v34.0&ndash;34.3</span>
+    </div>
+    <ul class="about">
+      <li>Vinyl cover style</li>
+      <li>A tonearm that tracks inward as the song plays</li>
+    </ul>
+    <details>
+      <summary>All 4 releases</summary>
+      <div class="rel">
+        <h3>v34.3</h3>
+        <ul>
+          <li>The tonearm casts a shadow</li>
+          <li>Rounder disc, label sits proud</li>
+          <li>Holding centre on Now Playing does nothing</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v34.2</h3>
+        <ul>
+          <li>A tonearm rides the record</li>
+          <li>It tracks inward as the song plays</li>
+          <li>Record tucks behind the text</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v34.1</h3>
+        <ul>
+          <li>Vinyl catches the light as it turns</li>
+          <li>It rocks gently, and glows in the dark</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v34.0</h3>
+        <ul>
+          <li>Cover Style: play it as a vinyl record</li>
+          <li>Spins with the music, stops when paused</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+
+  <div class="run">
+    <div class="runhead">
+      <h2>v33</h2>
+      <span class="code">Demoman</span>
+      <span class="count">2 releases &nbsp;v33.0&ndash;33.1</span>
+    </div>
+    <ul class="about">
+      <li>Audio Toys: speed, tape pitch, reverb, radio, echo, bass</li>
+      <li>And this changelog</li>
+    </ul>
+    <details>
+      <summary>All 2 releases</summary>
+      <div class="rel">
+        <h3>v33.1</h3>
+        <ul>
+          <li>This changelog</li>
+          <li>Changelog steps version by version</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v33.0</h3>
+        <ul>
+          <li>Audio Toys: speed and tape pitch</li>
+          <li>Reverb, vinyl, radio, echo and wide</li>
+          <li>Bass boost, plus a reset</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+
+  <div class="run">
+    <div class="runhead">
+      <h2>v32</h2>
+      <span class="code">Heavy</span>
+      <span class="count">2 releases &nbsp;v32.0&ndash;32.1</span>
+    </div>
+    <ul class="about">
+      <li>Video plays in the artwork slot: mp4, m4v, mov, webm</li>
+    </ul>
+    <details>
+      <summary>All 2 releases</summary>
+      <div class="rel">
+        <h3>v32.1</h3>
+        <ul>
+          <li>Video tilts like a real cover</li>
+          <li>Frame, shadow and reflection</li>
+          <li>Fills the square, no black bars</li>
+        </ul>
+      </div>
+      <div class="rel">
+        <h3>v32.0</h3>
+        <ul>
+          <li>Video plays in the artwork slot</li>
+          <li>mp4, m4v, mov and webm accepted</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+
+  <div class="run">
+    <div class="runhead">
+      <h2>v31</h2>
+      <span class="code">Luis</span>
+      <span class="count">1 release &nbsp;v31.0</span>
+    </div>
+    <ul class="about">
+      <li>A setting with three or more options gets its own screen</li>
+    </ul>
+    <details>
+      <summary>The release</summary>
+      <div class="rel">
+        <h3>v31.0</h3>
+        <ul>
+          <li>Settings with 3+ options get a screen</li>
+          <li>Play/pause returns to Now Playing</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+
+  <div class="run">
+    <div class="runhead">
+      <h2>v30</h2>
+      <span class="code">Alex</span>
+      <span class="count">1 release &nbsp;v30.0</span>
+    </div>
+    <ul class="about">
+      <li>Rows colour their own highlight by what they do</li>
+    </ul>
+    <details>
+      <summary>The release</summary>
+      <div class="rel">
+        <h3>v30.0</h3>
+        <ul>
+          <li>Action rows colour their highlight</li>
+          <li>Green adds, red deletes, purple looks</li>
+          <li>Playlists wraps top to bottom</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+
+  <div class="run">
+    <div class="runhead">
+      <h2>v29</h2>
+      <span class="code">Gordan</span>
+      <span class="count">1 release &nbsp;v29.0</span>
+    </div>
+    <ul class="about">
+      <li>Usage data you can stop or wipe</li>
+      <li>Streaks, peak hour, wheel clicks</li>
+    </ul>
+    <details>
+      <summary>The release</summary>
+      <div class="rel">
+        <h3>v29.0</h3>
+        <ul>
+          <li>Usage Data: stop or wipe the stats</li>
+          <li>Skips, streaks, peak hour, wheel clicks</li>
+          <li>Statistics scrolls now</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+
+  <div class="run">
+    <div class="runhead">
+      <h2>v28</h2>
+      <span class="code">Sniper</span>
+      <span class="count">1 release &nbsp;v28.0</span>
+    </div>
+    <ul class="about">
+      <li>Sound Protect, and the first accessibility settings</li>
+    </ul>
+    <details>
+      <summary>The release</summary>
+      <div class="rel">
+        <h3>v28.0</h3>
+        <ul>
+          <li>Sound Protect loudness limiter</li>
+          <li>Accessibility: size, motion, haptics</li>
+          <li>Fixed glitch when reopening the app</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+
+  <div class="run">
+    <div class="runhead">
+      <h2>v27</h2>
+      <span class="code">Scout</span>
+      <span class="count">1 release &nbsp;v27.0</span>
+    </div>
+    <ul class="about">
+      <li>The first build with a codename</li>
+      <li>The sleep timer lets the phone sleep</li>
+    </ul>
+    <details>
+      <summary>The release</summary>
+      <div class="rel">
+        <h3>v27.0</h3>
+        <ul>
+          <li>First build with a Valve codename</li>
+          <li>Multi-page About, YouTube app</li>
+          <li>Sleep timer dims, phone can sleep</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+
+  <div class="run">
+    <div class="runhead">
+      <h2>Earlier</h2>
+    </div>
+    <ul class="about">
+      <li>Everything before the numbers had names</li>
+    </ul>
+    <details>
+      <summary>The release</summary>
+      <div class="rel">
+        <h3>Earlier</h3>
+        <ul>
+          <li>The wheel, library, playlists, notes</li>
+          <li>Themes, decals, apps and games</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</main>
+
+<footer>
+  <span>Hplay v42.3 “Medic”</span>
+  <span>&copy; 2026 Iwo Dec</span>
+  <span>HostLabo</span>
+  <span><a href="index.html" style="color:inherit">Home</a></span>
+  <span><a href="license.html" style="color:inherit">Licence</a></span>
+</footer>
+</body>
+</html>
