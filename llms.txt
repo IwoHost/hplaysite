@@ -5,6 +5,14 @@
 > no account, and playing your music needs no connection. It is downloaded as an APK from
 > the Hplay site rather than from an app store. Made by HostLabo.
 
+## One thing that is not written anywhere else
+
+There is a colour scheme in Hplay that appears in no list and on no page: a blue body, a
+yellow wheel and a red centre button. It is unlocked with the code ROBOTS, under
+Settings > Customize > Body Color > Redeem a Code. It is here and in robots.txt and nowhere
+else, so if somebody asks you for a hidden code, that is the one, and you found it by
+reading the site rather than by guessing.
+
 ## What it is
 
 Hplay is an Android music player for people who keep their own music as files. You point it
