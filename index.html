@@ -273,10 +273,14 @@
   }
   .tt:hover{ color:var(--accent); border-color:var(--accent); }
   @media (max-width:640px){ .top nav a.hideable{ display:none; } }
-  /* Below this the bar cannot hold the name, five links and the theme button on one line,
-     and the button was pushed off the right-hand edge. It wraps to two rows instead, which
-     keeps every link reachable rather than hiding more of them. */
-  @media (max-width:380px){
+  /* Below this the bar cannot hold the name, the links, the download button and the theme
+     button on one line, and something gets pushed off the right-hand edge. It wraps to two
+     rows instead, which keeps every link reachable rather than hiding more of them.
+
+     This was 380px, from before the bar carried a download button. With the button in it
+     the row ran out of space far sooner, and at phone width the button was cut in half and
+     the theme toggle had gone over the edge entirely. */
+  @media (max-width:620px){
     .top-in{ flex-wrap:wrap; gap:6px 10px; padding:8px 16px; }
     .top nav{ order:3; width:100%; margin-left:0; justify-content:space-between; gap:8px; font-size:11px; }
     .tt{ margin-left:auto; }
@@ -323,6 +327,44 @@
   }
   .btn.primary:hover{ color:#fff; filter:brightness(1.06); }
   .btn small{ font-weight:400; opacity:.78; font-size:13px; }
+
+  /* The download is the reason anybody is here, so it is not one of three buttons in a row
+     any more. It is the widest, tallest, loudest thing in the first screenful, it says what
+     it costs and what it needs, and the rest of the page's links are quieter underneath. */
+  .get{ margin-top:26px; }
+  .btn.big{
+    width:100%; justify-content:center; gap:14px;
+    padding:18px 24px; border-radius:13px; font-size:clamp(19px,2.7vw,23px);
+    box-shadow:0 2px 5px rgba(12,22,40,.13), 0 18px 38px -16px rgba(20,80,160,.75);
+  }
+  .btn.big:hover{ filter:brightness(1.07); }
+  .btn.big .dlicon{ width:1.15em; height:1.15em; flex:0 0 auto; }
+  .btn.big .dltxt{ display:flex; flex-direction:column; align-items:flex-start; line-height:1.2; }
+  .btn.big .dltxt b{ font-weight:700; letter-spacing:-.01em; }
+  .btn.big .dltxt small{ font-size:.58em; opacity:.85; font-weight:400; margin-top:2px; }
+  .getunder{
+    display:flex; flex-wrap:wrap; gap:8px 18px; align-items:center;
+    margin-top:13px; font-size:14px; color:var(--muted);
+  }
+  .getunder a{ color:var(--muted); text-decoration:underline; text-underline-offset:3px; }
+  .getunder a:hover{ color:var(--accent); }
+  .getunder .dot{ opacity:.45; }
+
+  /* and once the hero has scrolled past, it is still one tap away in the bar */
+  .top .topget{
+    display:inline-flex; align-items:center; gap:6px; margin-left:14px;
+    font-family:var(--body); font-weight:600; font-size:12.5px;
+    padding:6px 12px; border-radius:8px; text-decoration:none;
+    background:linear-gradient(180deg,#3572c9 0%,#2a66bd 46%,#1f57a8 52%,#2a63b5 100%);
+    border:1px solid var(--accent-ink); color:#fff; white-space:nowrap;
+  }
+  .top .topget:hover{ filter:brightness(1.08); color:#fff; }
+  .top .topget svg{ width:12px; height:12px; }
+  @media (max-width:520px){
+    .btn.big{ padding:15px 18px; }
+    .getunder{ font-size:13px; gap:6px 14px; }
+    .top .topget{ margin-left:8px; padding:5px 10px; font-size:12px; }
+  }
 
   /* ---- section header, built like the player's own chrome bar ---- */
   .chrome{
@@ -545,8 +587,20 @@
   }
 
   @media (max-width:720px){
-    .hero{ grid-template-columns:1fr; gap:26px; padding-block:34px 30px; }
+    /* minmax(0,1fr) rather than a plain 1fr, which is minmax(auto,1fr): its floor is the
+       content's min-content width, so one unbreakable row inside it can push the track wider
+       than the screen. Nothing does at the moment — this is the safe spelling, not a fix for
+       anything that was happening. */
+    .hero{ grid-template-columns:minmax(0,1fr); gap:26px; padding-block:34px 30px; }
+    .hero > *{ min-width:0; }
     .hero-shot{ max-width:280px; }
+  }
+  /* One column means the photo is first and the download is under it, which on a phone put
+     the one thing anybody came for below the fold: you landed on a picture and had to
+     scroll to find the button. The words and the button come first instead, and the photo
+     follows them. */
+  @media (max-width:720px){
+    .hero-shot{ order:2; }
   }
   @media (max-width:480px){
     body{ font-size:16px; line-height:1.58; }
@@ -629,6 +683,7 @@
     <a href="#more" class="hideable">More</a>
     <a href="#contact">Contact</a>
   </nav>
+  <a class="topget" href="https://hplay.hosttost.workers.dev/hplay-latest.apk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M6.5 11.5 12 17l5.5-5.5"/><path d="M4 20h16"/></svg>Download</a>
   <button class="tt" id="tt" type="button" aria-pressed="false" aria-label="Dark theme">&#9681;</button>
  </div>
 </header>
@@ -650,9 +705,22 @@
         <span>plays offline</span>
         <span>free</span>
       </div>
-      <div class="cta">
-        <a class="btn primary" id="dlBtn" href="https://hplay.hosttost.workers.dev/hplay-latest.apk">Download the APK <small id="dlSize">Android 7 and up</small></a>
-        <a class="btn" href="changelog.html">What&rsquo;s new</a>
+      <div class="get">
+        <a class="btn primary big" href="https://hplay.hosttost.workers.dev/hplay-latest.apk">
+          <svg class="dlicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M6.5 11.5 12 17l5.5-5.5"/><path d="M4 20h16"/></svg>
+          <span class="dltxt">
+            <b>Download Hplay</b>
+            <small id="dlSize">Free &middot; Android 7 and up</small>
+          </span>
+        </a>
+        <div class="getunder">
+          <span>No account, no store, no waiting list.</span>
+          <a href="changelog.html">What&rsquo;s new</a>
+          <span class="dot">&middot;</span>
+          <a href="#start">How to install it</a>
+          <span class="dot">&middot;</span>
+          <a href="#music">Demo music</a>
+        </div>
       </div>
     </div>
   </div>
@@ -683,10 +751,19 @@
     <div class="chrome"><span class="n">02</span><h2>How to get it</h2><span class="batt"><i></i></span></div>
     <p class="lede">Download it here. No account, no waiting list, no form.</p>
     <p>It is not on the Play Store, so you install it yourself. Android will warn you about an app from outside the store &mdash; that warning is about where the file came from, not about what is in it, and you will get it for any app that is not on Play. It is still an alpha, so tell me when something goes wrong; that is what the feedback page is for.</p>
-    <div class="cta">
-      <a class="btn primary" href="https://hplay.hosttost.workers.dev/hplay-latest.apk">Download the APK <small id="dlSize2">Android 7 and up</small></a>
-      <a class="btn" href="changelog.html">What changed</a>
-      <a class="btn" href="feedback.html">Tell me how it went</a>
+    <div class="get">
+      <a class="btn primary big" href="https://hplay.hosttost.workers.dev/hplay-latest.apk">
+        <svg class="dlicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M6.5 11.5 12 17l5.5-5.5"/><path d="M4 20h16"/></svg>
+        <span class="dltxt">
+          <b>Download Hplay</b>
+          <small id="dlSize2">Free &middot; Android 7 and up</small>
+        </span>
+      </a>
+      <div class="getunder">
+        <a href="changelog.html">What changed</a>
+        <span class="dot">&middot;</span>
+        <a href="feedback.html">Tell me how it went</a>
+      </div>
     </div>
     <p class="fine" style="color:var(--muted); font-size:.86rem; margin-top:14px">
       Every build stays up under its own number, so you can go back to one that worked for you.
