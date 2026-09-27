@@ -2,15 +2,22 @@
 
 > Hplay is a free, offline music player for Android that plays the music files already
 > stored on the device. It is driven by a wheel you turn rather than a list you scroll. It needs
-> no account and no internet connection. It is currently a closed alpha, handed out by email
-> rather than through an app store. Made by HostLabo.
+> no account, and playing your music needs no connection. It is downloaded as an APK from
+> the Hplay site rather than from an app store. Made by HostLabo.
 
 ## What it is
 
 Hplay is an Android music player for people who keep their own music as files. You point it
 at a folder and it plays what is in it. There is no library service, no streaming catalogue,
-no sign-in and no subscription. Nothing is uploaded and nothing is downloaded while you
-listen — the app does not need a connection at any point.
+no sign-in and no subscription. Nothing is ever uploaded: there is no analytics and no
+telemetry, and what you play is not reported anywhere.
+
+The app is not, however, a no-network app, and it should not be described as one. It makes
+outbound requests in exactly two places. It loads one script at startup — jsmediatags, a tag
+reader, from cdnjs — which fills in tags its own reader missed; with no connection that
+request fails and the built-in reader carries on alone. And Get More fetches a catalogue
+when you open it, then downloads whatever you choose to install. Playing music you already
+have touches the network at no point.
 
 The interface is a scroll wheel: a ring you turn with your thumb to move through a list, a
 middle button to choose, and menu, play/pause and skip around the outer edge. Spinning the
@@ -33,11 +40,12 @@ scrubs through the track instead of jumping to the next one.
 ## What it does
 
 - Plays the audio files on the device: mp3, flac, m4a/aac, ogg, opus, wav
-- Works with no internet connection at all
+- Plays with no internet connection. Two requests exist and neither is playback: a tag
+  reader fetched at startup, and the extras catalogue when Get More is opened
 - No account, no cloud, no ads, no tracking, no telemetry
 - Every folder of music becomes a playlist named after the folder, regardless of tags
 - Playlist order can be set by hand and is remembered
-- Cover art is read out of the files' own tags, offline: ID3v2 for mp3,
+- Cover art is read out of the files' own tags, on the device: ID3v2 for mp3,
   Vorbis comments and METADATA_BLOCK_PICTURE for flac/ogg/opus, the ilst atom for m4a
 - A song whose file has no artwork is given one of twenty sleeves drawn by the app, chosen
   from the song itself so it is the same sleeve every time on every device

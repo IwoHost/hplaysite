@@ -45,14 +45,14 @@
       "installUrl": "https://hplay.hosttost.workers.dev/hplay-latest.apk",
       "downloadUrl": "https://hplay.hosttost.workers.dev/hplay-latest.apk",
       "softwareRequirements": "Android 7.0 or newer",
-      "description": "Hplay is an offline music player for Android that plays the music files already on the device. It is driven by a wheel you turn rather than a list you scroll. It needs no account and no internet connection, reads cover art out of the files themselves, and treats each folder of music as a playlist. It is free, and it is downloaded as an APK from this site rather than from an app store.",
+      "description": "Hplay is an offline music player for Android that plays the music files already on the device. It is driven by a wheel you turn rather than a list you scroll. It needs no account, plays with no internet connection, reads cover art out of the files themselves, and treats each folder of music as a playlist. It is free, and it is downloaded as an APK from this site rather than from an app store.",
       "featureList": [
         "Plays music files stored on the device — mp3, flac, m4a, ogg, opus and wav",
-        "Works with no internet connection at all",
+        "Plays with no internet connection — one tag-reading script is fetched at startup, and the extras catalogue when you open it",
         "No account, no sign-in, no cloud, no ads and no tracking",
         "A scroll wheel: turn to move through a list, press the middle to choose",
         "Every folder of music becomes a playlist, named after the folder",
-        "Cover art read out of the files' own tags, offline",
+        "Cover art read out of the files' own tags, on the device",
         "Songs with no artwork get one of twenty drawn sleeves, the same one every time",
         "Lock screen artwork, notification controls and volume-key support",
         "Sleep timer with fade out, playback speed, bass, effects and a loudness limiter",
@@ -115,12 +115,12 @@
         {
           "@type": "Question",
           "name": "What is Hplay?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Hplay is a music player for Android that plays the music files already stored on your phone. Instead of a list you scroll, it is driven by a wheel: you turn the ring with your thumb to move through a list and press the middle to choose. It needs no account and no internet connection." }
+          "acceptedAnswer": { "@type": "Answer", "text": "Hplay is a music player for Android that plays the music files already stored on your phone. Instead of a list you scroll, it is driven by a wheel: you turn the ring with your thumb to move through a list and press the middle to choose. It needs no account, and playing your music needs no connection." }
         },
         {
           "@type": "Question",
-          "name": "Does Hplay work offline?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Yes, entirely. Hplay never needs a connection. Your music is read from the device, and so is the cover art, which comes out of the tags inside the files rather than from an online lookup. Nothing is uploaded and nothing is downloaded while you listen." }
+          "name": "Does Hplay use the internet?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Playing your music does, entirely: songs and cover art are read from the device, and nothing about what you play is sent anywhere. Hplay is not a no-network app though. It loads one tag-reading script from a public CDN when it starts, and Get More fetches a catalogue when you open it and downloads what you install. Those are the only requests it makes, and it never uploads anything." }
         },
         {
           "@type": "Question",
@@ -165,7 +165,7 @@
         {
           "@type": "Question",
           "name": "Does Hplay show cover art?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Yes, read out of your own files with no connection involved. A song whose file has no artwork is given one of twenty sleeves drawn by the app, and it keeps the same one for good." }
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes, read out of your own files by the app itself. A song whose file has no artwork is given one of twenty sleeves drawn by the app, and it keeps the same one for good." }
         }
       ]
     }
@@ -647,7 +647,7 @@
         <span class="now" id="verNow">v42.3 &ldquo;Medic&rdquo;</span>
         <span>alpha</span>
         <span>Android 7+</span>
-        <span>works offline</span>
+        <span>plays offline</span>
         <span>free</span>
       </div>
       <div class="cta">
@@ -661,6 +661,7 @@
     <div class="chrome"><span class="n">01</span><h2>What Hplay is</h2><span class="batt"><i></i></span></div>
     <p class="lede">Most music apps want an account, a subscription and a connection. Hplay wants a folder.</p>
     <p>You point it at music that is already on your device and it plays it, with a wheel you spin instead of a list you scroll. Cover art, albums, artists, playlists, search, a sleep timer, a vinyl view that spins while the song runs, and five different screen looks. Nothing is uploaded anywhere. There is no sign-in, because there is nothing to sign in to.</p>
+    <p>Nothing about your listening is sent anywhere: no account, no analytics, no telemetry, and your music never leaves the device. It is not a no-network app, though &mdash; it fetches a tag-reading script when it starts and a catalogue when you open Get More. <a href="#faq">The questions below</a> say exactly what and when.</p>
     <p>It behaves like a music app should on a phone. It holds the lock screen with the cover art on it, puts controls in the notification shade, takes the volume keys, pauses when you pull your headphones out, and keeps playing with the screen off.</p>
 
     <dl class="spec">
@@ -1059,11 +1060,11 @@
     <div class="faq">
       <div class="qa">
         <h3>What is Hplay?</h3>
-        <p>Hplay is a music player for Android that plays the music files already stored on your phone. Instead of a list you scroll, it is driven by a wheel: you turn the ring with your thumb to move through a list and press the middle to choose. It needs no account and no internet connection.</p>
+        <p>Hplay is a music player for Android that plays the music files already stored on your phone. Instead of a list you scroll, it is driven by a wheel: you turn the ring with your thumb to move through a list and press the middle to choose. It needs no account, and playing your music needs no connection.</p>
       </div>
       <div class="qa">
-        <h3>Does Hplay work offline?</h3>
-        <p>Yes, entirely. Hplay never needs a connection. Your music is read from the device, and so is the cover art, which comes out of the tags inside the files rather than from an online lookup. Nothing is uploaded and nothing is downloaded while you listen.</p>
+        <h3>Does Hplay use the internet?</h3>
+        <p>Playing your music does, entirely. Your songs are read from the device and so is the cover art, out of the tags inside the files rather than an online lookup, and nothing about what you play is ever sent anywhere.</p><p>But Hplay is not a no-network app, and it would be wrong to say so. It loads one script when it starts &mdash; a tag reader, from a public CDN &mdash; which fills in tags its own reader missed; without a connection that one request fails and the built-in reader carries on alone. Get More fetches a catalogue when you open it, and downloads whatever you choose to install. Those are the only times it reaches out, and it never uploads anything at all.</p>
       </div>
       <div class="qa">
         <h3>Does Hplay need an account?</h3>
@@ -1099,7 +1100,7 @@
       </div>
       <div class="qa">
         <h3>Does Hplay show cover art?</h3>
-        <p>Yes, read out of your own files with no connection involved. A song whose file has no artwork is given one of twenty sleeves drawn by the app, and it keeps the same one for good.</p>
+        <p>Yes, read out of your own files by the app itself. A song whose file has no artwork is given one of twenty sleeves drawn by the app, and it keeps the same one for good.</p>
       </div>
     </div>
   </section>
