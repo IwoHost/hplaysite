@@ -1,3 +1,14 @@
+# THIS FILE IS NOT READ BY ANYTHING.
+#
+# A crawler reads robots.txt at the root of a host and nowhere else, so the rules below have
+# never applied to anything. They were moved to the one that counts:
+#
+#     https://iwohost.github.io/robots.txt        (repo: IwoHost/iwohost.github.io)
+#
+# with /hplaysite/ put in front of each path. Edit that one. This is kept only so that anyone
+# who comes looking for it here is sent to the right place rather than editing a file that
+# does nothing.
+
 # The words and the screenshots are public and there is nothing to hide from a crawler.
 # The photographs of a person are a different matter: they are on the page for anyone who
 # reads it, and that is not the same as wanting them in an image search for years. Blocking
