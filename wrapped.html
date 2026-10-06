@@ -423,8 +423,33 @@
   .acts{ display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin-top:18px; max-width:360px; }
   .acts .btn{ padding:11px 16px; font-size:13.5px; }
 
+  /* ---------- your look ---------- */
+  .fan{ position:relative; width:min(270px,66vw); aspect-ratio:1.5; margin-top:30px; }
+  .fan img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border-radius:10px;
+    border:7px solid #0b0d12; box-shadow:0 14px 26px -12px rgba(0,0,0,.7); transform-origin:50% 200%;
+    transform:rotate(var(--r)) translateY(var(--y)) scale(.6); opacity:0;
+    transition:transform .5s steps(6,end), opacity .25s steps(3,end); }
+  .fan img.in{ opacity:1; transform:rotate(var(--r)) translateY(var(--y)); }
+  .chips{ display:flex; flex-wrap:wrap; gap:6px; justify-content:center; max-width:370px; margin-top:22px; }
+  .chip{ background:rgba(0,0,0,.22); border:1px solid rgba(255,255,255,.28); border-radius:999px; padding:6px 11px; font-size:12.5px; font-weight:600; }
+  .chip small{ font-family:var(--ui); font-weight:700; font-size:9px; letter-spacing:.14em; text-transform:uppercase; opacity:.72; margin-right:6px; }
+
+  /* ---------- stop motion: everything moves on twos, about twelve frames a second ---------- */
+  .slide{ animation-timing-function:steps(4,end); }
+  .rise,.pop{ transition-timing-function:steps(6,end); }
+  .np .trk i,.wx .hours i,.horo .wk i,.tw .tp,.tw .fa,.tw .fb,.record{ transition-timing-function:steps(10,end) !important; }
+  .record .disc{ animation-timing-function:steps(10) !important; }
+  .tape span{ animation-timing-function:steps(264) !important; }
+  .shot{ animation-timing-function:steps(30) !important; }
+  .bub{ animation-timing-function:steps(3,end) !important; }
+  .bub.typing i{ animation-timing-function:steps(3) !important; }
+  .stk .ln{ transition-timing-function:steps(18,end) !important; }
+  .boil{ translate:var(--jx,0) var(--jy,0); rotate:var(--jr,0deg); }
+  .body::before{ background-position:var(--gx,0) var(--gy,0); }
+
   @media (prefers-reduced-motion: reduce){
     .slide{ animation:none; }
+    .fan img{ transition:none; opacity:1; transform:rotate(var(--r)) translateY(var(--y)); }
     .rise,.pop,.receipt.out,.record,.np .trk i,.wx .hours i,.horo .wk i,.tw i{ transition:none !important; }
     .rise,.pop{ opacity:1; transform:none; }
     .record .disc,.shot,.tape span,.arc .blink,.bub,.bub.typing i{ animation:none !important; }
@@ -539,7 +564,7 @@ function shape(raw){
                               .filter(x => !isNaN(x.date) && x.n > 0) : [];
   const months = Object.entries(raw.mo && typeof raw.mo === 'object' ? raw.mo : {})
     .filter(([k,v]) => /^\d{4}-\d{2}$/.test(k) && Array.isArray(v))
-    .map(([k,v]) => ({ key:k, plays:num(v[0]), secs:num(v[1]) }))
+    .map(([k,v]) => ({ key:k, plays:num(v[0]), secs:num(v[1]), skips:num(v[2]), finished:num(v[3]) }))
     .sort((a,b)=>a.key<b.key?-1:1);
   const hours = arr(raw.h).slice(0,24).map(n=>num(n));
   while(hours.length < 24) hours.push(0);
@@ -547,6 +572,12 @@ function shape(raw){
   while(weekdays.length < 7) weekdays.push(0);
   const q = arr(raw.q).slice(0,3).map(n=>num(n));
   const tc = raw.tc && typeof raw.tc === 'object' ? raw.tc : {};
+  const lk = raw.lk && typeof raw.lk === 'object' ? raw.lk : null;
+  const mt = raw.mt && typeof raw.mt === 'object' ? raw.mt : {};
+  const monthTop = {};
+  for(const k of Object.keys(mt)) if(/^\d{4}-\d{2}$/.test(k) && Array.isArray(mt[k]))
+    monthTop[k] = { song:str(mt[k][0]), sn:num(mt[k][1]), artist:str(mt[k][2]), an:num(mt[k][3]) };
+  const la = arr(raw.la);
   const b = hexes(tc.b, 4);
   return {
     name: str(raw.n,'Hplay') || 'Hplay',
@@ -562,8 +593,15 @@ function shape(raw){
     sleeves: arr(raw.sv).map(n => Number.isInteger(n) ? n : -1),
     quiz: { answered:q[0]||0, correct:q[1]||0, best:q[2]||0 },
     own: b ? { b, w: hexes(tc.w, 4) || b, lab: HEX.test(tc.l||'') ? tc.l : null } : null,
+    monthTop, libArtists: num(la[0]), libAlbums: num(la[1]),
+    look: lk ? { theme: str(lk.th) || 'Blue', wheel: str(lk.wh) || 'Match', mode: MODE_SLUG[lk.sm] ? lk.sm : 'Light',
+                 covers: lk.cs === 'Vinyl' ? 'Vinyl' : 'Cover', viz: str(lk.vz), artBg: !!lk.ab, clock: !!lk.ck,
+                 icon: !!lk.im, bold: !!lk.bd } : null,
   };
 }
+
+const MODE_SLUG = { 'Light':'light', 'Dark':'dark', 'High Contrast':'hicon', 'Night':'night', 'Paper':'paper' };
+const modeSlug = d => MODE_SLUG[d.look ? d.look.mode : 'Light'] || 'light';
 
 /* ---------- the colours: Hplay's own six bodies, and yours if the link brought it ---------- */
 const PAL = {
@@ -686,10 +724,11 @@ function countUp(node, to, ms, f){
   if(REDUCED || to === 0){ node.textContent = f(to); return; }
   const g = gen, t0 = performance.now();
   const ease = t => 1 - Math.pow(1-t, 3);
+  let shown = -1e9;
   (function step(now){
     if(g !== gen) return;
     const p = Math.min((now-t0)/ms, 1);
-    node.textContent = f(to * ease(p));
+    if(now - shown >= FRAME){ node.textContent = f(to * ease(p)); shown = now; }
     if(p < 1) requestAnimationFrame(step); else node.textContent = f(to);
   })(t0);
 }
@@ -788,8 +827,11 @@ function turnable(node, opts){
 /* ---------- the Hplay, in the round ----------
    Six faces and a screen that flips through real screens from the app. It turns on its
    own, and you can grab it and throw it round. */
-const SCREENS = ['np-vinyl.jpg','songs.jpg','np-cover.jpg','menu-vinyl.jpg','stats.jpg','quick.jpg'];
+/* Screens captured from the player itself, in each of its five screen modes, so the one turning
+   here looks the way yours does. */
+const SCREEN_VIEWS = ['np','menu','songs','colors'];
 function device(d){
+  const SCREENS = SCREEN_VIEWS.map(v => `wrapped/${v}-${modeSlug(d)}.jpg`);
   const box = el('div','dev3d grab');
   box.setAttribute('role','img');
   box.setAttribute('aria-label','An Hplay, turning slowly, with screens from the app on it');
@@ -800,19 +842,20 @@ function device(d){
   box.querySelector('.front').appendChild(wheelNode());
   const cube = box.querySelector('.devbox');
   const g = gen;
-  let ang = -24, vel = REDUCED ? 0 : .32, drag = null, lastX = 0, lastV = 0;
+  let ang = -24, vel = REDUCED ? 0 : .32, drag = null, lastX = 0, lastV = 0, drawn = 0;
   const auto = REDUCED ? 0 : .32;
   box.addEventListener('pointerdown', e => { e.stopPropagation(); drag = e.pointerId; lastX = e.clientX; lastV = 0; try{ box.setPointerCapture(e.pointerId); }catch(_){} });
   box.addEventListener('pointermove', e => { if(drag !== e.pointerId) return; const dx = e.clientX - lastX; lastX = e.clientX; ang += dx*.7; lastV = dx*.7; });
   const up = e => { if(drag === null) return; e.stopPropagation(); drag = null; vel = lastV; };
   box.addEventListener('pointerup', up); box.addEventListener('pointercancel', up);
   box.addEventListener('click', e => e.stopPropagation());
-  (function frame(){
+  // stop motion: it is moved on twos, a pose every twelfth of a second, unless you are holding it
+  (function frame(now){
     if(g !== gen) return;
     if(drag === null){ ang += vel; vel += (auto - vel) * .03; }
-    cube.style.transform = `rotateX(-7deg) rotateY(${ang}deg)`;
+    if(drag !== null || now - drawn >= FRAME){ cube.style.transform = `rotateX(-7deg) rotateY(${ang}deg)`; drawn = now; }
     requestAnimationFrame(frame);
-  })();
+  })(0);
   const imgs = [...box.querySelectorAll('.scr img')];
   let k = 0;
   const flip = setInterval(() => {
@@ -864,6 +907,33 @@ function buildSlides(d){
              mk('p','hint rise','Grab it and spin it · tap the side to go on', 1000));
   }});
 
+  // your look: the five screen modes fanned out, yours on top, and how you set the player up
+  if(d.look) S.push({ pal:'you', build(s){
+    const L = d.look, mine = modeSlug(d);
+    // the other four fanned evenly behind, outermost first, so yours lands upright on top
+    const ANG = [-8, 8, -4, 4];
+    const order = Object.values(MODE_SLUG).filter(m => m !== mine).map((m, i) => [m, ANG[i]]).concat([[mine, 0]]);
+    const fan = el('div','fan');
+    fan.setAttribute('role','img');
+    fan.setAttribute('aria-label', `Now Playing in each of the five screen modes, with ${L.mode} on top`);
+    order.forEach(([m, a], i) => {
+      const im = el('img'); im.src = `img/wrapped/np-${m}.jpg`; im.alt = ''; im.decoding = 'async';
+      im.style.setProperty('--r', a + 'deg');
+      im.style.setProperty('--y', (m === mine ? 0 : -4) + 'px');
+      fan.appendChild(im);
+      later(()=>{ im.classList.add('in'); tick(1400 + i*120, .02, .02); }, 300 + i*FRAME*3);
+    });
+    const chip = (k, v) => `<span class="chip boil"><small>${k}</small>${esc(v)}</span>`;
+    const chips = el('div','chips rise');
+    chips.innerHTML = chip('Body', L.theme) + chip('Wheel', L.wheel === 'Match' ? 'Matches' : L.wheel) + chip('Screen', L.mode) +
+      chip('Covers', L.covers) + chip('Visualizer', L.viz || 'Off') + chip('Cover behind', L.artBg ? 'On' : 'Off') +
+      chip('Clock', L.clock ? 'On' : 'Off') + chip('Icon', L.icon ? 'Matches' : 'Standard');
+    s.append(mk('div','eyebrow rise','Your look', 60), mk('h2','name rise gap-s', `${esc(L.mode)} on ${esc(L.theme)}`, 160), fan, chips);
+    reveal(chips, 300 + order.length*FRAME*3 + 200);
+    s.append(mk('p','sub rise', `Five ways the screen can look. You went with <b>${esc(L.mode)}</b>` +
+      (L.covers === 'Vinyl' ? ', and your covers spin as records.' : '.'), 1500));
+  }});
+
   // how long: the year as one long track on Now Playing
   if(d.secs > 0) S.push({ pal:'black', build(s){
     const end = new Date(made.getFullYear()+1, 0, 1);
@@ -901,7 +971,12 @@ function buildSlides(d){
       <div class="ln"><span>PLAYED TO THE END</span><span>${fmt(d.finished)}</span></div>
       <div class="ln"><span>SKIPPED</span><span>-${fmt(d.skips)}</span></div>
       ${d.replays ? `<div class="ln"><span>SAME SONG TWICE</span><span>${fmt(d.replays)}</span></div>` : ''}
-      <div class="ln"><span>TIME</span><span>${hhmm(d.secs)}</span></div><hr>
+      <div class="ln"><span>TIME</span><span>${hhmm(d.secs)}</span></div>
+      ${d.opens ? `<div class="ln"><span>TIMES OPENED</span><span>${fmt(d.opens)}</span></div>` : ''}
+      ${d.searches ? `<div class="ln"><span>SEARCHES</span><span>${fmt(d.searches)}</span></div>` : ''}
+      ${d.videos ? `<div class="ln"><span>VIDEOS</span><span>${fmt(d.videos)}</span></div>` : ''}
+      ${d.library ? `<div class="ln"><span>IN THE LIBRARY</span><span>${fmt(d.library)}</span></div>` : ''}
+      ${d.libArtists ? `<div class="ln"><span>ARTISTS</span><span>${fmt(d.libArtists)}</span></div>` : ''}<hr>
       <div class="ln tot"><span>TOTAL</span><span>0.00</span></div>
       <div class="c" style="margin-top:4px">NO ACCOUNT · NO ADS · NO CHARGE</div>
       <div class="barcode">${barcode(d.name + d.plays, 34)}</div>
@@ -1175,9 +1250,12 @@ function buildSlides(d){
       later(()=>{ ln.style.transition = 'stroke-dashoffset 1.6s ease'; ln.style.strokeDashoffset = '0'; }, 450);
     }
     const [ty,tm] = topM.key.split('-');
-    s.append(mk('p','sub rise', `Your loudest month was <b>${esc(new Date(+ty,+tm-1,1).toLocaleDateString(undefined,{month:'long',year:'numeric'}))}</b>, with ${fmt(topM.plays)} ${plural(topM.plays,'play')}.`, 1300));
+    const tmT = d.monthTop[topM.key];
+    s.append(mk('p','sub rise', `Your loudest month was <b>${esc(new Date(+ty,+tm-1,1).toLocaleDateString(undefined,{month:'long',year:'numeric'}))}</b>, with ${fmt(topM.plays)} ${plural(topM.plays,'play')}` +
+      (tmT && tmT.song ? `, most of them <b>${esc(tmT.song)}</b>.` : '.'), 1300));
     const tape = el('div','tape');
-    tape.innerHTML = `<span>${ms.map(m=>`${esc(mname(m.key).toUpperCase())} ${fmt(m.plays)}`).join('  ·  ')}  ·  ${d.songs.slice(0,5).map(p=>esc(p[0].toUpperCase())).join('  ▲  ')}</span>`;
+    tape.innerHTML = `<span>${ms.map(m => { const t = d.monthTop[m.key];
+      return `${esc(mname(m.key).toUpperCase())} ${fmt(m.plays)}` + (t && t.song ? ` ▲ ${esc(t.song.toUpperCase())}` : ''); }).join('   ·   ')}</span>`;
     s.append(tape);
   }});
 
@@ -1371,6 +1449,26 @@ async function makeCard(d){
   return await new Promise(r => c.toBlob(r, 'image/png'));
 }
 
+/* ---------- stop motion ----------
+   Everything here moves on twos, a new pose every twelfth of a second, and between poses
+   nothing is perfectly still: each card, number and word is nudged a hair and turned a
+   fraction of a degree, the way a thing moved by hand never lands in exactly the same place
+   twice. The grain shifts with every frame too, like film. */
+const FRAME = 83;
+const BOIL = '.num,.name,.title,.eyebrow,.sub,.lcd,.slot,.receipt,.deck,.pick,.legend,.news,.wx,.chat,.pass,.stk,.horo,.arc,.shot,.fan img,.chip,.hw,.dev3d,.iso,.acts .btn,.score';
+function boilTick(){
+  const s = $slides.firstElementChild;
+  if(!s || document.hidden) return;
+  s.style.setProperty('--gx', Math.round(Math.random()*140) + 'px');
+  s.style.setProperty('--gy', Math.round(Math.random()*140) + 'px');
+  for(const n of s.querySelectorAll('.boil')){
+    n.style.setProperty('--jx', (Math.random()*1.6 - .8).toFixed(2) + 'px');
+    n.style.setProperty('--jy', (Math.random()*1.6 - .8).toFixed(2) + 'px');
+    n.style.setProperty('--jr', (Math.random()*.8 - .4).toFixed(2) + 'deg');
+  }
+}
+if(!REDUCED) setInterval(boilTick, FRAME * 2);
+
 /* ---------- running them ---------- */
 let SLIDES = [], at = 0, moving = false, gen = 0;
 const $slides = document.getElementById('slides');
@@ -1389,6 +1487,7 @@ function go(i){
   $slides.appendChild(s);
   footHint(i === SLIDES.length-1 ? 'That is the lot' : 'Tap the side to go on');
   SLIDES[i].build(s);
+  if(!REDUCED) s.querySelectorAll(BOIL).forEach(n => n.classList.add('boil'));
   [...$bars.children].forEach((b,j)=>{ b.className = 'pbar' + (j < i ? ' done' : j === i ? ' now' : ''); });
   $live.textContent = 'Slide ' + (i+1) + ' of ' + SLIDES.length + '. ' + s.textContent.replace(/\s+/g,' ').trim().slice(0,220);
 }
@@ -1451,7 +1550,9 @@ function demo(){
     ni:61, rp:44, se:23, sl:9, vp:3,
     h:[6,4,2,1,0,0,3,14,22,18,11,9,15,13,12,17,26,38,52,71,64,49,30,14], w:[160,190,176,201,214,290,229],
     d0: d0.getFullYear()+'-'+String(d0.getMonth()+1).padStart(2,'0')+'-'+String(d0.getDate()).padStart(2,'0'), dv, mo,
-    so:songs, ar:artists, q:[48,37,9], sv:[3,12,7,0,16,5,9,14,1,18], tc:null };
+    so:songs, ar:artists, q:[48,37,9], sv:[3,12,7,0,16,5,9,14,1,18], tc:null,
+    mt:Object.fromEntries(Object.keys(mo).map((k, i) => [k, [songs[(i*5) % 6][0], 20 + i*3, artists[i % 5][0], 30 + i*4]])),
+    la:[14, 9], lk:{ th:'Blue', wh:'Match', sm:'Dark', cs:'Vinyl', vz:'Bars', ab:true, ck:true, im:true, bd:false, ts:1 } };
 }
 document.getElementById('demoBtn').addEventListener('click', () => start(demo()));
 document.getElementById('pasteForm').addEventListener('submit', async e => {
