@@ -48,7 +48,7 @@
       "description": "Hplay is an offline music player for Android that plays the music files already on the device. It is driven by a wheel you turn rather than a list you scroll. It needs no account, plays with no internet connection, reads cover art out of the files themselves, and treats each folder of music as a playlist. It is free, and it is downloaded as an APK from this site rather than from an app store.",
       "featureList": [
         "Plays music files stored on the device — mp3, flac, m4a, ogg, opus and wav",
-        "Plays with no internet connection — at startup it fetches one tag-reading script and checks for a newer version, and the extras catalogue is fetched when you open it",
+        "Plays with no internet connection — at startup it fetches one tag-reading script and checks for a newer version, the extras catalogue is fetched when you open it, and a supporter code is checked when you redeem one",
         "No account, no sign-in, no cloud, no ads and no tracking",
         "A scroll wheel: turn to move through a list, press the middle to choose",
         "Every folder of music becomes a playlist, named after the folder",
@@ -120,7 +120,7 @@
         {
           "@type": "Question",
           "name": "Does Hplay use the internet?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Playing your music does, entirely: songs and cover art are read from the device, and nothing about what you play is sent anywhere. Hplay is not a no-network app though. It loads one tag-reading script from a public CDN when it starts, and asks the download site once whether there is a newer version, which you can turn off. Get More fetches a catalogue when you open it and downloads what you install. Those are the only requests it makes, and it never uploads anything." }
+          "acceptedAnswer": { "@type": "Answer", "text": "Playing your music does, entirely: songs and cover art are read from the device, and nothing about what you play is sent anywhere. Hplay is not a no-network app though. It loads one tag-reading script from a public CDN when it starts, and asks the download site once whether there is a newer version, which you can turn off. Get More fetches a catalogue when you open it and downloads what you install, and redeeming a supporter code checks it with HostLabo. Those are the only requests it makes, and it never uploads anything." }
         },
         {
           "@type": "Question",
@@ -732,7 +732,7 @@
     <div class="chrome"><span class="n">01</span><h2>What Hplay is</h2><span class="batt"><i></i></span></div>
     <p class="lede">Most music apps want an account, a subscription and a connection. Hplay wants a folder.</p>
     <p>You point it at music that is already on your device and it plays it, with a wheel you spin instead of a list you scroll. Cover art, albums, artists, playlists, search, a sleep timer, a vinyl view that spins while the song runs, and five different screen looks. Nothing is uploaded anywhere. There is no sign-in, because there is nothing to sign in to.</p>
-    <p>Nothing about your listening is sent anywhere: no account, no analytics, no telemetry, and your music never leaves the device. It is not a no-network app, though &mdash; when it starts it fetches a tag-reading script and checks for a newer version, and it fetches a catalogue when you open Get More. <a href="#faq">The questions below</a> say exactly what and when.</p>
+    <p>Nothing about your listening is sent anywhere: no account, no analytics, no telemetry, and your music never leaves the device. It is not a no-network app, though &mdash; when it starts it fetches a tag-reading script and checks for a newer version, it fetches a catalogue when you open Get More, and it checks a supporter code when you redeem one. <a href="#faq">The questions below</a> say exactly what and when.</p>
     <p>It behaves like a music app should on a phone. It holds the lock screen with the cover art on it, puts controls in the notification shade, takes the volume keys, pauses when you pull your headphones out, and keeps playing with the screen off.</p>
 
     <dl class="spec">
@@ -1144,7 +1144,7 @@
       </div>
       <div class="qa">
         <h3>Does Hplay use the internet?</h3>
-        <p>Playing your music does, entirely. Your songs are read from the device and so is the cover art, out of the tags inside the files rather than an online lookup, and nothing about what you play is ever sent anywhere.</p><p>But Hplay is not a no-network app, and it would be wrong to say so. It loads one script when it starts &mdash; a tag reader, from a public CDN &mdash; which fills in tags its own reader missed; without a connection that one request fails and the built-in reader carries on alone. It also asks the download site, once each time it opens, whether there is a newer version &mdash; nothing of yours goes with the question, and Settings &rsaquo; About Hplay &rsaquo; Check for Updates turns it off. Get More fetches a catalogue when you open it, and downloads whatever you choose to install. Those are the only times it reaches out, and it never uploads anything at all.</p>
+        <p>Playing your music does, entirely. Your songs are read from the device and so is the cover art, out of the tags inside the files rather than an online lookup, and nothing about what you play is ever sent anywhere.</p><p>But Hplay is not a no-network app, and it would be wrong to say so. It loads one script when it starts &mdash; a tag reader, from a public CDN &mdash; which fills in tags its own reader missed; without a connection that one request fails and the built-in reader carries on alone. It also asks the download site, once each time it opens, whether there is a newer version &mdash; nothing of yours goes with the question, and Settings &rsaquo; About Hplay &rsaquo; Check for Updates turns it off. Get More fetches a catalogue when you open it, and downloads whatever you choose to install. Redeeming a supporter code sends that code, and a random number the app made so the same phone can redeem it again, to HostLabo&rsquo;s server to be checked. Those are the only times it reaches out, and it never uploads anything at all.</p>
       </div>
       <div class="qa">
         <h3>Does Hplay need an account?</h3>

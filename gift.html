@@ -166,9 +166,20 @@
       are reading this on a computer. Open this same link on the phone Hplay is on.</p>
     <p>You can also type it in by hand, which does exactly the same thing:
       <strong>Settings &rsaquo; Look &rsaquo; Body Color &rsaquo; Redeem a Code</strong>, then
-      <code id="code"></code>.</p>
+      <code id="code"></code>. The symbols are optional.</p>
+    <p class="fine">Your code is checked with HostLabo the moment you redeem it, so that needs
+      the internet once. It works on up to three phones, and the same phone can always put it
+      back on.</p>
     <p class="fine">Haven't got Hplay? It is still an alpha and goes out by email &mdash;
       <a href="mailto:hostlabosupport@gmail.com?subject=Hplay%20alpha">ask for a build</a>.</p>
+  </div>
+
+  <div class="fallback" id="retired" hidden>
+    <p>Supporter skins used to unlock with one shared word. Every supporter now gets a code of
+      their own instead, like <code>COFE#8762-K4QX-9PMZ</code>, which works on up to three phones.</p>
+    <p>If you already have the skin, you keep it. If you bought a coffee and have not got your
+      own code yet, <a href="mailto:hostlabosupport@gmail.com?subject=Hplay%20skin%20code">write to me</a>
+      and one is on its way.</p>
   </div>
 
   <div class="fallback" id="nocode" hidden>
@@ -183,7 +194,7 @@
 </main>
 
 <footer>
-  <span>Hplay v41.5 &ldquo;Spy&rdquo;</span>
+  <span>Hplay v43.0 &ldquo;Engineer&rdquo;</span>
   <span>&copy; 2026 Iwo Dec</span>
   <span>HostLabo</span>
   <span>Not affiliated with, or endorsed by, Apple Inc.</span>
@@ -209,16 +220,33 @@
               w:['#3d2c1e','#2b1e14','#1c130c','#0e0906'], c:'#9a7345' }
   };
 
+  /* A code is made for one person on HostLabo's Cloudflare Worker and looks like
+     COFE#8762-K4QX-9PMZ. The link carries it with the symbols taken out, because the app
+     only accepts letters and numbers from a link; the app puts it back together the same way.
+     Which skin it is reads off the first four letters. Whether it is real, and how many phones
+     it is on, only the Worker knows, and only when the app asks. */
+  var PREFIX = { GOLD:'GOLDEN', COFE:'COFFEE' };
+  var RETIRED = { GOLDEN:1, COFFEE:1 };
   function codeFromUrl(){
     var p = new URLSearchParams(location.search).get('c');
-    var raw = (p || location.hash.replace(/^#/, '') || '').trim().toUpperCase();
+    var raw = (p || location.hash.replace(/^#/, '') || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
     return /^[A-Z0-9]{1,24}$/.test(raw) ? raw : '';
+  }
+  function pretty(c){
+    var m = /^(GOLD|COFE)(\d{4})([A-Z0-9]{8})$/.exec(c);
+    return m ? m[1] + '#' + m[2] + '-' + m[3].slice(0,4) + '-' + m[3].slice(4) : c;
   }
 
   var code = codeFromUrl();
-  var skin = code && Object.prototype.hasOwnProperty.call(SKINS, code) ? SKINS[code] : null;
+  var retired = code && RETIRED[code];
+  var skin = code && !retired && PREFIX[code.slice(0,4)] ? SKINS[PREFIX[code.slice(0,4)]] : null;
 
-  if(!code){
+  if(retired){
+    document.getElementById('eyebrow').textContent = 'Supporter skins';
+    document.getElementById('head').textContent = 'This code has been retired';
+    document.getElementById('lede').hidden = true;
+    document.getElementById('retired').hidden = false;
+  } else if(!code){
     document.getElementById('eyebrow').textContent = 'Supporter skins';
     document.getElementById('head').textContent = 'No skin on this link';
     document.getElementById('lede').hidden = true;
@@ -229,7 +257,7 @@
     var go = document.getElementById('go');
     go.href = 'hplay://gift/' + encodeURIComponent(code);
     go.hidden = false;
-    document.getElementById('code').textContent = code;
+    document.getElementById('code').textContent = pretty(code);
     document.getElementById('fallback').hidden = false;
 
     if(skin){
