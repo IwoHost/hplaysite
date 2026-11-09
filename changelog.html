@@ -97,6 +97,19 @@
            color:var(--ink); }
   .rel ul{ margin:0 0 12px; padding-left:18px; color:var(--ink-soft); font-size:.95rem; }
   .rel li{ margin:.14rem 0; }
+  .rel h3 .kind{ font-family:var(--body); font-weight:500; color:var(--muted);
+                 margin-left:8px; font-size:.8rem; }
+
+  .renumber{ margin:34px 0 26px; padding:18px 0 0; border-top:2px dashed var(--line); }
+  .renumber h2{ font-family:var(--display); font-size:1.15rem; margin:0 0 .35rem; }
+  .renumber p{ color:var(--ink-soft); margin:0 0 .8rem; max-width:44rem; }
+  .renumber dl{ display:grid; grid-template-columns:max-content max-content 1fr; gap:4px 14px;
+                margin:0; font-size:.95rem; }
+  .renumber dt{ font-family:var(--mono); font-size:.82rem; font-weight:600; padding-top:.15em; }
+  .renumber dd{ margin:0; color:var(--ink-soft); }
+  .renumber dd.k{ font-weight:600; color:var(--accent-ink); }
+  @media (max-width:520px){ .renumber dl{ grid-template-columns:max-content 1fr; }
+                            .renumber dd:not(.k){ grid-column:2; } }
 
   footer{ max-width:52rem; margin:0 auto; padding:0 20px 46px; color:var(--muted);
           font-size:.8rem; display:flex; gap:14px; flex-wrap:wrap;
@@ -110,20 +123,54 @@
 <main id="main">
   <h1>Changelog</h1>
   <p class="lede">Every release, newest first. Each number gets a few lines on what the whole run was for, and its releases underneath.</p>
-  <p class="stamp">78 releases across 17 numbered runs &nbsp;·&nbsp; newest v43.1 “Engineer” &nbsp;·&nbsp; written from the app's own changelog on 2026-10-12</p>
+  <p class="stamp">79 releases across 18 numbered runs &nbsp;·&nbsp; newest v44.0.0 “Alyx” &nbsp;·&nbsp; written from the app's own changelog on 2026-11-09</p>
 
   <div class="run now">
     <div class="runhead">
+      <h2>v44</h2>
+      <span class="code">Alyx</span>
+      <span class="tag">current</span>
+      <span class="count">1 release &nbsp;v44.0.0</span>
+    </div>
+    <ul class="about">
+      <li>Three numbers now: major, minor and patch</li>
+      <li>Every kind of release says what it is</li>
+    </ul>
+    <details open>
+      <summary>The release</summary>
+      <div class="rel">
+        <h3>v44.0.0 <span class="kind">Proud</span></h3>
+        <ul>
+          <li>Version numbers changed: from here on, three of them</li>
+          <li>Major is Proud, Minor is Default, Patch is Shame</li>
+          <li>Each codename is used once, and never again</li>
+          <li>The Changelog marks where the numbering changed</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+
+  <section class="renumber" aria-labelledby="renumber">
+    <h2 id="renumber">The numbering changed here</h2>
+    <p>From v44.0.0 every version has three numbers, and which one moved says what kind of release it was. Everything below kept the two numbers it shipped with.</p>
+    <dl>
+      <dt>Major</dt><dd class="k">Proud</dd><dd>The one that goes on the r&eacute;sum&eacute;. A real change, and a codename never used before.</dd>
+      <dt>Minor</dt><dd class="k">Default</dd><dd>New things, and they were fine.</dd>
+      <dt>Patch</dt><dd class="k">Shame</dd><dd>Fixes only. Please don&rsquo;t ask.</dd>
+    </dl>
+  </section>
+
+  <div class="run">
+    <div class="runhead">
       <h2>v43</h2>
       <span class="code">Engineer</span>
-      <span class="tag">current</span>
       <span class="count">2 releases &nbsp;v43.0&ndash;43.1</span>
     </div>
     <ul class="about">
       <li>Hplay says when there is a newer version, once</li>
       <li>Music moved into Android's own player</li>
     </ul>
-    <details open>
+    <details>
       <summary>All 2 releases</summary>
       <div class="rel">
         <h3>v43.1</h3>
@@ -980,7 +1027,7 @@
 </main>
 
 <footer>
-  <span>Hplay v43.1 “Engineer”</span>
+  <span>Hplay v44.0.0 “Alyx”</span>
   <span>&copy; 2026 Iwo Dec</span>
   <span>HostLabo</span>
   <span><a href="index.html" style="color:inherit">Home</a></span>
