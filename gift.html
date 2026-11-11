@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="description" content="Open a Hplay supporter skin. Tap the button and the skin is on.">
+<meta name="description" content="The Gold and Coffee skins are free in every copy of Hplay now. No code needed.">
 <meta name="theme-color" content="#1b6fd0">
 <meta name="author" content="Iwo Dec (HostLabo)">
 <meta name="copyright" content="© 2026 Iwo Dec. All rights reserved.">
 <meta name="robots" content="noindex">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%231b6fd0%22/><circle cx=%2216%22 cy=%2216%22 r=%229%22 fill=%22none%22 stroke=%22white%22 stroke-width=%223%22/></svg>">
-<title>Your Hplay Skin</title>
+<title>Hplay Skins</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@112,500;112,600;112,700;112,800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <style>
   *{ box-sizing:border-box; }
@@ -147,49 +147,29 @@
 <div class="backhome"><a href="index.html">&#8592; Hplay</a></div>
 
 <main id="main">
-  <p class="eyebrow" id="eyebrow">Thank you</p>
-  <h1 id="head">Your skin is ready</h1>
-  <p id="lede">Tap the button and it is on. Nothing to type, nothing to set up.</p>
+  <p class="eyebrow">Supporter skins</p>
+  <h1>Gold and Coffee are free now</h1>
+  <p>Both skins come with every copy of Hplay from v44.1.0. No code, no link, nothing to
+    redeem: they are in <strong>Settings &rsaquo; Look &rsaquo; Body Color</strong>, finishes and all.</p>
 
-  <div class="preview" id="preview" hidden>
-    <div class="chip" id="chip"><b></b><i></i></div>
-    <div>
-      <p class="pname" id="pname"></p>
-      <p class="pwhat" id="pwhat"></p>
-    </div>
+  <div class="preview" style="display:flex">
+    <div class="chip" style="background:linear-gradient(180deg,#f8e3a0,#dcae33,#8e6112,#2c1c04)"><b></b><i style="background:radial-gradient(circle at 50% 40%,#454038,#322e28,#221f1a,#12100d)"></i></div>
+    <div><p class="pname">Gold</p><p class="pwhat">Gold body, graphite wheel</p></div>
+  </div>
+  <div class="preview" style="display:flex">
+    <div class="chip" style="background:linear-gradient(180deg,#eddbc0,#c9a271,#8a5e34,#3a2313)"><b></b><i style="background:radial-gradient(circle at 50% 40%,#3d2c1e,#2b1e14,#1c130c,#0e0906)"></i></div>
+    <div><p class="pname">Coffee</p><p class="pwhat">Crema body, espresso wheel</p></div>
   </div>
 
-  <a class="go" id="go" href="#" hidden>Open it in Hplay</a>
+  <a class="go" href="hplay://gift/COFFEE">Open Hplay</a>
 
-  <div class="fallback" id="fallback" hidden>
-    <p><strong>Nothing happened?</strong> That means Hplay is not on this device yet, or you
-      are reading this on a computer. Open this same link on the phone Hplay is on.</p>
-    <p>You can also type it in by hand, which does exactly the same thing:
-      <strong>Settings &rsaquo; Look &rsaquo; Body Color &rsaquo; Redeem a Code</strong>, then
-      <code id="code"></code>. The symbols are optional.</p>
-    <p class="fine">Your code is checked with HostLabo the moment you redeem it, so that needs
-      the internet once. It works on up to three phones, and the same phone can always put it
-      back on.</p>
-    <p class="fine">Haven't got Hplay? It is still an alpha and goes out by email &mdash;
-      <a href="mailto:hostlabosupport@gmail.com?subject=Hplay%20alpha">ask for a build</a>.</p>
-  </div>
-
-  <div class="fallback" id="retired" hidden>
-    <p>Supporter skins used to unlock with one shared word. Every supporter now gets a code of
-      their own instead, like <code>COFE#8762-K4QX-9PMZ</code>, which works on up to three phones.</p>
-    <p>If you already have the skin, you keep it. If you bought a coffee and have not got your
-      own code yet, <a href="mailto:hostlabosupport@gmail.com?subject=Hplay%20skin%20code">write to me</a>
-      and one is on its way.</p>
-  </div>
-
-  <div class="fallback" id="nocode" hidden>
-    <p>This page opens a supporter skin, and this link did not bring one with it.</p>
-    <p>If you bought a coffee, the link you were sent has a code on the end of it &mdash; use
-      that one. If something looks wrong with it,
-      <a href="mailto:hostlabosupport@gmail.com?subject=Hplay%20skin">tell me</a> and I will
-      sort it out.</p>
-    <p class="fine">Hplay is free either way. The skins are a thank-you, not a feature: nothing
-      the player does sits behind them.</p>
+  <div class="fallback">
+    <p>They used to come with a coffee. A coffee buys nothing now, not even a colour: everybody
+      gets the same Hplay, and the people who support it are thanked by name instead &mdash; in the
+      app under <strong>About Hplay &rsaquo; Credits</strong>, and on <a href="index.html#supporters">the home page</a>.</p>
+    <p>If you were sent a code like <code>COFE#8762-K4QX-9PMZ</code>, you do not need it any more.
+      If you already had the skin, you keep it; it is just called Gold or Coffee now.</p>
+    <p class="fine">Haven't got Hplay? <a href="index.html#start">Get it here</a>.</p>
   </div>
 </main>
 
@@ -207,75 +187,6 @@
     if(t === 'dark' || t === 'light') document.documentElement.dataset.theme = t;
   }catch(e){}
 
-  /* The same two skins the app ships, so the page can show what is coming rather than
-     naming it. Kept here on purpose and nowhere near the link: the link carries a code,
-     and the app decides what that code means from its own copy. If these ever drift, the
-     preview is wrong and the skin is still right, which is the way round it should be. */
-  var SKINS = {
-    GOLDEN: { name:'Golden Supporter', what:'Gold body, graphite wheel',
-              b:['#f8e3a0','#dcae33','#8e6112','#2c1c04'],
-              w:['#454038','#322e28','#221f1a','#12100d'], c:'#a97f22' },
-    COFFEE: { name:'Coffee Supporter', what:'Crema body, espresso wheel',
-              b:['#eddbc0','#c9a271','#8a5e34','#3a2313'],
-              w:['#3d2c1e','#2b1e14','#1c130c','#0e0906'], c:'#9a7345' }
-  };
-
-  /* A code is made for one person on HostLabo's Cloudflare Worker and looks like
-     COFE#8762-K4QX-9PMZ. The link carries it with the symbols taken out, because the app
-     only accepts letters and numbers from a link; the app puts it back together the same way.
-     Which skin it is reads off the first four letters. Whether it is real, and how many phones
-     it is on, only the Worker knows, and only when the app asks. */
-  var PREFIX = { GOLD:'GOLDEN', COFE:'COFFEE' };
-  var RETIRED = { GOLDEN:1, COFFEE:1 };
-  function codeFromUrl(){
-    var p = new URLSearchParams(location.search).get('c');
-    var raw = (p || location.hash.replace(/^#/, '') || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
-    return /^[A-Z0-9]{1,24}$/.test(raw) ? raw : '';
-  }
-  function pretty(c){
-    var m = /^(GOLD|COFE)(\d{4})([A-Z0-9]{8})$/.exec(c);
-    return m ? m[1] + '#' + m[2] + '-' + m[3].slice(0,4) + '-' + m[3].slice(4) : c;
-  }
-
-  var code = codeFromUrl();
-  var retired = code && RETIRED[code];
-  var skin = code && !retired && PREFIX[code.slice(0,4)] ? SKINS[PREFIX[code.slice(0,4)]] : null;
-
-  if(retired){
-    document.getElementById('eyebrow').textContent = 'Supporter skins';
-    document.getElementById('head').textContent = 'This code has been retired';
-    document.getElementById('lede').hidden = true;
-    document.getElementById('retired').hidden = false;
-  } else if(!code){
-    document.getElementById('eyebrow').textContent = 'Supporter skins';
-    document.getElementById('head').textContent = 'No skin on this link';
-    document.getElementById('lede').hidden = true;
-    document.getElementById('nocode').hidden = false;
-  } else {
-    /* An unknown code still gets the button. The app holds the real list, and this page
-       being out of date is not a reason to tell somebody their gift is not real. */
-    var go = document.getElementById('go');
-    go.href = 'hplay://gift/' + encodeURIComponent(code);
-    go.hidden = false;
-    document.getElementById('code').textContent = pretty(code);
-    document.getElementById('fallback').hidden = false;
-
-    if(skin){
-      var chip = document.getElementById('chip');
-      chip.style.background = 'linear-gradient(180deg,' + skin.b.join(',') + ')';
-      var wheel = chip.querySelector('i');
-      wheel.style.background = 'radial-gradient(circle at 50% 40%,' + skin.w.join(',') + ')';
-      wheel.style.setProperty('--c', skin.c);
-      var dot = document.createElement('style');
-      dot.textContent = '#chip i::after{ background:' + skin.c + '; }';
-      document.head.appendChild(dot);
-      document.getElementById('pname').textContent = skin.name;
-      document.getElementById('pwhat').textContent = skin.what;
-      document.getElementById('preview').hidden = false;
-      document.title = skin.name;
-      document.getElementById('head').textContent = skin.name + ' is ready';
-    }
-  }
 </script>
 </body>
 </html>
