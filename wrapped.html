@@ -679,7 +679,54 @@ function sleeveURI(i){
      taken out by hand rather than trusted not to turn up in a future sleeve */
   return (sleeveCache[i] = 'data:image/svg+xml,' + encodeURIComponent(svg).replace(/'/g, '%27'));
 }
+/* ---------- real covers, when Hplay itself opens this page ----------
+   A link has no room for pictures, so a shared link shows the house sleeves above. Opened from
+   inside the app, though, the app hands its own covers in through postMessage, straight from
+   the phone into this page, once it has loaded. Nothing in that ever reaches a server: it is
+   one window talking to the frame inside it. Index i is the song's place in d.songs.
+
+   Only accepted from the window this page is framed in, and only as small data: images, so a
+   page that framed this one could at most show different pictures in it. */
+const covers = [], coverPal = [];
+function takeCovers(list){
+  if(!Array.isArray(list)) return;
+  list.slice(0, 25).forEach((u, i) => {
+    if(typeof u !== 'string' || u.length > 300000) return;
+    if(!/^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+/=]+$/.test(u)) return;
+    covers[i] = u;
+    // the record label, the shadow and the like take their colour from the cover itself
+    const img = new Image();
+    img.onload = () => {
+      try{
+        const c = document.createElement('canvas'); c.width = c.height = 8;
+        const g = c.getContext('2d'); g.drawImage(img, 0, 0, 8, 8);
+        const px = g.getImageData(0, 0, 8, 8).data;
+        let r = 0, gg = 0, b = 0; for(let k = 0; k < px.length; k += 4){ r += px[k]; gg += px[k+1]; b += px[k+2]; }
+        const n = px.length / 4; r = Math.round(r/n); gg = Math.round(gg/n); b = Math.round(b/n);
+        const hex = v => v.toString(16).padStart(2, '0');
+        const mid = '#' + hex(r) + hex(gg) + hex(b);
+        const light = (0.2126*r + 0.7152*gg + 0.0722*b) > 140;
+        coverPal[i] = [light ? '#16181d' : '#f4f1ea', mid, light ? '#3a3d44' : '#e9e4d8'];
+      }catch(e){}
+    };
+    img.src = u;
+  });
+  // anything already on screen picks the cover up at once
+  document.querySelectorAll('[data-si]').forEach(x => {
+    const u = covers[+x.dataset.si];
+    if(u) x.style.backgroundImage = `url('${u}')`;
+  });
+}
+addEventListener('message', e => {
+  if(window.parent === window || e.source !== window.parent) return;
+  const m = e.data;
+  if(m && m.type === 'hplay-covers') takeCovers(m.covers);
+});
+// say so to the app, in case it asked before this page was listening
+if(window.parent !== window) try{ window.parent.postMessage({ type:'hplay-wrapped-ready' }, '*'); }catch(e){}
+
 function sleeveFor(d, i){
+  if(covers[i]) return covers[i];
   const n = d.sleeves[i];
   if(Number.isInteger(n) && n >= 0) return sleeveURI(n);
   // an older link has no sleeve numbers: settle on one from the title, so it is at least stable
@@ -688,6 +735,7 @@ function sleeveFor(d, i){
   return sleeveURI(h);
 }
 function sleevePalOf(d, i){
+  if(covers[i] && coverPal[i]) return coverPal[i];
   const n = d.sleeves[i];
   if(Number.isInteger(n) && n >= 0) return SLEEVE_PAL[((n % SLEEVES) + SLEEVES) % SLEEVES];
   const t = (d.songs[i] && d.songs[i][0]) || '';
@@ -1029,7 +1077,7 @@ function buildSlides(d){
     s.append(mk('div','eyebrow rise','Your most played', 60));
     const deck = el('div','deck rise');
     deck.innerHTML = `<div class="inner"><div class="record"><div class="disc"><div class="lbl">${esc(clipS(topSong[0], 34))}</div></div></div>
-      <div class="sleeve" style="background-image:url('${sleeveFor(d,0)}')"></div></div>`;
+      <div class="sleeve" data-si="0" style="background-image:url('${sleeveFor(d,0)}')"></div></div>`;
     const lbl = deck.querySelector('.lbl');
     lbl.style.setProperty('--lc', sp[1]); lbl.style.setProperty('--lt', sp[0]);
     s.append(deck); reveal(deck, 150);
@@ -1059,7 +1107,7 @@ function buildSlides(d){
       duel.innerHTML = '';
       const pair = rounds[r];
       const cards = pair.map(x => {
-        const b = el('button','pick', `<div class="art" style="background-image:url('${sleeveFor(d, x.i)}')"></div><div class="tt">${esc(x.t)}</div><div class="ct">${fmt(x.n)}</div>`);
+        const b = el('button','pick', `<div class="art" data-si="${x.i}" style="background-image:url('${sleeveFor(d, x.i)}')"></div><div class="tt">${esc(x.t)}</div><div class="ct">${fmt(x.n)}</div>`);
         b.type = 'button';
         b.addEventListener('click', e => {
           e.stopPropagation();
@@ -1108,7 +1156,7 @@ function buildSlides(d){
       <div class="dl"><span>Vol. ${made.getFullYear() - 1983}</span><span>${esc(made.toLocaleDateString(undefined,{day:'numeric',month:'short',year:'numeric'}))}</span><span>Free, always</span></div>
       <h2 class="hed">Local listener plays ${esc(clipS(topArtist[0], 34))} ${fmt(topArtist[1])} times</h2>
       <div class="dek">“I just like them,” says ${esc(clipS(d.name, 24))}. Neighbours were unavailable for comment.</div>
-      <div class="cols"><div class="photo" style="background-image:url('${sleeveFor(d,0)}')"></div>
+      <div class="cols"><div class="photo" data-si="0" style="background-image:url('${sleeveFor(d,0)}')"></div>
         <p>Sources close to the wheel confirm ${esc(topArtist[0])} finished the year ahead of ${rest > 0 ? fmt(rest) + ' other ' + plural(rest,'artist') : 'nobody, because nobody else was in the running'}.</p>
         <p>${second ? esc(second) + ' came second and has asked for a recount.' : 'A recount has not been requested.'} No streaming service was involved at any stage.</p></div>
       <div class="cap" style="margin-top:6px">PICTURED: THE SLEEVE IN QUESTION</div>`;
