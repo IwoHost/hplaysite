@@ -687,12 +687,23 @@ function sleeveURI(i){
 
    Only accepted from the window this page is framed in, and only as small data: images, so a
    page that framed this one could at most show different pictures in it. */
-const covers = [], coverPal = [];
+/* What the app hands in (see "the Wrapped connector" in the app's index.html):
+     covers   by index into d.songs, null where a song has no cover
+     songs    { title: picture }  every song the link names, month tops included
+     artists  { name: picture }   the top artists: the cover of their most played song
+   Use any of them in a new year's design; anything missing falls back to the sleeves.
+   artFor.song(title) and artFor.artist(name) are the easy way in. */
+const covers = [], coverPal = [], songArt = Object.create(null), artistArt = Object.create(null);
+const artOk = u => typeof u === 'string' && u.length <= 300000 && /^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+/=]+$/.test(u);
+const artFor = { song: t => songArt[t] || null, artist: n => artistArt[n] || null };
+function takeNamed(into, obj){
+  if(!obj || typeof obj !== 'object') return;
+  Object.keys(obj).slice(0, 200).forEach(k => { if(typeof k === 'string' && k.length <= 200 && artOk(obj[k])) into[k] = obj[k]; });
+}
 function takeCovers(list){
   if(!Array.isArray(list)) return;
   list.slice(0, 25).forEach((u, i) => {
-    if(typeof u !== 'string' || u.length > 300000) return;
-    if(!/^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+/=]+$/.test(u)) return;
+    if(!artOk(u)) return;
     covers[i] = u;
     // the record label, the shadow and the like take their colour from the cover itself
     const img = new Image();
@@ -711,22 +722,34 @@ function takeCovers(list){
     };
     img.src = u;
   });
-  // anything already on screen picks the cover up at once
+  refreshArt();
+}
+// anything already on screen picks its picture up at once
+function refreshArt(){
   document.querySelectorAll('[data-si]').forEach(x => {
     const u = covers[+x.dataset.si];
+    if(u) x.style.backgroundImage = `url('${u}')`;
+  });
+  document.querySelectorAll('[data-artist]').forEach(x => {
+    const u = artistArt[x.dataset.artist];
     if(u) x.style.backgroundImage = `url('${u}')`;
   });
 }
 addEventListener('message', e => {
   if(window.parent === window || e.source !== window.parent) return;
   const m = e.data;
-  if(m && m.type === 'hplay-covers') takeCovers(m.covers);
+  if(!m || m.type !== 'hplay-covers') return;
+  takeNamed(songArt, m.songs);
+  takeNamed(artistArt, m.artists);
+  takeCovers(m.covers);
 });
 // say so to the app, in case it asked before this page was listening
 if(window.parent !== window) try{ window.parent.postMessage({ type:'hplay-wrapped-ready' }, '*'); }catch(e){}
 
 function sleeveFor(d, i){
   if(covers[i]) return covers[i];
+  const named = d.songs[i] && songArt[d.songs[i][0]];
+  if(named) return named;
   const n = d.sleeves[i];
   if(Number.isInteger(n) && n >= 0) return sleeveURI(n);
   // an older link has no sleeve numbers: settle on one from the title, so it is at least stable
@@ -1156,7 +1179,7 @@ function buildSlides(d){
       <div class="dl"><span>Vol. ${made.getFullYear() - 1983}</span><span>${esc(made.toLocaleDateString(undefined,{day:'numeric',month:'short',year:'numeric'}))}</span><span>Free, always</span></div>
       <h2 class="hed">Local listener plays ${esc(clipS(topArtist[0], 34))} ${fmt(topArtist[1])} times</h2>
       <div class="dek">“I just like them,” says ${esc(clipS(d.name, 24))}. Neighbours were unavailable for comment.</div>
-      <div class="cols"><div class="photo" data-si="0" style="background-image:url('${sleeveFor(d,0)}')"></div>
+      <div class="cols"><div class="photo" data-artist="${esc(topArtist[0])}" style="background-image:url('${artFor.artist(topArtist[0]) || sleeveFor(d,0)}')"></div>
         <p>Sources close to the wheel confirm ${esc(topArtist[0])} finished the year ahead of ${rest > 0 ? fmt(rest) + ' other ' + plural(rest,'artist') : 'nobody, because nobody else was in the running'}.</p>
         <p>${second ? esc(second) + ' came second and has asked for a recount.' : 'A recount has not been requested.'} No streaming service was involved at any stage.</p></div>
       <div class="cap" style="margin-top:6px">PICTURED: THE SLEEVE IN QUESTION</div>`;
