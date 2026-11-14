@@ -90,12 +90,25 @@ function tracks(){
   await shot('clock',      go({type:'clock'}), 900, 's');
   await shot('colors',     go({type:'colors', sel:0, top:0}), 900, 's');
   for(const [name, mode] of [['light','Light'],['dark','Dark'],['hicon','High Contrast'],['night','Night'],['paper','Paper']])
-    await shot('mode-' + name, T('Hplay', mode, COVER) + `__play(10);` + go({type:'np'}) + MID, 1500, 's');
+    await shot('mode-' + name, T('Hplay', mode, COVER) + `__play(10);` + go({type:'np'}) + MID, 2600, 's');
   // the other bodies, for the fan of colours
   for(const [theme, i] of [['Blue',0],['Red',11],['Purple',2],['Silver',8],['Black',13],['Green',5]])
     await shot('body-' + theme.toLowerCase(), T(theme,'Dark',VINYL) + `__play(${i});` + go({type:'np'}) + MID, 3000, 'p');
   await shot('tour',       T('Hplay','Dark',COVER) + go(null) + `startTour();`, 1800, 'p');
-  await ctx.close(); await browser.close();
+  // The boot screen is deliberately not photographed: in v45.0.0 its badge still says
+  // "Alpha", and a picture of that on a page announcing the beta would only confuse.
+  await ctx.close();
+
+  // The home screen widget cannot be run off a phone, so this is the app repo's own drawing of
+  // it (tools/widget_mock.html), which is kept in step with the Kotlin. The page says so.
+  const mock = path.join(path.dirname(APP), 'tools', 'widget_mock.html');
+  if(fs.existsSync(mock)){
+    const p = await browser.newPage({ viewport:{ width:900, height:740 }, deviceScaleFactor:2 });
+    await p.goto(pathToFileURL(mock).href + '?fam=Y'); await p.waitForTimeout(700);
+    await p.locator('.phone.dark').screenshot({ path:path.join(OUT, 'widget.jpg'), type:'jpeg', quality:84 });
+    await p.close(); console.log('  widget');
+  }
+  await browser.close();
   if(errs.length) throw new Error('the app threw while being photographed: ' + errs.join('; '));
   console.log('Done: ' + OUT);
 })().catch(e => { console.error(e.message); process.exit(1); });
