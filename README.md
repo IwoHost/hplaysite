@@ -10,7 +10,7 @@ straight from `main`.
 |------|------------|
 | `index.html` | The site |
 | `review.html` | A long read on how the player got built |
-| `feedback.html` | The alpha feedback form, English and Polish |
+| `feedback.html` | The beta feedback form, English and Polish |
 | `img/` | Screenshots, album sleeves and photos |
 | `music/` | The twenty demo tracks, plus a zip of all of them |
 
@@ -23,5 +23,5 @@ name and sleeve is made up. Free to download and keep.
 
 ## The player
 
-The app itself is not in this repository. It is in a closed alpha, not on the
+The app itself is not in this repository. It is in beta, not on the
 Play Store, and handed out one person at a time: hostlabosupport@gmail.com.

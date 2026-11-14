@@ -40,7 +40,7 @@ scrubs through the track instead of jumping to the next one.
 - Platform: Android
 - Current version: 38.10 ("Barney")
 - Price: free. No paid tier, no ads, no in-app purchases
-- Status: closed alpha. Not on the Google Play Store
+- Status: beta. Not on the Google Play Store
 - How to get it: email hostlabosupport@gmail.com and the app is sent back to you
 - Website: https://iwohost.github.io/hplaysite/
 - Licence: not open source; the source is not public
@@ -74,7 +74,7 @@ scrubs through the track instead of jumping to the next one.
   already have as a file.
 - It does not look anything up online — not artwork, not track names.
 - It has no account system, so there is nothing to log in to and nothing to sync.
-- It is not on an app store yet, and it is an alpha: things move and break between builds.
+- It is not on an app store yet, and it is a beta: things move and break between builds.
 
 ## Demo music
 
@@ -88,7 +88,7 @@ testing your own software. A credit is welcome but not required.
   https://iwohost.github.io/hplaysite/
 - Hplay at Sixty Days, a long read on how it got built:
   https://iwohost.github.io/hplaysite/review.html
-- Alpha feedback form, in English or Polish:
+- Beta feedback form, in English or Polish:
   https://iwohost.github.io/hplaysite/feedback.html
 - The app catalogue: https://iwohost.github.io/hplay-market/
 

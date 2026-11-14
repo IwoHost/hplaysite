@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="description" content="Tester notes for the Hplay alpha, in English or Polish.">
+<meta name="description" content="Tester notes for the Hplay beta, in English or Polish.">
 <meta name="theme-color" content="#1b6fd0">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%231b6fd0%22/><circle cx=%2216%22 cy=%2216%22 r=%229%22 fill=%22none%22 stroke=%22white%22 stroke-width=%223%22/></svg>">
 <style>
@@ -452,9 +452,9 @@ window.HPLAY_POSTBOX = '1851de0b-3432-44a0-9c75-81463fb7beb2';
     en: {
       mailit: "Send it to me by email",
       summaryLabel: "Your notes, as text",
-      eyebrow:'Hplay · v44.1.0 “Alyx” · alpha test',
+      eyebrow:'Hplay · v44.1.0 “Alyx” · beta test',
       h1:'What did you actually think?',
-      intro1:'This is Hplay, a music player built to work like the classic scroll-wheel players. It is an <b>alpha build</b>: about two months old, unfinished on purpose, and you are one of the first people outside the project to touch it.',
+      intro1:'This is Hplay, a music player built to work like the classic scroll-wheel players. It is a <b>beta build</b>: about two months old, unfinished on purpose, and you are one of the first people outside the project to touch it.',
       intro2:'Be blunt. “I didn\'t get it” and “this bit annoyed me” are worth more than “nice job”. Things being broken is expected at this stage. Saying <em>which</em> things is the useful part. Two questions are required, the rest you can skip. Takes about three minutes.',
       sec1:'First Contact', sec2:'The Verdict', sec3:'Breakages',
       required:'required',
@@ -504,7 +504,7 @@ window.HPLAY_POSTBOX = '1851de0b-3432-44a0-9c75-81463fb7beb2';
       manualMsg:"Press the button and your mail app opens with everything already written out, addressed to hostlabosupport@gmail.com. Or copy the text and send it however you like.",
       copy:'Copy my answers', copied:'Copied. Now paste it to Iwo',
       back:'Back to the form', change:'Change something',
-      footer:'Hplay v41.5 · alpha test · September 2026 · © 2026 Iwo Dec (HostLabo) · Hplay is not affiliated with, or endorsed by, Apple Inc.',
+      footer:'Hplay v41.5 · beta test · September 2026 · © 2026 Iwo Dec (HostLabo) · Hplay is not affiliated with, or endorsed by, Apple Inc.',
       sumTitle:'HPLAY TESTER NOTES', sumFrom:'From', sumAnon:'(anonymous)', sumPhone:'Phone',
       sumFirst:'FIRST TEN SECONDS', sumWheel:'THE WHEEL', sumFound:'FOUND ALONE', sumNothing:'nothing',
       sumRatings:'RATINGS', sumLook:'looks', sumFeel:'feels', sumSpeed:'speed',
@@ -514,9 +514,9 @@ window.HPLAY_POSTBOX = '1851de0b-3432-44a0-9c75-81463fb7beb2';
     pl: {
       mailit: "Wyślij mi to mailem",
       summaryLabel: "Twoje uwagi, jako tekst",
-      eyebrow:'Hplay · v44.1.0 „Alyx” · test alfa',
+      eyebrow:'Hplay · v44.1.0 „Alyx” · test beta',
       h1:'Co o tym naprawdę myślisz?',
-      intro1:'To jest Hplay, odtwarzacz muzyki zrobiony tak, żeby działał jak klasyczne odtwarzacze z kółkiem. To <b>wersja alfa</b>: ma jakieś dwa miesiące, jest celowo niedokończona, a Ty jesteś jedną z pierwszych osób spoza projektu, które jej dotykają.',
+      intro1:'To jest Hplay, odtwarzacz muzyki zrobiony tak, żeby działał jak klasyczne odtwarzacze z kółkiem. To <b>wersja beta</b>: ma jakieś dwa miesiące, jest celowo niedokończona, a Ty jesteś jedną z pierwszych osób spoza projektu, które jej dotykają.',
       intro2:'Pisz wprost. „Nie rozumiem tego” i „to mnie wkurzało” są warte więcej niż „fajne”. Na tym etapie to, że coś jest zepsute, jest normalne. Najważniejsze jest powiedzieć, <em>co dokładnie</em>. Dwa pytania są obowiązkowe, resztę możesz pominąć. Zajmie jakieś trzy minuty.',
       sec1:'Pierwszy kontakt', sec2:'Werdykt', sec3:'Co się zepsuło',
       required:'wymagane',
@@ -566,7 +566,7 @@ window.HPLAY_POSTBOX = '1851de0b-3432-44a0-9c75-81463fb7beb2';
       manualMsg:"Naciśnij przycisk, a otworzy się twoja aplikacja pocztowa z już gotowym tekstem, zaadresowanym na hostlabosupport@gmail.com. Albo skopiuj tekst i wyślij go jak chcesz.",
       copy:'Skopiuj odpowiedzi', copied:'Skopiowane. Teraz wklej to Iwo',
       back:'Wróć do formularza', change:'Zmień coś',
-      footer:'Hplay v41.5 · test alfa · wrzesień 2026 · © 2026 Iwo Dec (HostLabo) · Hplay nie jest powiązane z Apple Inc. ani przez nie wspierane.',
+      footer:'Hplay v41.5 · test beta · wrzesień 2026 · © 2026 Iwo Dec (HostLabo) · Hplay nie jest powiązane z Apple Inc. ani przez nie wspierane.',
       sumTitle:'HPLAY: UWAGI TESTERA', sumFrom:'Od', sumAnon:'(anonimowo)', sumPhone:'Telefon',
       sumFirst:'PIERWSZE DZIESIĘĆ SEKUND', sumWheel:'KÓŁKO', sumFound:'ZNALEZIONE SAMODZIELNIE', sumNothing:'nic',
       sumRatings:'OCENY', sumLook:'wygląd', sumFeel:'obsługa', sumSpeed:'szybkość',
@@ -700,7 +700,7 @@ window.HPLAY_POSTBOX = '1851de0b-3432-44a0-9c75-81463fb7beb2';
   function collect(){
     return {
       submittedAt: new Date().toISOString(),
-      appVersion: 'v44.1.0 Alyx (alpha)',
+      appVersion: 'v44.1.0 Alyx (beta)',
       language: lang,
       first: val('first'), wheel: val('wheel'), found: checked('found'),
       look: val('look'), feel: val('feel'), speed: val('speed'),
@@ -798,7 +798,7 @@ window.HPLAY_POSTBOX = '1851de0b-3432-44a0-9c75-81463fb7beb2';
     // read when it is needed, not cached at startup, so setting it takes effect either way
     var POSTBOX = window.HPLAY_POSTBOX || '';
     if (POSTBOX) {
-      var payload = { access_key: POSTBOX, subject: 'Hplay tester notes (' + (answers.appVersion || 'alpha') + ')',
+      var payload = { access_key: POSTBOX, subject: 'Hplay tester notes (' + (answers.appVersion || 'beta') + ')',
                       from_name: 'Hplay feedback', message: notes };
       var gaveUp = false;
       var bail = setTimeout(function(){ gaveUp = true; done(false); }, 12000);
@@ -840,7 +840,7 @@ window.HPLAY_POSTBOX = '1851de0b-3432-44a0-9c75-81463fb7beb2';
     btn.addEventListener('click', function(){
       var body = document.getElementById('summary').value;
       var subj = (lang === 'pl' ? 'Hplay: uwagi testera' : 'Hplay tester notes')
-               + ' (' + (lastAnswers && lastAnswers.appVersion || 'alpha') + ')';
+               + ' (' + (lastAnswers && lastAnswers.appVersion || 'beta') + ')';
       location.href = 'mailto:hostlabosupport@gmail.com?subject=' + encodeURIComponent(subj)
                     + '&body=' + encodeURIComponent(body);
     });
