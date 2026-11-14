@@ -4,29 +4,35 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Hplay — free offline scroll-wheel music player for Android</title>
-<meta name="description" content="Hplay is a free offline music player for Android that plays the music files already on your phone. A wheel you turn instead of a list you scroll. No account, no cloud, no ads, no tracking. Reads cover art out of your own files. Free to download as an APK.">
+<meta name="description" content="Hplay is a free offline music player for Android that plays the music files already on your phone. A wheel you turn instead of a list you scroll. No account, no cloud, no ads, no tracking. Now in beta: free to download as an APK.">
 <link rel="canonical" href="https://iwohost.github.io/hplaysite/">
-<meta name="theme-color" content="#1b6fd0">
+<meta name="theme-color" content="#0a1c15">
+<meta name="color-scheme" content="dark">
 <meta name="author" content="Iwo Dec (HostLabo)">
 <meta name="copyright" content="© 2026 Iwo Dec. All rights reserved.">
 <meta property="og:site_name" content="Hplay">
 <meta property="og:title" content="Hplay — offline scroll-wheel music player for Android">
-<meta property="og:description" content="A free offline music player for Android, for the music files you already own. A wheel you turn instead of a list you scroll. No account, no cloud, no ads.">
+<meta property="og:description" content="A free offline music player for Android, for the music files you already own. A wheel you turn instead of a list you scroll. No account, no cloud, no ads. Now in beta.">
 <meta property="og:url" content="https://iwohost.github.io/hplaysite/">
-<meta property="og:image" content="https://iwohost.github.io/hplaysite/img/device.jpg">
-<meta property="og:image:alt" content="The Hplay player on a phone, showing the scroll wheel and a song list.">
+<meta property="og:image" content="https://iwohost.github.io/hplaysite/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Your music. On a wheel. The green Hplay player with its cream wheel, a record on its screen.">
 <meta name="twitter:card" content="summary_large_image">
 <meta property="og:type" content="website">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%231b6fd0%22/><circle cx=%2216%22 cy=%2216%22 r=%229%22 fill=%22none%22 stroke=%22white%22 stroke-width=%223%22/></svg>">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@112,500;112,600;112,700;112,800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%2323845a%22/><circle cx=%2216%22 cy=%2216%22 r=%2210%22 fill=%22%23fbf6e8%22/><rect x=%2211.5%22 y=%2211.5%22 width=%229%22 height=%229%22 rx=%223%22 fill=%22%23f4ac3a%22/></svg>">
+<!-- The typefaces are kept in this site (fonts/). Nothing on this page is asked of anybody
+     else until the script at the bottom reads latest.json from the download host. -->
+<link rel="preload" href="fonts/anton.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="site.css">
 
 <!-- What this page is, written out so a machine does not have to guess. Everything in here
      is a plain fact that is also stated in the page itself; there are no ratings and no
      review counts, because nobody has rated it and inventing numbers would be a lie that
-     search engines strip out anyway. -->
+     search engines strip out anyway. The questions are the same words as the ones on the
+     page: change both together. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -39,21 +45,23 @@
       "applicationCategory": "MultimediaApplication",
       "applicationSubCategory": "Music player",
       "operatingSystem": "Android",
-      "softwareVersion": "44.1.0",
+      "softwareVersion": "45.0.1",
       "releaseNotes": "https://iwohost.github.io/hplaysite/changelog.html",
       "url": "https://iwohost.github.io/hplaysite/",
       "installUrl": "https://hplay.hosttost.workers.dev/hplay-latest.apk",
       "downloadUrl": "https://hplay.hosttost.workers.dev/hplay-latest.apk",
       "softwareRequirements": "Android 7.0 or newer",
-      "description": "Hplay is an offline music player for Android that plays the music files already on the device. It is driven by a wheel you turn rather than a list you scroll. It needs no account, plays with no internet connection, reads cover art out of the files themselves, and treats each folder of music as a playlist. It is free, and it is downloaded as an APK from this site rather than from an app store.",
+      "description": "Hplay is an offline music player for Android that plays the music files already on the device. It is driven by a wheel you turn, not a list you scroll. It needs no account, plays with no internet connection, reads cover art out of the files themselves, and is free. It is in beta and is downloaded as an APK from its own site.",
       "featureList": [
-        "Plays music files stored on the device — mp3, flac, m4a, ogg, opus and wav",
-        "Plays with no internet connection — at startup it fetches one tag-reading script and checks for a newer version, the extras catalogue is fetched when you open it, and Your Year, Wrapped opens its page on this site",
+        "Plays music files stored on the device: mp3, flac, m4a, ogg, opus and wav",
+        "Plays with no internet connection. At startup it fetches one tag-reading script and checks for a newer version, the extras catalogue is fetched when you open it, and Your Year, Wrapped opens its page on this site",
         "No account, no sign-in, no cloud, no ads and no tracking",
         "A scroll wheel: turn to move through a list, press the middle to choose",
         "Every folder of music becomes a playlist, named after the folder",
         "Cover art read out of the files' own tags, on the device",
         "Songs with no artwork get one of twenty drawn sleeves, the same one every time",
+        "A vinyl view: each record is pressed in its cover's own colours, with a tonearm that lifts on pause",
+        "A home screen widget with buttons, in four sizes",
         "Lock screen artwork, notification controls and volume-key support",
         "Sleep timer with fade out, and playback speed from half to double, with or without the pitch following",
         "Five screen looks, from light to high-contrast to paper",
@@ -61,21 +69,27 @@
         "Small built-in apps and games, and more from a separate catalogue"
       ],
       "screenshot": [
-        "https://iwohost.github.io/hplaysite/img/np-vinyl.jpg",
-        "https://iwohost.github.io/hplaysite/img/songs.jpg",
-        "https://iwohost.github.io/hplaysite/img/quick.jpg"
+        "https://iwohost.github.io/hplaysite/img/app/scr-np-vinyl.jpg",
+        "https://iwohost.github.io/hplaysite/img/app/scr-songs.jpg",
+        "https://iwohost.github.io/hplaysite/img/app/scr-quick.jpg"
       ],
       "offers": {
         "@type": "Offer",
         "price": "0",
         "priceCurrency": "USD",
-        "availability": "https://schema.org/LimitedAvailability"
+        "availability": "https://schema.org/InStock"
       },
       "isAccessibleForFree": true,
       "inLanguage": "en",
-      "author": { "@id": "https://iwohost.github.io/hplaysite/#iwodec" },
-      "publisher": { "@id": "https://iwohost.github.io/hplaysite/#hostlabo" },
-      "copyrightHolder": { "@id": "https://iwohost.github.io/hplaysite/#iwodec" },
+      "author": {
+        "@id": "https://iwohost.github.io/hplaysite/#iwodec"
+      },
+      "publisher": {
+        "@id": "https://iwohost.github.io/hplaysite/#hostlabo"
+      },
+      "copyrightHolder": {
+        "@id": "https://iwohost.github.io/hplaysite/#iwodec"
+      },
       "copyrightYear": "2026",
       "copyrightNotice": "Copyright 2026 Iwo Dec, trading as HostLabo. All rights reserved.",
       "license": "https://iwohost.github.io/hplaysite/license.html"
@@ -85,13 +99,17 @@
       "@id": "https://iwohost.github.io/hplaysite/#iwodec",
       "name": "Iwo Dec",
       "url": "https://iwohost.github.io/hplaysite/",
-      "worksFor": { "@id": "https://iwohost.github.io/hplaysite/#hostlabo" }
+      "worksFor": {
+        "@id": "https://iwohost.github.io/hplaysite/#hostlabo"
+      }
     },
     {
       "@type": "Organization",
       "@id": "https://iwohost.github.io/hplaysite/#hostlabo",
       "name": "HostLabo",
-      "founder": { "@id": "https://iwohost.github.io/hplaysite/#iwodec" },
+      "founder": {
+        "@id": "https://iwohost.github.io/hplaysite/#iwodec"
+      },
       "url": "https://iwohost.github.io/hplaysite/",
       "email": "hostlabosupport@gmail.com",
       "sameAs": [
@@ -105,8 +123,12 @@
       "url": "https://iwohost.github.io/hplaysite/",
       "name": "Hplay",
       "inLanguage": "en",
-      "publisher": { "@id": "https://iwohost.github.io/hplaysite/#hostlabo" },
-      "about": { "@id": "https://iwohost.github.io/hplaysite/#hplay" }
+      "publisher": {
+        "@id": "https://iwohost.github.io/hplaysite/#hostlabo"
+      },
+      "about": {
+        "@id": "https://iwohost.github.io/hplaysite/#hplay"
+      }
     },
     {
       "@type": "FAQPage",
@@ -115,756 +137,401 @@
         {
           "@type": "Question",
           "name": "What is Hplay?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Hplay is a music player for Android that plays the music files already stored on your phone. Instead of a list you scroll, it is driven by a wheel: you turn the ring with your thumb to move through a list and press the middle to choose. It needs no account, and playing your music needs no connection." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Hplay is a music player for Android that plays the music files already stored on your phone. Instead of a list you scroll, it is driven by a wheel: you turn the ring with your thumb to move through a list and press the middle to choose. It needs no account, and playing your music needs no connection."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the beta safe to install?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "v45 is the first beta. Most of it works: playing music, the library, playlists, the lock screen and the notification are what get used every day. Some of it will not work on your phone, because it has been tried on a few phones and not on hundreds. It only reads your music, it never changes or deletes your files, and it can be uninstalled like any other app. When something goes wrong, the feedback form or an email to hostlabosupport@gmail.com is how it gets fixed."
+          }
         },
         {
           "@type": "Question",
           "name": "Does Hplay use the internet?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Playing your music does, entirely: songs and cover art are read from the device, and nothing about what you play is sent anywhere. Hplay is not a no-network app though. It loads one tag-reading script from a public CDN when it starts, and asks the download site once whether there is a newer version, which you can turn off. Get More fetches a catalogue when you open it and downloads what you install, and Your Year, Wrapped opens its page on this site, with your numbers in the link rather than sent. Those are the only requests it makes, and it never uploads anything." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not to play your music. Your songs are read from the device and so is the cover art, out of the tags inside the files and not from an online lookup, and nothing about what you play is ever sent anywhere. But Hplay is not a no-network app, and it would be wrong to say so. It loads one script when it starts, a tag reader from a public CDN, which fills in tags its own reader missed; without a connection that one request fails and the built-in reader carries on alone. It also asks the download site, once each time it opens, whether there is a newer version; nothing of yours goes with the question, and Settings › About Hplay › Check for Updates turns it off. Get More fetches a catalogue when you open it, downloads whatever you choose to install, and brings any app you installed from it up to date. Your Year, Wrapped opens its page on this site; your numbers travel in the part of the link after the #, which a browser never sends, and the covers in it come straight from the app. Tapping Buy Me a Coffee opens that site in your browser. Those are the only times it reaches out, and it never uploads anything at all."
+          }
         },
         {
           "@type": "Question",
           "name": "Does Hplay need an account?",
-          "acceptedAnswer": { "@type": "Answer", "text": "No. There is no sign-in, because there is nothing to sign in to. There is no account, no subscription, no ads and no tracking of any kind. Your listening statistics are counted on the device and stay there." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. There is no sign-in, because there is nothing to sign in to. There is no account, no subscription, no ads and no tracking of any kind. Your listening statistics are counted on the device and stay there."
+          }
         },
         {
           "@type": "Question",
           "name": "Which audio formats does Hplay play?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Whatever the phone itself can decode, which on Android means mp3, flac, m4a and aac, ogg, opus and wav at the least. Cover art is read from ID3 tags in mp3 files, Vorbis comments in flac, ogg and opus, and the ilst atom in m4a." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Whatever the phone itself can decode, which on Android means mp3, flac, m4a and aac, ogg, opus and wav at the least. Cover art is read from ID3 tags in mp3 files, Vorbis comments in flac, ogg and opus, and the ilst atom in m4a."
+          }
         },
         {
           "@type": "Question",
           "name": "How does Hplay handle playlists?",
-          "acceptedAnswer": { "@type": "Answer", "text": "A folder is a playlist. Point Hplay at a folder of music and every folder inside it becomes a playlist named after that folder, whatever the tags inside the files say. Renaming a folder renames the playlist, and the order of songs within one can be set by hand and is remembered." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A folder is a playlist. Point Hplay at a folder of music and every folder inside it becomes a playlist named after that folder, whatever the tags inside the files say. Renaming a folder renames the playlist, and the order of songs within one can be set by hand and is remembered."
+          }
         },
         {
           "@type": "Question",
           "name": "Who makes Hplay?",
-          "acceptedAnswer": { "@type": "Answer", "text": "One person: Iwo Dec, working as HostLabo. It is written by hand, with no framework and no build step, and it is not open source. Hplay is copyright 2026 Iwo Dec, all rights reserved. Hplay is free to use forever, but it may not be redistributed, sold, or have its source reused without permission." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "One person: Iwo Dec, working as HostLabo. It is written by hand, with no framework and no build step, and it is not open source. Hplay is copyright © 2026 Iwo Dec, all rights reserved. You can read the full licence, which is short."
+          }
         },
         {
           "@type": "Question",
           "name": "Is Hplay free?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Free, with no paid tier, no ads and nothing to buy inside it. The twenty demo tracks on this site are free to download and free to use as well." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Free, with no paid tier, no ads and nothing to buy inside it. The twenty demo tracks on this site are free to download and free to use as well."
+          }
         },
         {
           "@type": "Question",
           "name": "How do I get Hplay?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Download the APK from the Hplay site and open it on your phone. Android asks whether you trust an app from outside the Play Store; say yes and it installs like any other. There is no account, no waiting list and no form." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Download the APK from How to get it and open it on your phone. Android asks whether you trust an app from outside the Play Store; say yes and it installs like any other. There is no account, no waiting list and no form. It is a beta, so things still move between builds; the changelog says what."
+          }
         },
         {
           "@type": "Question",
           "name": "Is Hplay on the Google Play Store?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Not yet. While it is in beta it is distributed by email as an APK you install yourself. That is also why the version numbers move quickly and why things change between builds." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not yet. While it is in beta it is an APK you download from this site and install yourself. That is also why the version numbers move quickly and why things change between builds."
+          }
         },
         {
           "@type": "Question",
           "name": "What does a scroll wheel player mean?",
-          "acceptedAnswer": { "@type": "Answer", "text": "The main control is a ring you turn with your thumb rather than a list you swipe. Turning moves the highlight; spinning faster jumps further; the middle opens what is highlighted; the outer edges are menu, play or pause, and skip. It is the way portable music players worked before touchscreens, rebuilt as an Android app." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The main control is a ring you turn with your thumb, not a list you swipe. Turning moves the highlight; spinning faster jumps further; the middle opens what is highlighted; around the edge are back (the hexagon at the top), play or pause, and skip. It is the way portable music players worked before touchscreens, rebuilt as an Android app."
+          }
         },
         {
           "@type": "Question",
           "name": "Does Hplay show cover art?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Yes, read out of your own files by the app itself. A song whose file has no artwork is given one of twenty sleeves drawn by the app, and it keeps the same one for good." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, read out of your own files by the app itself. A song whose file has no artwork is given one of twenty sleeves drawn by the app, and it keeps the same one for good."
+          }
         }
       ]
     }
   ]
 }
 </script>
-<style>
-  *{ margin:0; padding:0; box-sizing:border-box; }
-
-  :root{
-    --ground:#e9ebf0;
-    --panel:#ffffff;
-    --panel-2:#f3f5f9;
-    --ink:#0f131b;
-    --ink-soft:#333c4a;
-    --muted:#5c6674;
-    --line:#ccd2dc;
-    --line-soft:#dfe3ea;
-    --accent:#1b6fd0;
-    --accent-ink:#0f4fa8;
-    --accent-soft:#dbe8f8;
-    --good:#3d8f18;
-    --warn:#a76a12;
-    --chrome-1:#fdfdfd;
-    --chrome-2:#dadce0;
-    --chrome-3:#c3c7cd;
-    --chrome-line:#9aa0a8;
-    --chrome-ink:#1c1f24;
-    --shadow:0 1px 2px rgba(12,22,40,.06), 0 8px 24px -12px rgba(12,22,40,.28);
-    /* one column width for the whole page — the bar, the hero and every section use it, so
-       nothing can drift out of line with anything else. 960 is what the page was designed at
-       and it stays at 960; the point of the variable is that the bar cannot drift out of
-       line with it, not that the page got wider. */
-    --col:960px;
-    --display:"Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;
-    --body:"IBM Plex Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-    --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
-  }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      --ground:#0a0d13; --panel:#141a24; --panel-2:#101620;
-      --ink:#e6eaf1; --ink-soft:#c3cad6; --muted:#8b95a5;
-      --line:#242e3c; --line-soft:#1b232e;
-      --accent:#64a6f0; --accent-ink:#9cc8f7; --accent-soft:#132437;
-      --good:#6bc24a; --warn:#d9a441;
-      --chrome-1:#2e3138; --chrome-2:#1c1f25; --chrome-3:#15171c;
-      --chrome-line:#05060a; --chrome-ink:#ced4dc;
-      --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 30px -14px rgba(0,0,0,.8);
-    }
-  }
-  :root[data-theme="dark"]{
-    --ground:#0a0d13; --panel:#141a24; --panel-2:#101620;
-    --ink:#e6eaf1; --ink-soft:#c3cad6; --muted:#8b95a5;
-    --line:#242e3c; --line-soft:#1b232e;
-    --accent:#64a6f0; --accent-ink:#9cc8f7; --accent-soft:#132437;
-    --good:#6bc24a; --warn:#d9a441;
-    --chrome-1:#2e3138; --chrome-2:#1c1f25; --chrome-3:#15171c;
-    --chrome-line:#05060a; --chrome-ink:#ced4dc;
-    --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 30px -14px rgba(0,0,0,.8);
-  }
-
-  html{ scroll-behavior:smooth; }
-  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
-  body{
-    background:var(--ground); color:var(--ink);
-    font-family:var(--body); font-size:17px; line-height:1.62;
-    -webkit-font-smoothing:antialiased;
-    padding-bottom:78px;
-  }
-  .wrap{ max-width:var(--col); margin:0 auto; padding-inline:20px; padding-block:0 72px; }
-  p{ max-width:66ch; }
-  /* --accent on the page background is 4.16:1 — fine as a border or a fill, not as text.
-     Links use the darker ink, which clears 4.5 on the background and on a white panel. */
-  a{ color:var(--accent-ink); }
-  h1,h2,h3{ font-family:var(--display); text-wrap:balance; line-height:1.1; }
-  strong{ font-weight:600; color:var(--ink); }
-  .sr{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
-  img{ max-width:100%; }
-
-  /* ---- top bar ---- */
-  /* The bar spans the window, but what is in it lines up with the column below. Left
-     unbounded, the name sat in one far corner of a wide monitor and the menu in the other,
-     with a thousand pixels of nothing between them and the page floating in the middle,
-     apparently unrelated to either. */
-  .top{
-    position:sticky; top:0; z-index:40;
-    background:color-mix(in srgb, var(--ground) 86%, transparent);
-    backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--line-soft);
-  }
-  .top-in{
-    max-width:var(--col); margin:0 auto;
-    display:flex; align-items:center; gap:14px;
-    padding:10px 20px;
-  }
-  .top .mark{ font-family:var(--display); font-weight:800; font-size:17px; letter-spacing:-.01em; }
-  .top nav{ display:flex; gap:16px; margin-left:auto; font-family:var(--mono); font-size:12px;
-    letter-spacing:.06em; text-transform:uppercase; }
-  .top nav a{ color:var(--muted); text-decoration:none; padding:5px 2px; display:inline-block; min-height:24px; }
-  .top nav a:hover{ color:var(--accent); }
-  .tt{
-    background:var(--panel); border:1px solid var(--line); color:var(--muted);
-    border-radius:999px; width:30px; height:30px; cursor:pointer;
-    font-size:14px; line-height:1; flex:0 0 auto;
-  }
-  .tt:hover{ color:var(--accent); border-color:var(--accent); }
-  @media (max-width:640px){ .top nav a.hideable{ display:none; } }
-  /* Below this the bar cannot hold the name, the links, the download button and the theme
-     button on one line, and something gets pushed off the right-hand edge. It wraps to two
-     rows instead, which keeps every link reachable rather than hiding more of them.
-
-     This was 380px, from before the bar carried a download button. With the button in it
-     the row ran out of space far sooner, and at phone width the button was cut in half and
-     the theme toggle had gone over the edge entirely. */
-  @media (max-width:620px){
-    .top-in{ flex-wrap:wrap; gap:6px 10px; padding:8px 16px; }
-    .top nav{ order:3; width:100%; margin-left:0; justify-content:space-between; gap:8px; font-size:11px; }
-    .tt{ margin-left:auto; }
-  }
-
-  /* ---- hero ---- */
-  .hero{
-    display:grid; grid-template-columns:minmax(0,300px) minmax(0,1fr);
-    gap:40px; align-items:center; padding-block:52px 44px;
-  }
-  .hero-shot{
-    position:relative; border-radius:14px; overflow:hidden;
-    background:linear-gradient(170deg,#5aa8ee,#12559f 48%,#07305f);
-    box-shadow:var(--shadow);
-  }
-  .hero-shot img{ display:block; width:100%; height:auto; }
-  .eyebrow{
-    font-family:var(--mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase;
-    color:var(--muted); margin-bottom:14px;
-  }
-  h1{ font-size:clamp(46px,9vw,78px); font-weight:800; letter-spacing:-.02em; margin-bottom:10px; }
-  .dek{ font-size:clamp(18px,2.4vw,21px); color:var(--ink-soft); max-width:36ch; }
-  .stamp{ display:flex; flex-wrap:wrap; gap:8px; margin-top:22px; font-family:var(--mono); font-size:12.5px; }
-  .stamp span{
-    border:1px solid var(--line); border-radius:999px; padding:5px 11px;
-    color:var(--muted); background:var(--panel);
-  }
-  .stamp span.now{ color:#fff; background:var(--accent-ink); border-color:var(--accent-ink); font-weight:500; }
-  :root[data-theme="dark"] .stamp span.now{ color:#06243f; }
-  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .stamp span.now{ color:#06243f; } }
-
-  .cta{ display:flex; flex-wrap:wrap; gap:11px; margin-top:26px; }
-  .btn{
-    display:inline-flex; align-items:center; gap:9px;
-    font-family:var(--body); font-weight:600; font-size:15.5px;
-    padding:11px 19px; border-radius:9px; text-decoration:none;
-    border:1px solid var(--line); background:var(--panel); color:var(--ink);
-    box-shadow:var(--shadow); cursor:pointer;
-  }
-  .btn:hover{ border-color:var(--accent); color:var(--accent); }
-  .btn.primary{
-    background:linear-gradient(180deg,#3572c9 0%,#2a66bd 46%,#1f57a8 52%,#2a63b5 100%);
-    border-color:var(--accent-ink); color:#fff;
-  }
-  .btn.primary:hover{ color:#fff; filter:brightness(1.06); }
-  .btn small{ font-weight:400; opacity:.78; font-size:13px; }
-
-  /* The download is the reason anybody is here, so it is not one of three buttons in a row
-     any more. It is the widest, tallest, loudest thing in the first screenful, it says what
-     it costs and what it needs, and the rest of the page's links are quieter underneath. */
-  .get{ margin-top:26px; }
-  .btn.big{
-    width:100%; justify-content:center; gap:14px;
-    padding:18px 24px; border-radius:13px; font-size:clamp(19px,2.7vw,23px);
-    box-shadow:0 2px 5px rgba(12,22,40,.13), 0 18px 38px -16px rgba(20,80,160,.75);
-  }
-  .btn.big:hover{ filter:brightness(1.07); }
-  .btn.big .dlicon{ width:1.15em; height:1.15em; flex:0 0 auto; }
-  .btn.big .dltxt{ display:flex; flex-direction:column; align-items:flex-start; line-height:1.2; }
-  .btn.big .dltxt b{ font-weight:700; letter-spacing:-.01em; }
-  .btn.big .dltxt small{ font-size:.58em; opacity:.85; font-weight:400; margin-top:2px; }
-  .getunder{
-    display:flex; flex-wrap:wrap; gap:8px 18px; align-items:center;
-    margin-top:13px; font-size:14px; color:var(--muted);
-  }
-  .getunder a{ color:var(--muted); text-decoration:underline; text-underline-offset:3px; }
-  .getunder a:hover{ color:var(--accent); }
-  .getunder .dot{ opacity:.45; }
-
-  /* the closing note signs off, so the last line is set apart from the argument above it */
-  #why .sig{ font-family:var(--mono); font-size:13.5px; color:var(--muted); margin-top:20px; }
-
-  /* and once the hero has scrolled past, it is still one tap away in the bar */
-  .top .topget{
-    display:inline-flex; align-items:center; gap:6px; margin-left:14px;
-    font-family:var(--body); font-weight:600; font-size:12.5px;
-    padding:6px 12px; border-radius:8px; text-decoration:none;
-    background:linear-gradient(180deg,#3572c9 0%,#2a66bd 46%,#1f57a8 52%,#2a63b5 100%);
-    border:1px solid var(--accent-ink); color:#fff; white-space:nowrap;
-  }
-  .top .topget:hover{ filter:brightness(1.08); color:#fff; }
-  .top .topget svg{ width:12px; height:12px; }
-  @media (max-width:520px){
-    .btn.big{ padding:15px 18px; }
-    .getunder{ font-size:13px; gap:6px 14px; }
-    .top .topget{ margin-left:8px; padding:5px 10px; font-size:12px; }
-  }
-
-  /* ---- section header, built like the player's own chrome bar ---- */
-  .chrome{
-    display:flex; align-items:center; gap:10px;
-    margin:56px 0 28px; padding:9px 14px;
-    background:linear-gradient(180deg,var(--chrome-1) 0%,var(--chrome-2) 46%,var(--chrome-3) 52%,var(--chrome-2) 100%);
-    border:1px solid var(--chrome-line); border-radius:7px;
-    color:var(--chrome-ink); box-shadow:var(--shadow);
-  }
-  section[id]{ scroll-margin-top:62px; }
-  .chrome .n{ font-family:var(--mono); font-size:12px; color:var(--muted); min-width:2.4em; }
-  .chrome h2{ flex:1; text-align:center; font-size:17px; font-weight:700; letter-spacing:.01em;
-    margin:0; color:var(--chrome-ink); }
-  .batt{ width:26px; height:13px; border:1.5px solid var(--chrome-line); border-radius:2.5px;
-    position:relative; flex:0 0 auto; background:var(--chrome-3); }
-  .batt::after{ content:""; position:absolute; right:-4px; top:3px; width:2px; height:5px;
-    background:var(--chrome-line); border-radius:0 1px 1px 0; }
-  .batt i{ position:absolute; inset:1.5px; width:86%; border-radius:1px;
-    background:linear-gradient(180deg,#a4ec74,#4fb022 55%,#3d8f18); }
-
-  .lede{ font-size:19px; color:var(--ink-soft); }
-  section > p + p{ margin-top:16px; }
-  h3{ font-size:20px; font-weight:700; margin:30px 0 10px; letter-spacing:-.01em; }
-  code{ font-family:var(--mono); font-size:.88em; background:var(--panel-2);
-    border:1px solid var(--line-soft); border-radius:4px; padding:1px 5px; }
-
-  /* ---- spec sheet ---- */
-  .spec{
-    display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-    gap:1px; background:var(--line-soft);
-    border:1px solid var(--line-soft); border-radius:10px; overflow:hidden; margin-top:26px;
-  }
-  .spec div{ background:var(--panel); padding:16px 18px; }
-  .spec dt{ font-family:var(--mono); font-size:11.5px; letter-spacing:.1em;
-    text-transform:uppercase; color:var(--muted); margin-bottom:6px; }
-  .spec dd{ font-family:var(--display); font-size:26px; font-weight:700;
-    font-variant-numeric:tabular-nums; letter-spacing:-.01em; }
-  .spec dd small{ font-family:var(--body); font-size:14px; font-weight:400; color:var(--muted); }
-
-  /* ---- questions ---- */
-  /* Two columns where there is room, so ten answers are a page you can scan rather than a
-     wall you scroll past. */
-  .faq{ display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:4px; }
-  .qa{
-    background:var(--panel); border:1px solid var(--line-soft); border-radius:10px;
-    padding:18px 20px;
-  }
-  .qa h3{ font-size:17.5px; font-weight:700; margin-bottom:8px; }
-  .qa p{ font-size:15.5px; line-height:1.6; color:var(--ink-soft); max-width:none; }
-
-  /* ---- beta notice ---- */
-  .notice{
-    margin-top:26px; border:1px solid var(--warn); border-radius:11px;
-    padding:20px 22px; background:var(--panel);
-  }
-  .notice h3{ margin:0 0 8px; font-size:17px; color:#8a5607; }
-  :root[data-theme="dark"] .notice h3{ color:var(--warn); }
-  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .notice h3{ color:var(--warn); } }
-  .notice p{ font-size:16px; color:var(--ink-soft); }
-
-  /* ---- steps ---- */
-  .steps{ display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:20px; margin-top:26px; }
-  .step{ background:var(--panel); border:1px solid var(--line-soft); border-radius:11px;
-    padding:20px 21px; box-shadow:var(--shadow); }
-  .step .num{ font-family:var(--mono); font-size:11.5px; letter-spacing:.12em;
-    text-transform:uppercase; color:var(--accent); display:block; margin-bottom:8px; }
-  .step h3{ margin:0 0 7px; font-size:17.5px; }
-  .step p{ font-size:15.5px; color:var(--ink-soft); }
-
-  /* ---- galleries ---- */
-  figure{ margin:0; }
-  .shots{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:26px; margin-top:8px; }
-  .shots img, .strip img, .photos img{ display:block; width:100%; height:auto; border-radius:9px;
-    background:var(--panel-2); }
-  figcaption{ font-size:14.5px; color:var(--muted); margin-top:10px; max-width:46ch; }
-  figcaption b{ color:var(--ink); font-weight:600; }
-  .strip{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:22px; }
-  .strip figcaption{ font-family:var(--mono); font-size:11.5px; letter-spacing:.06em;
-    text-transform:uppercase; margin-top:8px; }
-  .photos{ display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px; margin-top:24px; }
-  .photos img{ aspect-ratio:3/4; object-fit:cover; }
-  .photos img.wide{ aspect-ratio:4/3; grid-column:span 2; }
-
-  /* ---- music ---- */
-  .grab{
-    display:flex; flex-wrap:wrap; align-items:center; gap:16px;
-    margin-top:26px; padding:20px 22px;
-    background:var(--accent-soft); border:1px solid var(--accent); border-radius:12px;
-  }
-  .grab p{ flex:1 1 240px; margin:0; font-size:15.5px; color:var(--ink-soft); }
-  .grab b{ color:var(--accent-ink); }
-
-  .album{ margin-top:34px; }
-  .album-head{ border-bottom:1px solid var(--line); padding-bottom:10px; margin-bottom:6px; }
-  .album-head h3{ margin:0; font-size:19px; }
-  .album-head p{ margin:3px 0 0; font-size:15px; color:var(--ink-soft); }
-  .album-head .meta{ display:block; font-family:var(--mono); font-size:11.5px;
-    letter-spacing:.06em; text-transform:uppercase; color:var(--muted); margin-top:4px; }
-  ol.tracks{ list-style:none; }
-  .track{
-    display:grid; grid-template-columns:48px minmax(0,1fr) auto auto;
-    gap:14px; align-items:center;
-    padding:9px 6px; border-bottom:1px solid var(--line-soft);
-  }
-  .track:last-child{ border-bottom:0; }
-  .track.on{ background:var(--accent-soft); border-radius:8px; border-bottom-color:transparent; }
-  .play{
-    position:relative; width:48px; height:48px; border-radius:6px; overflow:hidden;
-    border:1px solid var(--line); padding:0; cursor:pointer; background:var(--panel-2);
-    flex:0 0 auto;
-  }
-  .play img{ display:block; width:100%; height:100%; object-fit:cover; }
-  .play .glyph{
-    position:absolute; inset:0; display:grid; place-items:center;
-    background:rgba(6,12,24,.44); opacity:0; transition:opacity .14s;
-  }
-  .play:hover .glyph, .track.on .glyph{ opacity:1; }
-  .play .glyph::before{
-    content:""; width:0; height:0; margin-left:3px;
-    border-left:13px solid #fff; border-top:8px solid transparent; border-bottom:8px solid transparent;
-  }
-  .track.on .play .glyph::before{
-    width:13px; height:15px; margin-left:0; border:0;
-    background:linear-gradient(90deg,#fff 0 36%, transparent 36% 64%, #fff 64% 100%);
-  }
-  .tinfo{ min-width:0; line-height:1.34; }
-  .tinfo b{ display:block; font-weight:600; font-size:16px; }
-  .by{ display:block; font-size:14.5px; color:var(--ink-soft); }
-  .spec2{ display:block; font-family:var(--mono); font-size:11px; letter-spacing:.05em;
-    text-transform:uppercase; color:var(--muted); margin-top:2px; }
-  .spec2 .k{ text-transform:none; letter-spacing:.02em; }
-  .dur{ font-family:var(--mono); font-size:13px; color:var(--muted); font-variant-numeric:tabular-nums; }
-  .dl{
-    display:grid; place-items:center; width:32px; height:32px; border-radius:7px;
-    border:1px solid var(--line); color:var(--muted); text-decoration:none; font-size:15px;
-    background:var(--panel);
-  }
-  .dl:hover{ border-color:var(--accent); color:var(--accent); }
-
-  /* ---- sticky preview bar ---- */
-  .bar{
-    position:fixed; left:0; right:0; bottom:0; z-index:50;
-    display:flex; align-items:center; gap:13px;
-    padding:10px 16px calc(10px + env(safe-area-inset-bottom));
-    background:var(--panel); border-top:1px solid var(--line);
-    box-shadow:0 -6px 24px -14px rgba(12,22,40,.5);
-    transform:translateY(110%); transition:transform .22s ease;
-  }
-  .bar.up{ transform:none; }
-  .bar img{ width:40px; height:40px; border-radius:5px; object-fit:cover; flex:0 0 auto;
-    border:1px solid var(--line); }
-  .bar .who{ min-width:0; flex:1; line-height:1.3; }
-  .bar .who b{ display:block; font-size:14.5px; font-weight:600; overflow:hidden;
-    text-overflow:ellipsis; white-space:nowrap; }
-  .bar .who span{ display:block; font-size:12.5px; color:var(--muted); overflow:hidden;
-    text-overflow:ellipsis; white-space:nowrap; }
-  .bar button{ background:none; border:0; color:var(--muted); cursor:pointer; font-size:13px;
-    font-family:var(--mono); padding:6px 8px; }
-  .bar button:hover{ color:var(--accent); }
-  .bar .seek{ flex:0 0 clamp(90px,22vw,220px); height:5px; border-radius:3px;
-    background:var(--line-soft); overflow:hidden; }
-  .bar .seek i{ display:block; height:100%; width:0; background:var(--accent); }
-
-  /* ---- link cards ---- */
-  .links{ display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:18px; margin-top:26px; }
-  .card{
-    display:block; text-decoration:none; color:inherit;
-    background:var(--panel); border:1px solid var(--line-soft); border-radius:11px;
-    padding:20px 21px; box-shadow:var(--shadow);
-  }
-  .card:hover{ border-color:var(--accent); }
-  .card .kind{ font-family:var(--mono); font-size:11px; letter-spacing:.12em;
-    text-transform:uppercase; color:var(--accent); display:block; margin-bottom:7px; }
-  .card h3{ margin:0 0 6px; font-size:17.5px; }
-  .card p{ font-size:15px; color:var(--ink-soft); margin:0; }
-
-  /* ---- where to find me ---- */
-  .social{
-    display:grid; grid-template-columns:repeat(auto-fit,minmax(252px,1fr));
-    gap:14px; margin-top:26px;
-  }
-  .soc{
-    display:flex; align-items:center; gap:15px;
-    padding:16px 18px; border-radius:13px;
-    background:var(--panel); border:1px solid var(--line-soft);
-    box-shadow:var(--shadow); text-decoration:none; color:inherit;
-  }
-  a.soc:hover{ border-color:var(--accent); }
-  a.soc:hover .ico{ background:var(--accent); color:#fff; }
-  .ico{
-    flex:0 0 auto; width:42px; height:42px; border-radius:11px;
-    display:grid; place-items:center;
-    background:var(--accent-soft); color:var(--accent-ink);
-  }
-  .ico svg{ width:21px; height:21px; display:block; }
-  .who{ min-width:0; line-height:1.35; }
-  .who b{ display:block; font-family:var(--display); font-weight:700; font-size:16px; letter-spacing:-.005em; }
-  .who span{ display:block; font-size:14.5px; color:var(--ink-soft); overflow-wrap:anywhere; }
-  a.soc .who span{ color:var(--accent); }
-  .soc.soon{ background:var(--panel-2); border-style:dashed; box-shadow:none; }
-  .soc.soon .ico{ background:var(--line-soft); color:var(--muted); }
-  .soc.soon .who b{ color:var(--ink-soft); }
-  .soc.soon .who span{ color:var(--muted); }
-  .pill{
-    margin-left:auto; flex:0 0 auto; align-self:flex-start;
-    font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase;
-    color:var(--muted); border:1px solid var(--line); border-radius:999px; padding:3px 8px;
-  }
-
-  footer{
-    margin-top:64px; padding-top:22px; border-top:1px solid var(--line);
-    font-family:var(--mono); font-size:12.5px; color:var(--muted);
-    display:flex; flex-wrap:wrap; align-items:center; gap:6px 18px;
-  }
-  /* a link down here is still a link somebody has to hit, so it carries a 24px target
-     of its own rather than inheriting the footer's 15px line box */
-  footer a{
-    color:var(--accent-ink); display:inline-flex; align-items:center;
-    min-height:24px; padding:2px 0;
-  }
-
-  @media (max-width:720px){
-    /* minmax(0,1fr) rather than a plain 1fr, which is minmax(auto,1fr): its floor is the
-       content's min-content width, so one unbreakable row inside it can push the track wider
-       than the screen. Nothing does at the moment — this is the safe spelling, not a fix for
-       anything that was happening. */
-    .hero{ grid-template-columns:minmax(0,1fr); gap:26px; padding-block:34px 30px; }
-    .hero > *{ min-width:0; }
-    .hero-shot{ max-width:280px; }
-  }
-  /* One column means the photo is first and the download is under it, which on a phone put
-     the one thing anybody came for below the fold: you landed on a picture and had to
-     scroll to find the button. The words and the button come first instead, and the photo
-     follows them. */
-  @media (max-width:720px){
-    .hero-shot{ order:2; }
-  }
-  @media (max-width:480px){
-    body{ font-size:16px; line-height:1.58; }
-    .wrap{ padding-inline:16px; padding-block:0 48px; }
-    h1{ font-size:38px; }
-    .dek{ font-size:17px; }
-    .stamp{ font-size:11.5px; gap:6px; }
-    .stamp span{ padding:4px 9px; }
-    .btn{ font-size:14.5px; padding:10px 15px; flex:1 1 auto; justify-content:center; }
-    .lede{ font-size:17px; }
-    h3{ font-size:18px; margin:24px 0 8px; }
-    .chrome{ margin:38px 0 20px; padding:8px 11px; }
-    .chrome h2{ font-size:15px; }
-    .spec{ grid-template-columns:repeat(2,1fr); }
-    .spec div{ padding:13px 14px; }
-    .spec dd{ font-size:22px; }
-    .shots{ gap:22px; }
-    figcaption{ font-size:14px; }
-    .strip{ grid-template-columns:repeat(2,1fr); gap:12px; }
-    .photos{ grid-template-columns:repeat(2,1fr); gap:11px; }
-    .step, .card{ padding:17px 16px; }
-    .grab{ padding:17px 16px; }
-    .track{ grid-template-columns:44px minmax(0,1fr) auto; gap:11px; padding:8px 4px; }
-    .play{ width:44px; height:44px; }
-    .track .dur{ display:none; }
-    .tinfo b{ font-size:15px; }
-    footer{ font-size:11.5px; }
-  }
-  @media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important; } }
-
-  /* ---- reachable by keyboard, readable by everyone ----
-     Contrast here is measured, not guessed: every colour below clears 4.5:1 against the
-     worst stop of whatever gradient sits behind it, in both the light and the dark theme. */
-  .skiplink{
-    position:absolute; left:8px; top:-60px; z-index:100;
-    background:#0f4fa8; color:#fff; font-weight:600;   /* fixed, so it passes in both themes */
-    padding:10px 16px; border-radius:0 0 8px 8px; text-decoration:none;
-  }
-  .skiplink:focus{ top:0; }
-  /* one obvious ring everywhere, rather than whatever each browser happens to draw */
-  :focus-visible{ outline:3px solid var(--accent); outline-offset:2px; border-radius:4px; }
-  .btn:focus-visible, .tt:focus-visible{ outline-offset:3px; }
-  /* the number on a section bar sits over the darkest part of that bar's gradient */
-  .chrome .n{ color:#3d4550; }
-  :root:not([data-theme="light"]) .chrome .n{ color:#a2acbb; }
-  @media (prefers-color-scheme: light){ :root:not([data-theme="dark"]) .chrome .n{ color:#3d4550; } }
-  :root[data-theme="dark"] .chrome .n{ color:#a2acbb; }
-
-  /* Nine of these are crops of the screen, about 3:2. One is the whole device, portrait, and
-     nearly three times as tall as its neighbours — dropped into the same grid it left a hole
-     beside it and pushed the last picture onto a row of its own. It gets the full width
-     instead, laid beside its caption at a height that matches the rest of the page. */
-  .shots figure.tall{
-    grid-column:1 / -1;
-    display:grid; grid-template-columns:auto minmax(0,1fr);
-    gap:24px; align-items:center;
-  }
-  .shots figure.tall img{ width:auto; max-height:420px; justify-self:start; }
-  .shots figure.tall figcaption{ margin-top:0; }
-  @media (max-width:560px){
-    .shots figure.tall{ grid-template-columns:1fr; gap:0; }
-    .shots figure.tall img{ max-height:300px; justify-self:center; }
-    .shots figure.tall figcaption{ margin-top:10px; }
-  }
-</style>
 </head>
 <body>
 
 <a class="skiplink" href="#main">Skip to the content</a>
 
-<header class="top">
- <div class="top-in">
-  <span class="mark">Hplay</span>
-  <nav>
-    <a href="#about">About</a>
-    <a href="#look" class="hideable">Look</a>
-    <a href="#music">Music</a>
-    <a href="#faq">FAQ</a>
-    <a href="#access" class="hideable">Access</a>
-    <a href="#more" class="hideable">More</a>
-    <a href="#contact">Contact</a>
-  </nav>
-  <a class="topget" href="https://hplay.hosttost.workers.dev/hplay-latest.apk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M6.5 11.5 12 17l5.5-5.5"/><path d="M4 20h16"/></svg>Download</a>
-  <button class="tt" id="tt" type="button" aria-pressed="false" aria-label="Dark theme">&#9681;</button>
- </div>
-</header>
+<div class="hero">
+  <div class="halftone" aria-hidden="true"></div>
+  <header class="top">
+    <a class="mark" href="./" aria-label="Hplay, home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.6 20.2 7.3v9.4L12 21.4 3.8 16.7V7.3z"/><path d="M12 2.6v18.8"/></svg>Hplay</a>
+    <span class="sp"></span>
+    <nav aria-label="On this page">
+      <a href="#beta">The beta</a>
+      <a href="#about">About</a>
+      <a href="#look">Look</a>
+      <a href="#music">Music</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="pill" href="https://hplay.hosttost.workers.dev/hplay-latest.apk">Download</a>
+  </header>
 
-<main class="wrap" id="main">
-
-  <div class="hero">
-    <div class="hero-shot">
-      <img src="img/photos/hero.jpg" width="1048" height="1396" alt="Sitting on the ground outdoors with the player in one hand and wired headphones in.">
+  <main id="main">
+  <div class="hero-grid">
+    <div class="hero-in">
+      <span class="sticker"><span id="verNow">v45.0.1 &ldquo;Eli&rdquo;</span> &middot; the first beta</span>
+      <h1 class="head"><span class="brand">Hplay</span>Your music.<br>On a wheel.</h1>
+      <p class="dek">An Android music player with a click wheel, for the songs you already own. No account, no cloud, no ads. Download it and it is yours.</p>
+      <a class="get" href="https://hplay.hosttost.workers.dev/hplay-latest.apk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M6.5 11.5 12 17l5.5-5.5"/><path d="M4 20h16"/></svg>
+        <span><b>Download the beta</b><small id="dlSize">Free &middot; Android 7 and up</small></span></a>
+      <div class="under">
+        <a href="#beta">What beta means</a>
+        <a href="#start">How to install it</a>
+        <a href="changelog.html">What&rsquo;s new</a>
+      </div>
     </div>
-    <div>
-      <div class="eyebrow">A music player by HostLabo &middot; beta</div>
-      <h1>Hplay</h1>
-      <p class="dek">An Android music player with a scroll wheel, for the songs you already own. No account, no cloud, no ads. Download it and it is yours.</p>
-      <div class="stamp">
-        <span class="now" id="verNow">v44.1.0 &ldquo;Alyx&rdquo;</span>
-        <span>beta</span>
-        <span>Android 7+</span>
-        <span>plays offline</span>
-        <span>free</span>
-      </div>
-      <div class="get">
-        <a class="btn primary big" href="https://hplay.hosttost.workers.dev/hplay-latest.apk">
-          <svg class="dlicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M6.5 11.5 12 17l5.5-5.5"/><path d="M4 20h16"/></svg>
-          <span class="dltxt">
-            <b>Download Hplay</b>
-            <small id="dlSize">Free &middot; Android 7 and up</small>
-          </span>
-        </a>
-        <div class="getunder">
-          <span>No account, no store, no waiting list.</span>
-          <a href="changelog.html">What&rsquo;s new</a>
-          <span class="dot">&middot;</span>
-          <a href="#start">How to install it</a>
-          <span class="dot">&middot;</span>
-          <a href="#music">Demo music</a>
-        </div>
-      </div>
+    <div class="collage" aria-hidden="true">
+      <div class="tcard c3"><img class="ph" src="img/app/phone-body-red.jpg" width="780" height="1688" loading="lazy" alt=""></div>
+      <div class="tcard c1"><div class="ghost" style="background-image:url(img/app/phone-np-vinyl.jpg)"></div><img class="ph" src="img/app/phone-np-vinyl.jpg" width="780" height="1688" alt=""><span class="tape" style="left:32%;top:-10px;transform:rotate(-5deg)"></span></div>
+      <div class="tcard c2"><img class="scr" src="img/app/scr-menu.jpg" width="706" height="484" alt=""><span class="tape" style="left:-14px;top:4px;width:64px;transform:rotate(-38deg)"></span></div>
+      <span class="note hn1">vinyl that<br>spins</span>
+      <svg class="scrib hs1" viewBox="0 0 80 60"><path d="M4 30 Q30 52 72 20" stroke-width="4"/><path d="M54 16 L73 19 L68 38" stroke-width="4"/></svg>
+      <span class="note white hn2">a real wheel</span>
+      <svg class="scrib hs2" viewBox="0 0 56 30"><path d="M2 18 Q26 26 50 10" stroke-width="3.5"/><path d="M36 6 L51 9 L46 24" stroke-width="3.5"/></svg>
     </div>
   </div>
+  <p class="sr">Pictured: the Hplay player in green with a cream wheel and an amber middle button, a record playing on its screen, and the main menu beside it.</p>
+  <div class="vig" aria-hidden="true"></div>
+</div>
 
-  <section id="about">
-    <div class="chrome"><span class="n">01</span><h2>What Hplay is</h2><span class="batt"><i></i></span></div>
-    <p class="lede">Most music apps want an account, a subscription and a connection. Hplay wants a folder.</p>
-    <p>You point it at music that is already on your device and it plays it, with a wheel you spin instead of a list you scroll. Cover art, albums, artists, playlists, search, a sleep timer, a vinyl view that spins while the song runs, and five different screen looks. Nothing is uploaded anywhere. There is no sign-in, because there is nothing to sign in to.</p>
-    <p>Nothing about your listening is sent anywhere: no account, no analytics, no telemetry, and your music never leaves the device. It is not a no-network app, though &mdash; when it starts it fetches a tag-reading script and checks for a newer version, it fetches a catalogue when you open Get More, and Your Year, Wrapped opens its page here. <a href="#faq">The questions below</a> say exactly what and when.</p>
-    <p>It behaves like a music app should on a phone. It holds the lock screen with the cover art on it, puts controls in the notification shade, takes the volume keys, pauses when you pull your headphones out, and keeps playing with the screen off.</p>
+<nav class="contents" aria-label="On this page, for small screens">
+  <a href="#beta">The beta</a><a href="#about">About</a><a href="#start">Get it</a><a href="#look">Look</a><a href="#music">Music</a><a href="#faq">FAQ</a><a href="#contact">Contact</a>
+</nav>
 
-    <dl class="spec">
-      <div><dt>Version</dt><dd id="verSpec">44.1.0 <small>Alyx</small></dd></div>
-      <div><dt>Runs on</dt><dd>Android 7+</dd></div>
-      <div><dt>Screen looks</dt><dd>5 <small>light to paper</small></dd></div>
-      <div><dt>Demo tracks</dt><dd>20 <small>51 minutes</small></dd></div>
-      <div><dt>Accounts</dt><dd>0</dd></div>
-      <div><dt>Price</dt><dd>Free</dd></div>
-    </dl>
+  <!-- The news. Said plainly, for somebody deciding whether to install it: what works, what
+       may not, and what to do when it does not. -->
+  <section class="band green" id="beta">
+    <div class="wrap">
+      <div class="split">
+        <div>
+          <div class="sec"><span class="sticker ">The news</span><h2 class="head">Hplay is in beta</h2></div>
+          <p class="lede">v45 &ldquo;Eli&rdquo; is the first beta. After forty-four rounds of alpha, Hplay is ready for people who were not there while it was built.</p>
+          <div class="prose">
+            <p>Beta means it is good enough to use every day and not yet finished. Here is what that comes to if you are deciding whether to install it.</p>
+          </div>
+        </div>
+        <div class="news" aria-hidden="true">
+          <span class="tape"></span>
+          <div class="mast">The Daily Wheel</div>
+          <div class="dl"><span>VOL. 45</span><span>NOV 2026</span><span>FREE, ALWAYS</span></div>
+          <div class="hed">Hplay leaves alpha</div>
+          <div class="sub">&ldquo;Most of it works,&rdquo; says maker. First beta out now.</div>
+        </div>
+      </div>
+      <div class="trio">
+        <div class="panel">
+          <span class="kicker">Most of it works</span>
+          <h3>What you can count on</h3>
+          <p>Playing your music, screen on or off. The library, folders as playlists, search, the lock screen and the notification, the sleep timer, colours and screen looks. These are the parts that get used every day.</p>
+        </div>
+        <div class="panel">
+          <span class="kicker">Some of it will not</span>
+          <h3>What may go wrong</h3>
+          <p>It has been tried on a few phones, not hundreds, so something may misbehave on yours. The newest parts have had the least time on real phones: the home screen widget, the redrawn vinyl and the apps from Get More. Things can still move or be renamed between versions.</p>
+          <p>So keep your own copy of your music, and do not treat the player as the only place your playlists live.</p>
+        </div>
+        <div class="panel">
+          <span class="kicker">Then tell me</span>
+          <h3>How to report a problem</h3>
+          <p>Use <a href="feedback.html">the feedback form</a>, in English or Polish, or email <a href="mailto:hostlabosupport@gmail.com">hostlabosupport@gmail.com</a>. Say which phone, what you did and what happened. A person reads it and replies. That is what the beta is for.</p>
+        </div>
+      </div>
 
-    <div class="notice">
-      <h3>This is a beta</h3>
-      <p>Hplay is still being built and tested. Things move, break and get renamed between versions. Keep your own copy of your music, do not treat the player as the only place your playlists live, and tell me when something goes wrong. That is what the beta is for.</p>
+      <h3 style="margin-top:52px">New in v45</h3>
+      <div class="duo">
+        <figure class="tcard">
+          <span class="tape" aria-hidden="true"></span>
+          <img src="img/app/widget.jpg" width="824" height="1200" loading="lazy" decoding="async" alt="A drawing of a phone&rsquo;s home screen with the Hplay widget in four sizes: a square with the record sliding out of its sleeve, a single cell, a wide one with skip buttons, and a thin bar.">
+          <figcaption>The widget in its four sizes. This one is a drawing made from its design, since a home screen cannot be photographed from here.</figcaption>
+        </figure>
+        <ul class="newlist">
+          <li><b>A look of its own.</b> Hplay green, a cream wheel and an amber middle button, with the HostLabo hexagon as the back button. New installs start in these colours, on the Dark screen.</li>
+          <li><b>Vinyl, redrawn from the groove up.</b> Each record is pressed in its cover&rsquo;s own colours, with a proper tonearm that lifts when you pause.</li>
+          <li><b>A home screen widget with buttons,</b> in four sizes, from a single cell to the full width.</li>
+          <li><b>Store apps that fit in.</b> Apps from Get More follow your screen look and text size, and bring themselves up to date.</li>
+          <li><b>Click sounds and fonts.</b> Choose how the wheel clicks and which typeface the player is set in.</li>
+        </ul>
+      </div>
+      <p style="margin-top:26px"><a href="changelog.html">Every change, in the changelog</a></p>
     </div>
   </section>
 
-  <section id="start">
-    <div class="chrome"><span class="n">02</span><h2>How to get it</h2><span class="batt"><i></i></span></div>
-    <p class="lede">Download it here. No account, no waiting list, no form.</p>
-    <p>It is not on the Play Store, so you install it yourself. Android will warn you about an app from outside the store &mdash; that warning is about where the file came from, not about what is in it, and you will get it for any app that is not on Play. It is still a beta, so tell me when something goes wrong; that is what the feedback page is for.</p>
-    <div class="get">
-      <a class="btn primary big" href="https://hplay.hosttost.workers.dev/hplay-latest.apk">
-        <svg class="dlicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M6.5 11.5 12 17l5.5-5.5"/><path d="M4 20h16"/></svg>
-        <span class="dltxt">
-          <b>Download Hplay</b>
-          <small id="dlSize2">Free &middot; Android 7 and up</small>
-        </span>
-      </a>
-      <div class="getunder">
+  <section class="band wash-a" id="about">
+    <div class="wrap">
+      <div class="sec"><span class="sticker cream">01</span><h2 class="head">What Hplay is</h2></div>
+      <p class="lede">Most music apps want an account, a subscription and a connection. Hplay wants a folder.</p>
+      <div class="prose">
+        <p>You point it at music that is already on your device and it plays it, with a wheel you spin instead of a list you scroll. Cover art, artists, playlists, search, a sleep timer, a vinyl view that spins while the song runs, and five different screen looks. Nothing is uploaded anywhere. There is no sign-in, because there is nothing to sign in to.</p>
+        <p>It behaves like a music app should on a phone. It holds the lock screen with the cover art on it, puts controls in the notification shade and on the home screen, takes the volume keys, pauses when you pull your headphones out, and keeps playing with the screen off.</p>
+      </div>
+
+      <dl class="spec">
+        <div><dt>Version</dt><dd id="verSpec">45.0.1 <small>Eli</small></dd></div>
+        <div><dt>Runs on</dt><dd>Android 7+</dd></div>
+        <div><dt>Screen looks</dt><dd>5 <small>light to paper</small></dd></div>
+        <div><dt>Demo tracks</dt><dd>20 <small>51 minutes</small></dd></div>
+        <div><dt>Accounts</dt><dd>0</dd></div>
+        <div><dt>Price</dt><dd>Free</dd></div>
+      </dl>
+
+      <h3 id="online" style="margin-top:48px">What goes online, and when</h3>
+      <div class="prose">
+        <p>Nothing about your listening is sent anywhere: no account, no analytics, no telemetry, and your music never leaves the device. It is not a no-network app, though. This is everything it fetches, and <a href="#faq">the questions below</a> say more.</p>
+      </div>
+      <table class="online">
+        <thead><tr><th scope="col">When</th><th scope="col">What it fetches</th></tr></thead>
+        <tbody>
+          <tr><td>Every time it starts</td><td>A tag-reading script from a public CDN (cdnjs). Without a connection the built-in reader carries on alone.</td></tr>
+          <tr><td>Once each time it opens</td><td>A check with the download site for a newer version. Nothing of yours goes with it, and it can be turned off in Settings &rsaquo; About Hplay.</td></tr>
+          <tr><td>When you open Get More</td><td>The catalogue, whatever you choose to install, and a newer copy of any app you installed from it.</td></tr>
+          <tr><td>When you open Your Year, Wrapped</td><td>Its page on this site. Your numbers ride in the part of the link after the #, which is never sent.</td></tr>
+          <tr><td>If you tap Buy Me a Coffee</td><td>That site, opened in your phone&rsquo;s browser.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="band wash-b" id="start">
+    <div class="wrap">
+      <div class="sec"><span class="sticker ">02</span><h2 class="head">How to get it</h2></div>
+      <p class="lede">Download it here. No account, no waiting list, no form.</p>
+      <div class="prose">
+        <p>It is not on the Play Store, so you install it yourself. Android will warn you about an app from outside the store. That warning is about where the file came from, not about what is in it, and you will get it for any app that is not on Play. It is a beta, so tell me when something goes wrong; that is what the feedback page is for.</p>
+      </div>
+      <a class="get" href="https://hplay.hosttost.workers.dev/hplay-latest.apk" style="margin-top:8px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M6.5 11.5 12 17l5.5-5.5"/><path d="M4 20h16"/></svg>
+        <span><b>Download Hplay</b><small id="dlSize2">Free &middot; Android 7 and up</small></span></a>
+      <div class="under">
         <a href="changelog.html">What changed</a>
-        <span class="dot">&middot;</span>
         <a href="feedback.html">Tell me how it went</a>
       </div>
-    </div>
-    <p class="fine" style="color:var(--muted); font-size:.86rem; margin-top:14px">
-      Every build stays up under its own number, so you can go back to one that worked for you.
-      Each has a <code>.sha256</code> next to it if you want to check the file arrived whole.
-      <a href="https://hplay.hosttost.workers.dev/latest.json">latest.json</a> says what the newest one is.
-    </p>
+      <p class="fine" style="margin-top:18px; max-width:42em">
+        Every build stays up under its own number, so you can go back to one that worked for you.
+        Each has a <code>.sha256</code> next to it if you want to check the file arrived whole.
+        <a href="https://hplay.hosttost.workers.dev/latest.json">latest.json</a> says what the newest one is.
+      </p>
 
-    <h3>Once you have it</h3>
-    <div class="steps">
-      <div class="step">
-        <span class="num">Step one</span>
-        <h3>Install it</h3>
-        <p>Open the file you downloaded. Your phone will ask whether you trust an app from outside the store &mdash; say yes, and it installs like any other. Nothing to register, no account to make.</p>
+      <h3 style="margin:48px 0 26px">Once you have it</h3>
+      <div class="steps">
+        <div class="step">
+          <span class="tape" aria-hidden="true"></span>
+          <span class="num">Step one</span>
+          <h3>Install it</h3>
+          <p>Open the file you downloaded. Your phone will ask whether you trust an app from outside the store. Say yes, and it installs like any other. Nothing to register, no account to make.</p>
+        </div>
+        <div class="step">
+          <span class="tape" aria-hidden="true"></span>
+          <span class="num">Step two</span>
+          <h3>Add music</h3>
+          <p>Point Hplay at a folder of your own files, or add songs one at a time. It reads the tags and the cover art out of the files themselves.</p>
+        </div>
+        <div class="step">
+          <span class="tape" aria-hidden="true"></span>
+          <span class="num">Step three</span>
+          <h3>Spin the wheel</h3>
+          <p>Drag around the wheel to move, press the middle to choose, press the hexagon at the top to go back. A short guided tour runs the first time so you are not guessing.</p>
+        </div>
       </div>
-      <div class="step">
-        <span class="num">Step two</span>
-        <h3>Add music</h3>
-        <p>Point Hplay at a folder of your own files, or add songs one at a time. It reads the tags and the cover art out of the files themselves.</p>
-      </div>
-      <div class="step">
-        <span class="num">Step three</span>
-        <h3>Spin the wheel</h3>
-        <p>Drag around the wheel to move, press the middle to choose, press MENU to go back. A short guided tour runs the first time so you are not guessing.</p>
-      </div>
+      <p style="margin-top:30px">No music handy? Take <a href="#music">the twenty demo tracks below</a>, drop them in a folder, and point the player at that.</p>
     </div>
-    <p style="margin-top:22px">No music handy? Take the twenty demo tracks below, drop them in a folder, and point the player at that.</p>
   </section>
 
-  <section id="look">
-    <div class="chrome"><span class="n">03</span><h2>What it looks like</h2><span class="batt"><i></i></span></div>
-    <div class="shots">
+  <section class="band wash-c" id="look">
+    <div class="halftone bl" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="sec"><span class="sticker green">03</span><h2 class="head">What it looks like</h2></div>
+      <p class="fine" style="margin:-10px 0 34px">Every picture here is the real v45 app, playing the demo tracks from this page.</p>
+      <div class="shots">
       <figure>
-        <img src="img/menu-vinyl.jpg" loading="lazy" alt="The Hplay main menu, with a record spinning in the pane on the right.">
-        <figcaption><b>The main menu.</b> The pane on the right shows whatever is playing, as a record when vinyl view is on.</figcaption>
+        <span class="tape" aria-hidden="true"></span>
+        <img class="scr" src="img/app/scr-menu.jpg" width="706" height="484" loading="lazy" decoding="async" alt="The Hplay main menu, with a green record turning in the pane on the right.">
+        <figcaption><b>The main menu.</b> The pane on the right shows whatever is playing, as a small record when vinyl is on.</figcaption>
       </figure>
       <figure>
-        <img src="img/np-vinyl.jpg" loading="lazy" alt="The now playing screen showing a spinning record with a tonearm resting on it.">
-        <figcaption><b>Now playing, vinyl view.</b> The record turns at the speed of the song and the arm tracks across it.</figcaption>
+        <span class="tape" aria-hidden="true"></span>
+        <img class="scr" src="img/app/scr-np-vinyl.jpg" width="706" height="484" loading="lazy" decoding="async" alt="The now playing screen: a translucent green record with a tonearm resting on it.">
+        <figcaption><b>Now playing, vinyl.</b> Each record is pressed in its cover&rsquo;s own colours. Pause lifts the arm; a new song rolls the old record off.</figcaption>
       </figure>
       <figure>
-        <img src="img/np-cover.jpg" loading="lazy" alt="The now playing screen showing full album art with a progress bar underneath.">
-        <figcaption><b>Now playing, cover view.</b> Art pulled out of the file, with time, progress and rating underneath.</figcaption>
+        <span class="tape" aria-hidden="true"></span>
+        <img class="scr" src="img/app/scr-np-cover.jpg" width="706" height="484" loading="lazy" decoding="async" alt="The now playing screen showing the album cover, with the time and a progress line underneath.">
+        <figcaption><b>Now playing, cover.</b> Art pulled out of the file, with the time and how far through underneath.</figcaption>
       </figure>
       <figure>
-        <img src="img/songs.jpg" loading="lazy" alt="A scrolling list of songs with small cover thumbnails.">
-        <figcaption><b>Lists.</b> Songs, albums, artists, genres, playlists and search, all reachable from the wheel.</figcaption>
+        <span class="tape" aria-hidden="true"></span>
+        <img class="scr" src="img/app/scr-songs.jpg" width="706" height="484" loading="lazy" decoding="async" alt="A list of songs in white on a dark screen, one of them highlighted in blue.">
+        <figcaption><b>Lists.</b> Songs, artists, playlists and search, all reachable from the wheel.</figcaption>
       </figure>
       <figure>
-        <img src="img/albums.jpg" loading="lazy" alt="The album list with cover thumbnails down the left side.">
-        <figcaption><b>Albums.</b> Grouped from the tags in your files, no library service involved.</figcaption>
+        <span class="tape" aria-hidden="true"></span>
+        <img class="scr" src="img/app/scr-albums.jpg" width="706" height="484" loading="lazy" decoding="async" alt="The list of playlists, one for each folder of music.">
+        <figcaption><b>Playlists.</b> One for every folder of music, named after the folder. No library service involved.</figcaption>
       </figure>
       <figure>
-        <img src="img/quick.jpg" loading="lazy" alt="A quick settings panel with sliders and toggles over a dimmed screen.">
+        <span class="tape" aria-hidden="true"></span>
+        <img class="scr" src="img/app/scr-quick.jpg" width="706" height="484" loading="lazy" decoding="async" alt="Quick Settings: a sleep timer reading off, with duration, dimming and speed below it.">
         <figcaption><b>Quick settings.</b> Hold the play button for the sleep timer, speed and screen dimming.</figcaption>
       </figure>
       <figure>
-        <img src="img/stats.jpg" loading="lazy" alt="A statistics screen listing plays, listening time and top artists.">
-        <figcaption><b>Your own numbers.</b> Counted on your device and kept there, a rolling year at a time.</figcaption>
+        <span class="tape" aria-hidden="true"></span>
+        <img class="scr" src="img/app/scr-stats.jpg" width="706" height="484" loading="lazy" decoding="async" alt="A statistics screen listing tracks played, listening time and the favourite song and artist.">
+        <figcaption><b>Your own numbers.</b> Counted on your device and kept there.</figcaption>
       </figure>
       <figure>
-        <img src="img/changelog.jpg" loading="lazy" alt="The in-app changelog listing recent versions and what changed.">
+        <span class="tape" aria-hidden="true"></span>
+        <img class="scr" src="img/app/scr-changelog.jpg" width="706" height="484" loading="lazy" decoding="async" alt="The changelog inside the app, a list of versions with their codenames, v45 Eli at the top.">
         <figcaption><b>The changelog.</b> Every version is listed inside the player, so you can see what moved.</figcaption>
       </figure>
       <figure>
-        <img src="img/boot.jpg" loading="lazy" alt="The Hplay boot screen showing the HostLabo name.">
-        <figcaption><b>Boot.</b> It starts the way the old players did, with a name and a wait.</figcaption>
+        <span class="tape" aria-hidden="true"></span>
+        <img class="scr" src="img/app/scr-apps.jpg" width="706" height="484" loading="lazy" decoding="async" alt="The Apps menu: Clock, Stopwatch, Music Quiz, Notes and Get More.">
+        <figcaption><b>Little apps.</b> A clock, a stopwatch, a music quiz and notes, and more from Get More that now follow the player&rsquo;s look.</figcaption>
       </figure>
-      <figure class="tall">
-        <img src="img/tour.jpg" loading="lazy" alt="The guided tour overlay dimming the screen with a white arrow pointing at the wheel.">
-        <figcaption><b>The guided tour.</b> White arrows walk you through the wheel on first boot. Skippable, and repeatable from Settings.</figcaption>
-      </figure>
-    </div>
+      </div>
 
-    <h3>Five ways to light the screen</h3>
-    <div class="strip">
-      <figure><img src="img/mode-light.jpg" loading="lazy" alt="Hplay in the light screen mode."><figcaption>Light</figcaption></figure>
-      <figure><img src="img/mode-dark.jpg" loading="lazy" alt="Hplay in the dark screen mode."><figcaption>Dark</figcaption></figure>
-      <figure><img src="img/mode-hicon.jpg" loading="lazy" alt="Hplay in the high contrast screen mode."><figcaption>High contrast</figcaption></figure>
-      <figure><img src="img/mode-night.jpg" loading="lazy" alt="Hplay in the warm night screen mode."><figcaption>Night</figcaption></figure>
-      <figure><img src="img/mode-paper.jpg" loading="lazy" alt="Hplay in the paper screen mode."><figcaption>Paper</figcaption></figure>
+      <div class="duo" style="margin-top:64px">
+        <figure class="tcard" style="max-width:250px">
+          <span class="tape" aria-hidden="true"></span>
+          <img class="ph" style="border-radius:9% / 4.2%" src="img/app/phone-tour.jpg" width="780" height="1688" loading="lazy" decoding="async" alt="The guided tour: the player dimmed, a white outline round its screen and a card that reads Welcome to Hplay.">
+        </figure>
+        <div>
+          <h3 style="margin-top:0">The guided tour</h3>
+          <div class="prose"><p>The first time it opens, a short tour walks you round the screen and the wheel, one step at a time. You can skip it, and run it again from Settings.</p></div>
+          <span class="note" style="margin-top:8px">nobody is left guessing</span>
+        </div>
+      </div>
+
+      <h3 style="margin-top:64px">Five ways to light the screen</h3>
+      <div class="strip">
+        <figure><img class="scr" src="img/app/scr-mode-light.jpg" width="706" height="484" loading="lazy" decoding="async" alt="Hplay in the light screen mode."><figcaption>Light</figcaption></figure>
+        <figure><img class="scr" src="img/app/scr-mode-dark.jpg" width="706" height="484" loading="lazy" decoding="async" alt="Hplay in the dark screen mode."><figcaption>Dark</figcaption></figure>
+        <figure><img class="scr" src="img/app/scr-mode-hicon.jpg" width="706" height="484" loading="lazy" decoding="async" alt="Hplay in the high contrast screen mode."><figcaption>High contrast</figcaption></figure>
+        <figure><img class="scr" src="img/app/scr-mode-night.jpg" width="706" height="484" loading="lazy" decoding="async" alt="Hplay in the warm night screen mode."><figcaption>Night</figcaption></figure>
+        <figure><img class="scr" src="img/app/scr-mode-paper.jpg" width="706" height="484" loading="lazy" decoding="async" alt="Hplay in the paper screen mode."><figcaption>Paper</figcaption></figure>
+      </div>
+
+      <h3 style="margin-top:64px">Every colour</h3>
+      <div class="prose"><p>Hplay green is where it starts. Blue, silver, black, red, green and purple are in Settings, the Gold and Coffee skins are free for everyone, and the icon on your home screen can follow whichever you pick.</p></div>
+      <div class="fan" role="img" aria-label="Six Hplay players fanned out like a hand of cards, in black, blue, green, purple, red and silver, each with a record on its screen.">
+        <img src="img/app/phone-body-black.jpg" width="780" height="1688" loading="lazy" decoding="async" alt="">
+        <img src="img/app/phone-body-blue.jpg" width="780" height="1688" loading="lazy" decoding="async" alt="">
+        <img src="img/app/phone-body-green.jpg" width="780" height="1688" loading="lazy" decoding="async" alt="">
+        <img src="img/app/phone-body-purple.jpg" width="780" height="1688" loading="lazy" decoding="async" alt="">
+        <img src="img/app/phone-body-red.jpg" width="780" height="1688" loading="lazy" decoding="async" alt="">
+        <img src="img/app/phone-body-silver.jpg" width="780" height="1688" loading="lazy" decoding="async" alt="">
+      </div>
     </div>
   </section>
 
-  <section id="music">
-    <div class="chrome"><span class="n">04</span><h2>Demo music, free to keep</h2><span class="batt"><i></i></span></div>
-    <p class="lede">Twenty tracks, six made-up compilations, 51 minutes. Built to give the player something real to chew on.</p>
-    <p>Testing a music player with three songs tells you nothing. So these were written and synthesised from scratch for Hplay: proper tags, embedded cover art, varied lengths, loud ones and quiet ones. They are not recordings of any real band, and no real artist is involved. The artist names, the track names and the sleeves are all invented. Yours to download, keep and play anywhere.</p>
+  <section class="band plum" id="music">
+    <div class="wrap">
+      <div class="sec"><span class="sticker ">04</span><h2 class="head">Demo music, free to keep</h2></div>
+      <p class="lede">Twenty tracks, six made-up compilations, 51 minutes. Built to give the player something real to chew on.</p>
+      <div class="prose">
+        <p>Testing a music player with three songs tells you nothing. So these were written and synthesised from scratch for Hplay: proper tags, embedded cover art, varied lengths, loud ones and quiet ones. They are not recordings of any real band, and no real artist is involved. The artist names, the track names and the sleeves are all invented. Yours to download, keep and play anywhere.</p>
+      </div>
 
-    <div class="grab">
-      <p><b>Want the lot?</b> One zip, 20 tracks, tagged and ready to drop into a folder.</p>
-      <a class="btn primary" href="music/HostLabo-Tapes.zip" download>Download all <small>61 MB</small></a>
-    </div>
+      <div class="grab">
+        <p><b>Want the lot?</b> One zip, 20 tracks, tagged and ready to drop into a folder.</p>
+        <a class="btn" href="music/HostLabo-Tapes.zip" download>Download all <small>61 MB</small></a>
+      </div>
 
-    <figure style="margin-top:28px">
-      <img src="img/covers-sheet.jpg" loading="lazy" alt="A grid of all twenty album covers, each an abstract pattern in a different palette." style="border-radius:9px; display:block; width:100%; max-width:560px">
-      <figcaption>Every sleeve was drawn by the same generator that made the music. Abstract on purpose, so nothing looks borrowed.</figcaption>
-    </figure>
+      <figure class="sheet">
+        <span class="tape" aria-hidden="true"></span>
+        <img src="img/covers-sheet.jpg" width="1100" height="880" loading="lazy" decoding="async" alt="A grid of all twenty album covers, each an abstract pattern in a different palette.">
+        <figcaption>Every sleeve was drawn by the same generator that made the music. Abstract on purpose, so nothing looks borrowed.</figcaption>
+      </figure>
 
+      <div class="albums">
       <div class="album">
         <div class="album-head">
           <h3>Night Bus, Vol. 1</h3>
@@ -1113,38 +780,48 @@
           </li>
         </ol>
       </div>
+      </div>
 
-    <p style="margin-top:28px; font-size:15px; color:var(--muted); max-width:60ch">
-      Released under the name HostLabo Tapes. Use them for whatever you like, including testing your own things. A credit is welcome but not required.
-    </p>
-  </section>
-
-  <section id="photos">
-    <div class="chrome"><span class="n">05</span><h2>Out in the world</h2><span class="batt"><i></i></span></div>
-    <p>Photographs taken while carrying the thing around.</p>
-    <div class="photos">
-      <img src="img/photos/street.jpg" loading="lazy" alt="Sitting against a wall in an underpass with wired headphones in, the player showing its red screen.">
-      <img src="img/photos/hands.jpg" loading="lazy" alt="The player up close in one hand, cover art at the top and the wheel underneath.">
-      <img src="img/photos/stairs.jpg" loading="lazy" alt="Sitting on a step, chin on one hand, the player held in the other.">
-      <img src="img/photos/sit.jpg" loading="lazy" alt="Leaning back against a wall with the player held out at arm's length.">
-      <img src="img/photos/three.jpg" loading="lazy" alt="The player held sideways in landscape, the wheel filling half the screen.">
+      <p class="fine" style="margin-top:28px; max-width:42em">
+        Released under the name HostLabo Tapes. Use them for whatever you like, including testing your own things. A credit is welcome but not required.
+      </p>
     </div>
   </section>
 
-  <!-- Plain answers to the questions people actually type. Written out on the page rather
-       than hidden behind anything, because an answer nobody can read is not an answer — and
-       the same words are handed to machines in the structured data at the top of the file. -->
-  <section id="faq">
-    <div class="chrome"><span class="n">06</span><h2>Questions</h2><span class="batt"><i></i></span></div>
+  <section class="band wash-a" id="photos">
+    <div class="wrap">
+      <div class="sec"><span class="sticker pink">05</span><h2 class="head">Out in the world</h2></div>
+      <p>Photographs taken while carrying the thing around, back when its body was blue and red.</p>
+      <div class="photos">
+        <figure><span class="tape" aria-hidden="true"></span><img src="img/photos/hero.jpg" width="1048" height="1396" loading="lazy" decoding="async" alt="Sitting on the ground outdoors with the player in one hand and wired headphones in."></figure>
+        <figure><span class="tape" aria-hidden="true"></span><img src="img/photos/street.jpg" loading="lazy" decoding="async" alt="Sitting against a wall in an underpass with wired headphones in, the player showing its red screen."></figure>
+        <figure><span class="tape" aria-hidden="true"></span><img src="img/photos/hands.jpg" loading="lazy" decoding="async" alt="The player up close in one hand, cover art at the top and the wheel underneath."></figure>
+        <figure><span class="tape" aria-hidden="true"></span><img src="img/photos/stairs.jpg" loading="lazy" decoding="async" alt="Sitting on a step, chin on one hand, the player held in the other."></figure>
+        <figure><span class="tape" aria-hidden="true"></span><img src="img/photos/sit.jpg" loading="lazy" decoding="async" alt="Leaning back against a wall with the player held out at arm&rsquo;s length."></figure>
+        <figure><span class="tape" aria-hidden="true"></span><img src="img/photos/three.jpg" loading="lazy" decoding="async" alt="The player held sideways in landscape, the wheel filling half the screen."></figure>
+      </div>
+    </div>
+  </section>
 
-    <div class="faq">
+  <!-- Plain answers to the questions people actually type. Written out on the page, not
+       hidden behind anything, because an answer nobody can read is not an answer. The same
+       words are handed to machines in the structured data at the top of the file. -->
+  <section class="band paper" id="faq">
+    <div class="wrap">
+      <div class="sec"><span class="sticker ">06</span><h2 class="head">Questions</h2></div>
+      <div class="faq">
       <div class="qa">
         <h3>What is Hplay?</h3>
         <p>Hplay is a music player for Android that plays the music files already stored on your phone. Instead of a list you scroll, it is driven by a wheel: you turn the ring with your thumb to move through a list and press the middle to choose. It needs no account, and playing your music needs no connection.</p>
       </div>
       <div class="qa">
+        <h3>Is the beta safe to install?</h3>
+        <p>v45 is the first beta. Most of it works: playing music, the library, playlists, the lock screen and the notification are what get used every day. Some of it will not work on your phone, because it has been tried on a few phones and not on hundreds. It only reads your music, it never changes or deletes your files, and it can be uninstalled like any other app. When something goes wrong, <a href="feedback.html">the feedback form</a> or an email to <a href="mailto:hostlabosupport@gmail.com">hostlabosupport@gmail.com</a> is how it gets fixed.</p>
+      </div>
+      <div class="qa">
         <h3>Does Hplay use the internet?</h3>
-        <p>Playing your music does, entirely. Your songs are read from the device and so is the cover art, out of the tags inside the files rather than an online lookup, and nothing about what you play is ever sent anywhere.</p><p>But Hplay is not a no-network app, and it would be wrong to say so. It loads one script when it starts &mdash; a tag reader, from a public CDN &mdash; which fills in tags its own reader missed; without a connection that one request fails and the built-in reader carries on alone. It also asks the download site, once each time it opens, whether there is a newer version &mdash; nothing of yours goes with the question, and Settings &rsaquo; About Hplay &rsaquo; Check for Updates turns it off. Get More fetches a catalogue when you open it, and downloads whatever you choose to install. Your Year, Wrapped opens its page on this site; your numbers travel in the part of the link after the #, which a browser never sends, and the covers in it come straight from the app. Those are the only times it reaches out, and it never uploads anything at all.</p>
+        <p>Not to play your music. Your songs are read from the device and so is the cover art, out of the tags inside the files and not from an online lookup, and nothing about what you play is ever sent anywhere.</p>
+        <p>But Hplay is not a no-network app, and it would be wrong to say so. It loads one script when it starts, a tag reader from a public CDN, which fills in tags its own reader missed; without a connection that one request fails and the built-in reader carries on alone. It also asks the download site, once each time it opens, whether there is a newer version; nothing of yours goes with the question, and Settings &rsaquo; About Hplay &rsaquo; Check for Updates turns it off. Get More fetches a catalogue when you open it, downloads whatever you choose to install, and brings any app you installed from it up to date. Your Year, Wrapped opens its page on this site; your numbers travel in the part of the link after the #, which a browser never sends, and the covers in it come straight from the app. Tapping Buy Me a Coffee opens that site in your browser. Those are the only times it reaches out, and it never uploads anything at all.</p>
       </div>
       <div class="qa">
         <h3>Does Hplay need an account?</h3>
@@ -1168,196 +845,181 @@
       </div>
       <div class="qa">
         <h3>How do I get Hplay?</h3>
-        <p>Download the APK from <a href="#start">How to get it</a> and open it on your phone. Android asks whether you trust an app from outside the Play Store; say yes and it installs like any other. There is no account, no waiting list and no form. It is still a beta, so things move between builds &mdash; <a href="changelog.html">the changelog</a> says what.</p>
+        <p>Download the APK from <a href="#start">How to get it</a> and open it on your phone. Android asks whether you trust an app from outside the Play Store; say yes and it installs like any other. There is no account, no waiting list and no form. It is a beta, so things still move between builds; <a href="changelog.html">the changelog</a> says what.</p>
       </div>
       <div class="qa">
         <h3>Is Hplay on the Google Play Store?</h3>
-        <p>Not yet. While it is in beta it is an APK you download and install yourself. That is also why the version numbers move quickly and why things change between builds.</p>
+        <p>Not yet. While it is in beta it is an APK you download from this site and install yourself. That is also why the version numbers move quickly and why things change between builds.</p>
       </div>
       <div class="qa">
         <h3>What does a scroll wheel player mean?</h3>
-        <p>The main control is a ring you turn with your thumb rather than a list you swipe. Turning moves the highlight; spinning faster jumps further; the middle opens what is highlighted; the outer edges are menu, play or pause, and skip. It is the way portable music players worked before touchscreens, rebuilt as an Android app.</p>
+        <p>The main control is a ring you turn with your thumb, not a list you swipe. Turning moves the highlight; spinning faster jumps further; the middle opens what is highlighted; around the edge are back (the hexagon at the top), play or pause, and skip. It is the way portable music players worked before touchscreens, rebuilt as an Android app.</p>
       </div>
       <div class="qa">
         <h3>Does Hplay show cover art?</h3>
         <p>Yes, read out of your own files by the app itself. A song whose file has no artwork is given one of twenty sleeves drawn by the app, and it keeps the same one for good.</p>
+      </div>
       </div>
     </div>
   </section>
 
   <!-- An honest statement of where this page stands, and a way to tell me when it does not
        work for you. Written as what was actually measured, not as a claim of compliance. -->
-  <section id="access">
-    <div class="chrome"><span class="n">07</span><h2>Accessibility</h2><span class="batt"><i></i></span></div>
+  <section class="band plain" id="access">
+    <div class="wrap narrow">
+      <div class="sec"><span class="sticker cream">07</span><h2 class="head">Accessibility</h2></div>
+      <p class="lede">This page aims to meet WCAG 2.2 level AA. Here is honestly where it stands.</p>
+      <div class="prose">
+        <h3>What has been checked</h3>
+        <p>Every piece of text on this site was measured against what is actually behind it, and all of it clears the contrast the standard asks for: 4.5:1 for ordinary text and 3:1 for large headlines, measured against the worst pixel behind each line and not an average. The colour washes, dots and grain stay behind pictures and at the edges, away from anything you are meant to read. Everything you can operate has a name a screen reader can read out, a visible focus ring, and a target at least 24 by 24 pixels. Each page has one main heading, headings in order, a skip link, and proper landmarks. The pages work at 320 pixels wide, which is what 400% zoom comes to, without scrolling sideways. Nothing is conveyed by colour alone. Nothing on the page moves by itself, and the few things that move when you touch them stay still if your device asks for reduced motion. The marker notes and the newspaper cutting are decoration, hidden from screen readers, and only repeat what the page says in ordinary words.</p>
 
-    <p class="lede">This page aims to meet WCAG 2.2 level AA. Here is honestly where it stands.</p>
+        <h3>What has not</h3>
+        <p>None of the above was tested with a real screen reader by somebody who uses one every day, and that is the test that counts. The photographs have written descriptions, but a description is somebody&rsquo;s opinion of a picture and mine may not be the useful one. The demo tracks are music with no words, so there are no captions or transcripts; if that is wrong, tell me. The site has one look, a dark one, and does not offer a light one. This is a one-person beta, so it is checked by a script and not audited by anyone qualified.</p>
 
-    <h3>What has been checked</h3>
-    <p>Every piece of text on this site was measured against what is actually behind it, in the light theme and the dark one, and all of it clears the 4.5:1 contrast the standard asks for — including text over gradients, measured against the worst part of the gradient rather than an average. Everything you can operate has a name a screen reader can read out, a visible focus ring, and a target at least 24 by 24 pixels. Each page has one main heading, headings in order, a skip link, and proper landmarks. The page works at 320 pixels wide, which is what 400% zoom comes to, without anything being cut off or scrolling sideways. It survives a reader's own stylesheet forcing wider line, letter and word spacing. Nothing is conveyed by colour alone, animation respects a reduced-motion setting, and the light and dark themes both follow your system setting unless you change it here.</p>
+        <h3>The app itself</h3>
+        <p>Hplay the Android app is a separate thing from this page and has not been through the same check. It has a text size setting, a high-contrast screen mode, a reduced-motion setting and a haptics switch, but it is driven by a scroll wheel, which is a demanding thing to operate. If it does not work for you I would genuinely like to know, because that is fixable and worth fixing.</p>
 
-    <h3>What has not</h3>
-    <p>None of the above was tested with a real screen reader by somebody who uses one every day, and that is the test that counts. The photographs have written descriptions, but a description is somebody's opinion of a picture and mine may not be the useful one. The demo tracks are music with no words, so there are no captions or transcripts; if that is wrong, tell me. This is a one-person beta, so it is checked by a script on every change rather than audited by anyone qualified.</p>
-
-    <h3>The app itself</h3>
-    <p>Hplay the Android app is a separate thing from this page and has not been through the same check. It has a text size setting, a high-contrast screen mode, a reduced-motion setting and a haptics switch, but it is driven by a scroll wheel, which is a demanding thing to operate. If it does not work for you I would genuinely like to know, because that is fixable and worth fixing.</p>
-
-    <h3>Tell me when something does not work</h3>
-    <p>Email <a href="mailto:hostlabosupport@gmail.com">hostlabosupport@gmail.com</a> with what you were trying to do and what got in the way. You will get a reply from a person. If something here stops you using the page, say so and it goes to the front of the queue.</p>
-    <p style="font-size:15px; color:var(--muted)">Last checked 20 September 2026, against WCAG 2.2 AA, using automated measurement of the rendered pages.</p>
+        <h3>Tell me when something does not work</h3>
+        <p>Email <a href="mailto:hostlabosupport@gmail.com">hostlabosupport@gmail.com</a> with what you were trying to do and what got in the way. You will get a reply from a person. If something here stops you using the page, say so and it goes to the front of the queue.</p>
+        <p class="fine">Last checked 14 November 2026, against WCAG 2.2 AA, using automated measurement of the rendered pages.</p>
+      </div>
+    </div>
   </section>
 
-  <section id="more">
-    <div class="chrome"><span class="n">08</span><h2>More to read</h2><span class="batt"><i></i></span></div>
-    <div class="links">
-      <a class="card" href="review.html">
-        <span class="kind">Long read</span>
-        <h3>Hplay at Sixty Days</h3>
-        <p>How the player got built, what broke along the way, and what the first tester said about it.</p>
-      </a>
-      <a class="card" href="changelog.html">
-        <span class="kind">Every release</span>
-        <h3>Changelog</h3>
-        <p>All 72 releases, newest first, with a few lines on what each numbered run was for.</p>
-      </a>
-      <a class="card" href="feedback.html">
-        <span class="kind">Form</span>
-        <h3>Beta feedback</h3>
-        <p>Tried it? Tell me what worked and what did not. In English or Polish.</p>
-      </a>
-      <a class="card" href="#music">
-        <span class="kind">Downloads</span>
-        <h3>HostLabo Tapes</h3>
-        <p>All twenty demo tracks, tagged and sleeved, in one zip or one at a time.</p>
-      </a>
-      <a class="card" href="license.html">
-        <span class="kind">Terms</span>
-        <h3>Licence</h3>
-        <p>Free to use forever, and not open source. What you may and may not do, in plain words.</p>
-      </a>
-      <a class="card" href="https://iwohost.github.io/HostLab/">
-        <span class="kind">Elsewhere</span>
-        <h3>HostLab</h3>
-        <p>The other site: a pile of small browser tools and experiments, all built the same way.</p>
-      </a>
+  <section class="band wash-b" id="more">
+    <div class="wrap">
+      <div class="sec"><span class="sticker ">08</span><h2 class="head">More to read</h2></div>
+      <div class="links">
+        <a class="lcard" href="review.html">
+          <span class="kicker">Long read</span>
+          <h3>Hplay at Sixty Days</h3>
+          <p>How the player got built, what broke along the way, and what the first tester said about it.</p>
+        </a>
+        <a class="lcard" href="changelog.html">
+          <span class="kicker">Every release</span>
+          <h3>Changelog</h3>
+          <p>Every release, newest first, with a few lines on what each numbered run was for.</p>
+        </a>
+        <a class="lcard" href="feedback.html">
+          <span class="kicker">Form</span>
+          <h3>Beta feedback</h3>
+          <p>Tried it? Tell me what worked and what did not. In English or Polish.</p>
+        </a>
+        <a class="lcard" href="#music">
+          <span class="kicker">Downloads</span>
+          <h3>HostLabo Tapes</h3>
+          <p>All twenty demo tracks, tagged and sleeved, in one zip or one at a time.</p>
+        </a>
+        <a class="lcard" href="license.html">
+          <span class="kicker">Terms</span>
+          <h3>Licence</h3>
+          <p>Free to use forever, and not open source. What you may and may not do, in plain words.</p>
+        </a>
+        <a class="lcard" href="https://iwohost.github.io/HostLab/">
+          <span class="kicker">Elsewhere</span>
+          <h3>HostLab</h3>
+          <p>The other site: a pile of small browser tools and experiments, all built the same way.</p>
+        </a>
+      </div>
     </div>
   </section>
 
   <!-- Supporters.
        Adding a name here is instant, which is the point: the list inside the app only moves
        when a new build goes out, and that can be weeks. Copy a <li> and type the name. -->
-  <section id="supporters">
-    <div class="chrome"><span class="n">09</span><h2>Supporters</h2><span class="batt"><i></i></span></div>
-    <p>People who bought a coffee. They get their name here, their name in the app under About Hplay &rsaquo; Credits, and a rank on the Discord when there is one. Nothing else, because nothing else is held back: the Gold and Coffee skins are free for everyone.</p>
-    <ul class="sup" id="sup">
-      <!-- <li>Name</li> -->
-    </ul>
-    <p class="supnone" id="supnone">Nobody yet. <a href="https://buymeacoffee.com/iwohost">You could be first.</a></p>
+  <section class="band plain" id="supporters">
+    <div class="wrap">
+      <div class="sec"><span class="sticker green">09</span><h2 class="head">Supporters</h2></div>
+      <div class="prose"><p>People who bought a coffee. They get their name here, their name in the app under About Hplay &rsaquo; Credits, and a rank on the Discord when there is one. Nothing else, because nothing else is held back: the Gold and Coffee skins are free for everyone.</p></div>
+      <ul class="sup" id="sup">
+        <!-- <li>Name</li> -->
+      </ul>
+      <p class="supnone" id="supnone">Nobody yet. <a href="https://buymeacoffee.com/iwohost">You could be first.</a></p>
+    </div>
   </section>
 
-  <section id="contact">
-    <div class="chrome"><span class="n">10</span><h2>Get in touch</h2><span class="batt"><i></i></span></div>
-    <p>Bug reports, ideas and complaints are all welcome. The fastest way is email.</p>
-    <div class="social">
-      <a class="soc" href="mailto:hostlabosupport@gmail.com">
-        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="2.5" y="4.8" width="19" height="14.4" rx="3"/><path d="m3.4 7 8.6 6 8.6-6"/></svg></span>
-        <span class="who"><b>Email</b><span>hostlabosupport@gmail.com</span></span>
-      </a>
-      <a class="soc" href="https://instagram.com/hostlabo">
-        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5.2"/><circle cx="12" cy="12" r="4.1"/><circle cx="17.3" cy="6.7" r="1.15" fill="currentColor" stroke="none"/></svg></span>
-        <span class="who"><b>Instagram</b><span>@hostlabo</span></span>
-      </a>
-      <a class="soc" href="https://iwohost.github.io/HostLab/">
-        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9.2"/><path d="M2.9 12h18.2M12 2.8c2.4 2.5 3.6 5.6 3.6 9.2s-1.2 6.7-3.6 9.2c-2.4-2.5-3.6-5.6-3.6-9.2S9.6 5.3 12 2.8z"/></svg></span>
-        <span class="who"><b>HostLab</b><span>The other site</span></span>
-      </a>
-      <div class="soc soon">
-        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 8h12v6.5a4.5 4.5 0 0 1-4.5 4.5H9a4.5 4.5 0 0 1-4.5-4.5z"/><path d="M16.5 9.5h1.6a2.4 2.4 0 0 1 0 4.8h-1.6"/><path d="M7.6 2.9v2.2M11 2.9v2.2M14.4 2.9v2.2"/></svg></span>
-        <span class="who"><b>Buy me a coffee</b><span>Not up yet</span></span>
-        <span class="pill">soon</span>
-      </div>
-      <div class="soc soon">
-        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13.4 3v11.6a3.2 3.2 0 1 1-2.9-3.19"/><path d="M13.4 3.2c.45 2.75 2.1 4.4 4.9 4.72"/></svg></span>
-        <span class="who"><b>TikTok</b><span>Not up yet</span></span>
-        <span class="pill">soon</span>
-      </div>
-      <div class="soc soon">
-        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2.4" y="5.2" width="19.2" height="13.6" rx="4.2"/><path d="M10.3 9.3v5.4L15.1 12z" fill="currentColor" stroke="none"/></svg></span>
-        <span class="who"><b>YouTube</b><span>Not up yet</span></span>
-        <span class="pill">soon</span>
-      </div>
-      <div class="soc soon">
-        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M20.5 18.6 21 7.4a2 2 0 0 0-1.3-1.95A15.6 15.6 0 0 0 15.2 4.5l-.5 1.3a13.4 13.4 0 0 0-5.4 0l-.5-1.3a15.6 15.6 0 0 0-4.5.95A2 2 0 0 0 3 7.4l.5 11.2 3.4 1.4 1.1-1.8a11.6 11.6 0 0 0 8 0l1.1 1.8z"/><circle cx="9.1" cy="12.6" r="1.35" fill="currentColor" stroke="none"/><circle cx="14.9" cy="12.6" r="1.35" fill="currentColor" stroke="none"/></svg></span>
-        <span class="who"><b>Discord</b><span>A server, one day</span></span>
-        <span class="pill">soon</span>
+  <section class="band wash-c" id="contact">
+    <div class="wrap">
+      <div class="sec"><span class="sticker pink">10</span><h2 class="head">Get in touch</h2></div>
+      <p>Bug reports, ideas and complaints are all welcome. The fastest way is email.</p>
+      <div class="social">
+        <a class="soc" href="mailto:hostlabosupport@gmail.com">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.8" width="19" height="14.4" rx="3"/><path d="m3.4 7 8.6 6 8.6-6"/></svg></span>
+          <span class="who"><b>Email</b><span>hostlabosupport@gmail.com</span></span>
+        </a>
+        <a class="soc" href="https://instagram.com/hostlabo">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5.2"/><circle cx="12" cy="12" r="4.1"/><circle cx="17.3" cy="6.7" r="1.15" fill="currentColor" stroke="none"/></svg></span>
+          <span class="who"><b>Instagram</b><span>@hostlabo</span></span>
+        </a>
+        <a class="soc" href="https://iwohost.github.io/HostLab/">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9.2"/><path d="M2.9 12h18.2M12 2.8c2.4 2.5 3.6 5.6 3.6 9.2s-1.2 6.7-3.6 9.2c-2.4-2.5-3.6-5.6-3.6-9.2S9.6 5.3 12 2.8z"/></svg></span>
+          <span class="who"><b>HostLab</b><span>The other site</span></span>
+        </a>
+        <a class="soc" href="feedback.html">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12.5h5"/></svg></span>
+          <span class="who"><b>Beta feedback</b><span>The form, EN or PL</span></span>
+        </a>
+        <div class="soc soon">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 8h12v6.5a4.5 4.5 0 0 1-4.5 4.5H9a4.5 4.5 0 0 1-4.5-4.5z"/><path d="M16.5 9.5h1.6a2.4 2.4 0 0 1 0 4.8h-1.6"/><path d="M7.6 2.9v2.2M11 2.9v2.2M14.4 2.9v2.2"/></svg></span>
+          <span class="who"><b>Buy me a coffee</b><span>Not up yet</span></span>
+          <span class="tag">soon</span>
+        </div>
+        <div class="soc soon">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.4 3v11.6a3.2 3.2 0 1 1-2.9-3.19"/><path d="M13.4 3.2c.45 2.75 2.1 4.4 4.9 4.72"/></svg></span>
+          <span class="who"><b>TikTok</b><span>Not up yet</span></span>
+          <span class="tag">soon</span>
+        </div>
+        <div class="soc soon">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2.4" y="5.2" width="19.2" height="13.6" rx="4.2"/><path d="M10.3 9.3v5.4L15.1 12z" fill="currentColor" stroke="none"/></svg></span>
+          <span class="who"><b>YouTube</b><span>Not up yet</span></span>
+          <span class="tag">soon</span>
+        </div>
+        <div class="soc soon">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 18.6 21 7.4a2 2 0 0 0-1.3-1.95A15.6 15.6 0 0 0 15.2 4.5l-.5 1.3a13.4 13.4 0 0 0-5.4 0l-.5-1.3a15.6 15.6 0 0 0-4.5.95A2 2 0 0 0 3 7.4l.5 11.2 3.4 1.4 1.1-1.8a11.6 11.6 0 0 0 8 0l1.1 1.8z"/><circle cx="9.1" cy="12.6" r="1.35" fill="currentColor" stroke="none"/><circle cx="14.9" cy="12.6" r="1.35" fill="currentColor" stroke="none"/></svg></span>
+          <span class="who"><b>Discord</b><span>A server, one day</span></span>
+          <span class="tag">soon</span>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Last, on purpose. The rest of the page is what Hplay does; this is why it exists, and
        it reads better after somebody already knows what they are being told the reason for. -->
-  <section id="why">
-    <div class="chrome"><span class="n">11</span><h2>Why it exists</h2><span class="batt"><i></i></span></div>
-    <p class="lede">I made Hplay because everything now is too much.</p>
-    <p>Every app wants an account, a subscription, a feed and your attention. A music player should want a folder. So Hplay opens on one screen, with one wheel, and nothing to set up before it plays something.</p>
-    <p>Simple was the point. Thin was not. Underneath it there are stations built out of what you actually replay, six ways to watch the sound, a theme system that colours the icon on your home screen, and an accessibility screen with real controls in it rather than a toggle and an apology. Nothing is in your way. Nothing is missing either.</p>
-    <p class="sig">&mdash; Iwo</p>
+  <section class="band green" id="why">
+    <div class="wrap narrow">
+      <div class="sec"><span class="sticker cream">11</span><h2 class="head">Why it exists</h2></div>
+      <p class="lede">I made Hplay because everything now is too much.</p>
+      <div class="prose">
+        <p>Every app wants an account, a subscription, a feed and your attention. A music player should want a folder. So Hplay opens on one screen, with one wheel, and nothing to set up before it plays something.</p>
+        <p>Simple was the point. Thin was not. Underneath it there are stations built out of what you actually replay, six ways to watch the sound, a theme system that colours the icon on your home screen, and an accessibility screen with real controls in it, not a toggle and an apology. Nothing is in your way. Nothing is missing either.</p>
+      </div>
+      <p class="sig">&mdash; Iwo</p>
+    </div>
   </section>
+  </main>
 
-  <style>
-    #supporters .sup{
-      list-style:none; margin:16px 0 0; padding:0;
-      display:flex; flex-wrap:wrap; gap:8px 10px;
-    }
-    #supporters .sup li{
-      font-family:var(--mono); font-size:13px; color:var(--ink-soft);
-      background:var(--panel); border:1px solid var(--line); border-radius:999px;
-      padding:6px 14px; min-height:28px; display:inline-flex; align-items:center;
-    }
-    #supporters .sup:empty + .supnone{ display:block; }
-    #supporters .sup:not(:empty) + .supnone{ display:none; }
-    #supporters .supnone{ color:var(--muted); font-size:15px; margin-top:14px; }
-  </style>
-
-  <footer role="contentinfo">
-    <span>Hplay v41.5 &ldquo;Spy&rdquo;</span>
-    <span>Beta</span>
-    <span>Built by Iwo Dec &middot; HostLabo</span>
-    <span>&copy; 2026 Iwo Dec. All rights reserved</span>
-    <span><a href="license.html">Licence</a></span>
-    <span>Demo music: HostLabo Tapes</span>
-    <span>No trackers on this page</span>
-    <span>Hplay is not affiliated with, or endorsed by, Apple Inc.</span>
+  <footer class="foot" role="contentinfo">
+    <div class="in">
+      <span>Hplay &middot; beta</span>
+      <span>Built by Iwo Dec &middot; HostLabo</span>
+      <span>&copy; 2026 Iwo Dec. All rights reserved</span>
+      <span><a href="license.html">Licence</a></span>
+      <span><a href="changelog.html">Changelog</a></span>
+      <span>Demo music: HostLabo Tapes</span>
+      <span>No trackers on this page</span>
+      <span>Hplay is not affiliated with, or endorsed by, Apple Inc.</span>
+    </div>
   </footer>
 
-</main>
-
 <div class="bar" id="bar" role="status" aria-live="polite">
-  <img id="barArt" src="img/cover-00.jpg" alt="">
+  <img id="barArt" src="img/cover-00.jpg" alt="" width="44" height="44" loading="lazy">
   <div class="who"><b id="barTitle">Nothing playing</b><span id="barBy"></span></div>
-  <div class="seek"><i id="barFill"></i></div>
   <button type="button" id="barStop">stop</button>
+  <div class="seek"><i id="barFill"></i></div>
 </div>
 
 <script>
 (function(){
-  /* ---- theme ---- */
-  var root = document.documentElement, tt = document.getElementById('tt');
-  try{ var saved = localStorage.getItem('hplaysite-theme'); if(saved) root.dataset.theme = saved; }catch(e){}
-  function current(){
-    if(root.dataset.theme) return root.dataset.theme;
-    return matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  }
-  // a toggle has to say which way it is set, or it reads as a button that does nothing
-  function markTheme(){ tt.setAttribute('aria-pressed', String(current() === 'dark')); }
-  markTheme();
-  try{ matchMedia('(prefers-color-scheme: dark)').addEventListener('change', markTheme); }catch(e){}
-  tt.addEventListener('click', function(){
-    var next = current() === 'dark' ? 'light' : 'dark';
-    root.dataset.theme = next;
-    markTheme();
-    try{ localStorage.setItem('hplaysite-theme', next); }catch(e){}
-  });
-
   /* ---- track previews ---- */
   var audio = new Audio();
   audio.preload = 'none';
@@ -1368,7 +1030,7 @@
       barFill = document.getElementById('barFill'),
       playing = null;
 
-  // the pressed state belongs on the button, so it is announced rather than just coloured in
+  // the pressed state belongs on the button, so it is announced and not just coloured in
   function markButtons(){
     document.querySelectorAll('.track .play').forEach(function(btn){
       btn.setAttribute('aria-pressed', String(btn.closest('.track') === playing));
@@ -1449,8 +1111,8 @@
         var size = kb(j.size);
         if (size) {
           var when = j.released ? ' \u00b7 ' + j.released : '';
-          set('dlSize', size + when);
-          set('dlSize2', size + when);
+          set('dlSize', 'Free \u00b7 ' + size + when);
+          set('dlSize2', 'Free \u00b7 ' + size + when);
         }
         /* Point the buttons at the build latest.json actually names. hplay-latest.apk is
            the same bytes, but a versioned link is the one worth sending to somebody: it

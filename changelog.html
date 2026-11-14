@@ -5,138 +5,160 @@
 <link rel="canonical" href="https://iwohost.github.io/hplaysite/changelog.html">
 <meta name="robots" content="index, follow, max-snippet:-1">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="color-scheme" content="light dark">
+<meta name="color-scheme" content="dark">
 <meta name="description" content="Every Hplay release, newest first, with what each numbered run was for.">
-<meta name="theme-color" content="#1b6fd0">
+<meta name="theme-color" content="#0a1c15">
 <meta name="author" content="Iwo Dec (HostLabo)">
 <meta name="copyright" content="© 2026 Iwo Dec. All rights reserved.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%231b6fd0%22/><circle cx=%2216%22 cy=%2216%22 r=%229%22 fill=%22none%22 stroke=%22white%22 stroke-width=%223%22/></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%2323845a%22/><circle cx=%2216%22 cy=%2216%22 r=%2210%22 fill=%22%23fbf6e8%22/><rect x=%2211.5%22 y=%2211.5%22 width=%229%22 height=%229%22 rx=%223%22 fill=%22%23f4ac3a%22/></svg>">
 <title>Hplay Changelog</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@112,500;112,600;112,700;112,800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="preload" href="fonts/anton.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="site.css">
 <style>
-  *{ box-sizing:border-box; }
-  html{ -webkit-text-size-adjust:100%; }
-  body{ margin:0; }
-  [hidden]{ display:none !important; }
-
-  :root{
-    --ground:#e9ebf0; --panel:#ffffff; --panel-2:#f3f5f9;
-    --ink:#0f131b; --ink-soft:#333c4a; --muted:#5c6674;
-    --line:#ccd2dc; --line-soft:#dfe3ea;
-    --accent:#1b6fd0; --accent-ink:#0f4fa8; --accent-soft:#dbe8f8;
-    --shadow:0 1px 2px rgba(12,22,40,.06), 0 8px 24px -12px rgba(12,22,40,.28);
-    --display:"Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;
-    --body:"IBM Plex Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-    --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
-  }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      --ground:#0a0d13; --panel:#141a24; --panel-2:#101620;
-      --ink:#e6eaf1; --ink-soft:#c3cad6; --muted:#8b95a5;
-      --line:#242e3c; --line-soft:#1b232e;
-      --accent:#64a6f0; --accent-ink:#9cc8f7; --accent-soft:#132437;
-      --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 30px -14px rgba(0,0,0,.8);
-    }
-  }
-  :root[data-theme="dark"]{
-    --ground:#0a0d13; --panel:#141a24; --panel-2:#101620;
-    --ink:#e6eaf1; --ink-soft:#c3cad6; --muted:#8b95a5;
-    --line:#242e3c; --line-soft:#1b232e;
-    --accent:#64a6f0; --accent-ink:#9cc8f7; --accent-soft:#132437;
-    --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 30px -14px rgba(0,0,0,.8);
-  }
-
-  body{ background:var(--ground); color:var(--ink); font-family:var(--body);
-        font-size:16px; line-height:1.62; }
-  main{ max-width:52rem; margin:0 auto; padding:34px 20px 80px; }
-  @media (max-width:520px){ main{ padding:18px 16px 60px; } }
-
-  .skiplink{ position:absolute; left:-999px; }
-  .skiplink:focus{ left:8px; top:8px; background:var(--panel); padding:8px 12px;
-                   border-radius:8px; z-index:9; }
-  .backhome{ max-width:52rem; margin:0 auto; padding:14px 20px 0; }
-  .backhome a{ color:var(--muted); text-decoration:none; font-size:.9rem; }
-  .backhome a:hover{ color:var(--accent); }
-
-  h1{ font-family:var(--display); font-size:clamp(1.9rem,5vw,2.7rem); margin:0 0 .3rem;
-      letter-spacing:-.02em; text-wrap:balance; }
-  .lede{ color:var(--ink-soft); font-size:1.08rem; margin:0 0 .6rem; max-width:44rem; }
-  .stamp{ font-family:var(--mono); font-size:.76rem; color:var(--muted);
-          margin:0 0 30px; }
-
-  .run{ background:var(--panel); border:1px solid var(--line); border-radius:14px;
-        box-shadow:var(--shadow); padding:20px 22px; margin:0 0 20px; }
-  .run.now{ border-color:var(--accent); }
+  /* Only what this page has that the others do not: the runs and their releases. The rest
+     (type, colours, the poster at the top, the foot) is the site's own site.css. The fonts
+     come from the site too, so opening this page asks nobody else for anything. */
+  .run{ background:var(--night2); border:1px solid var(--line); border-radius:16px;
+        padding:20px 22px; margin:0 0 20px; }
+  .run.now{ border-color:var(--amber1); border-width:2px; }
   @media (max-width:520px){ .run{ padding:16px; } }
 
-  .runhead{ display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;
-            margin-bottom:.5rem; }
-  .runhead h2{ font-family:var(--display); font-size:1.5rem; margin:0;
-               letter-spacing:-.01em; }
-  .runhead .code{ color:var(--muted); font-size:1.02rem; font-weight:600; }
+  .runhead{ display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:.5rem; }
+  .runhead h2{ font-family:var(--head); font-weight:400; font-size:2.6rem; line-height:1; margin:0;
+               letter-spacing:.01em; }
+  .runhead .code{ font-family:var(--display); font-stretch:112%; font-weight:800; color:var(--ink);
+                  font-size:1.15rem; }
   .runhead .count{ font-family:var(--mono); font-size:.74rem; color:var(--muted);
                    margin-left:auto; white-space:nowrap; }
-  .tag{ font-family:var(--mono); font-size:.66rem; letter-spacing:.06em;
-        text-transform:uppercase; background:var(--accent-soft); color:var(--accent-ink);
-        border-radius:999px; padding:3px 9px; }
+  .tag{ font-family:var(--mono); font-weight:500; font-size:.7rem; letter-spacing:.06em;
+        text-transform:uppercase; background:var(--yellow); color:#1a1206;
+        border-radius:999px; padding:4px 10px; transform:rotate(-3deg); }
 
   .about{ margin:0 0 4px; padding:0; list-style:none; }
-  .about li{ color:var(--ink-soft); padding:3px 0 3px 18px; position:relative; }
-  .about li::before{ content:""; position:absolute; left:2px; top:.78em; width:7px;
-                     height:2px; background:var(--accent); border-radius:2px; }
+  .about li{ color:var(--ink-soft); padding:3px 0 3px 22px; position:relative; }
+  .about li::before{ content:""; position:absolute; left:2px; top:.5em; width:11px; height:13px;
+                     background:var(--amber1);
+                     clip-path:polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); }
 
-  details{ margin-top:14px; border-top:1px solid var(--line-soft); padding-top:12px; }
-  summary{ cursor:pointer; color:var(--muted); font-size:.9rem; list-style:none; }
+  details{ margin-top:14px; border-top:1px solid var(--line-soft); padding-top:6px; }
+  summary{ cursor:pointer; color:var(--ink-soft); font-size:.95rem; list-style:none;
+           min-height:44px; display:flex; align-items:center; gap:8px; }
   summary::-webkit-details-marker{ display:none; }
-  summary::before{ content:"\25B8 "; display:inline-block; transition:transform .15s; }
+  summary::before{ content:"\25B8"; display:inline-block; transition:transform .15s; }
   details[open] summary::before{ transform:rotate(90deg); }
-  summary:hover{ color:var(--accent); }
+  summary:hover{ color:var(--amber1); }
 
-  .rel{ margin:14px 0 0; }
-  .rel h3{ font-family:var(--mono); font-size:.82rem; font-weight:600; margin:0 0 .2rem;
-           color:var(--ink); }
-  .rel ul{ margin:0 0 12px; padding-left:18px; color:var(--ink-soft); font-size:.95rem; }
+  .rel{ margin:10px 0 0; }
+  .rel h3{ font-family:var(--mono); font-stretch:100%; font-size:.86rem; font-weight:500; margin:0 0 .2rem;
+           color:var(--ink); letter-spacing:0; }
+  .rel ul{ margin:0 0 12px; padding-left:18px; color:var(--ink-soft); font-size:.97rem; }
   .rel li{ margin:.14rem 0; }
-  .rel h3 .kind{ font-family:var(--body); font-weight:500; color:var(--muted);
-                 margin-left:8px; font-size:.8rem; }
+  .rel h3 .kind{ font-family:var(--body); font-weight:500; color:var(--amber1);
+                 margin-left:8px; font-size:.82rem; }
 
   .renumber{ margin:34px 0 26px; padding:18px 0 0; border-top:2px dashed var(--line); }
-  .renumber h2{ font-family:var(--display); font-size:1.15rem; margin:0 0 .35rem; }
+  .renumber h2{ font-family:var(--display); font-stretch:112%; font-weight:800; font-size:1.25rem; margin:0 0 .35rem; }
   .renumber p{ color:var(--ink-soft); margin:0 0 .8rem; max-width:44rem; }
-  .renumber dl{ display:grid; grid-template-columns:max-content max-content 1fr; gap:4px 14px;
-                margin:0; font-size:.95rem; }
-  .renumber dt{ font-family:var(--mono); font-size:.82rem; font-weight:600; padding-top:.15em; }
+  .renumber dl{ display:grid; grid-template-columns:max-content max-content minmax(0,1fr); gap:4px 14px;
+                margin:0; font-size:.97rem; }
+  .renumber dt{ font-family:var(--mono); font-size:.84rem; font-weight:500; padding-top:.15em; }
   .renumber dd{ margin:0; color:var(--ink-soft); }
-  .renumber dd.k{ font-weight:600; color:var(--accent-ink); }
-  @media (max-width:520px){ .renumber dl{ grid-template-columns:max-content 1fr; }
+  .renumber dd.k{ font-weight:600; color:var(--amber1); }
+  @media (max-width:520px){ .renumber dl{ grid-template-columns:max-content minmax(0,1fr); }
                             .renumber dd:not(.k){ grid-column:2; } }
-
-  footer{ max-width:52rem; margin:0 auto; padding:0 20px 46px; color:var(--muted);
-          font-size:.8rem; display:flex; gap:14px; flex-wrap:wrap;
-          border-top:1px solid var(--line); padding-top:20px; }
 </style>
 </head>
 <body>
 <a class="skiplink" href="#main">Skip to the content</a>
-<div class="backhome"><a href="index.html">&#8592; Hplay</a></div>
+<div class="poster">
+  <div class="halftone" aria-hidden="true"></div>
+  <header class="top">
+    <a class="mark" href="./" aria-label="Hplay, home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.6 20.2 7.3v9.4L12 21.4 3.8 16.7V7.3z"/><path d="M12 2.6v18.8"/></svg>Hplay</a>
+    <span class="sp"></span>
+    <nav aria-label="Site"><a href="./">Home</a><a href="changelog.html" aria-current="page">Changelog</a><a href="feedback.html">Feedback</a><a href="license.html">Licence</a></nav>
+    <a class="pill" href="https://hplay.hosttost.workers.dev/hplay-latest.apk">Download</a>
+  </header>
+  <div class="wrap">
+    <span class="sticker">Every release</span>
+    <h1 class="head">Changelog</h1>
+    <p class="dek">Every release, newest first. Each number gets a few lines on what the whole run was for, and its releases underneath.</p>
+    <p class="stamp">82 releases across 19 numbered runs &nbsp;·&nbsp; newest v45.0.1 “Eli” &nbsp;·&nbsp; written from the app's own changelog on 2026-11-14</p>
+  </div>
+</div>
 
-<main id="main">
-  <h1>Changelog</h1>
-  <p class="lede">Every release, newest first. Each number gets a few lines on what the whole run was for, and its releases underneath.</p>
-  <p class="stamp">81 releases across 18 numbered runs &nbsp;·&nbsp; newest v44.1.0 “Alyx” &nbsp;·&nbsp; written from the app's own changelog on 2026-11-13</p>
-
+<main id="main" class="band plain">
+<div class="wrap narrow">
   <div class="run now">
+    <div class="runhead">
+      <h2>v45</h2>
+      <span class="code">Eli</span>
+      <span class="tag">current</span>
+      <span class="count">1 release &nbsp;v45.0.1</span>
+    </div>
+    <ul class="about">
+      <li>The first beta: out of alpha at last</li>
+      <li>A look of its own: the hexagon and Hplay green</li>
+      <li>A widget with buttons, in four sizes</li>
+      <li>Vinyl redrawn, and store apps that fit in</li>
+    </ul>
+    <details open>
+      <summary>The release</summary>
+      <div class="rel">
+        <h3>v45.0.1 <span class="kind">Shame</span></h3>
+        <ul>
+          <li>Vinyl mode, redrawn from the groove up</li>
+          <li>Each record is pressed in its cover's own colours</li>
+          <li>The colour comes from the corners the label hides</li>
+          <li>Fine grooves, track gaps and a light that stays still</li>
+          <li>A proper tonearm, with its shadow on the record</li>
+          <li>Pause lifts the arm and lets the record coast</li>
+          <li>Play spins it up and lowers the needle again</li>
+          <li>A new song rolls the old record off and its own on</li>
+          <li>The main menu shows the same record, smaller</li>
+          <li>The text backing matches Paper and Night screens</li>
+          <li>Store apps follow your screen mode, Dark too</li>
+          <li>They follow Display Size as well</li>
+          <li>Installed apps update themselves from Get More</li>
+          <li>An update keeps the app's save and its stats line</li>
+          <li>No white flash when an app opens in Dark or Night</li>
+          <li>Text inside store apps is as sharp as the rest</li>
+          <li>A new look: Hplay green with a cream wheel</li>
+          <li>The back button wears the HostLabo hexagon</li>
+          <li>A rounded middle button, and fresher colours</li>
+          <li>New installs start on Hplay colours and Dark</li>
+          <li>Launcher icons redrawn to match the new wheel</li>
+          <li>Holding a row explains it in a cleaner window</li>
+          <li>Every widget size is listed: one cell, square, bar, big</li>
+          <li>The widget and lock screen never keep the last cover</li>
+          <li>A new widget: the cover, the title and the artist</li>
+          <li>Play, next and previous work right on the widget</li>
+          <li>Four sizes, from a single cell up to four by two</li>
+          <li>Cover Style on Vinyl puts the record on the widget</li>
+          <li>The widget follows your colour, Match Icon or not</li>
+          <li>Six click sounds: Classic, Soft, Tick, Pop and more</li>
+          <li>Turn through them in Feel to hear each one</li>
+          <li>Click Volume: Quiet, Normal or Loud</li>
+          <li>Haptic Strength: Light, Normal or Strong</li>
+          <li>Chimes: two notes when a song starts or a list ends</li>
+          <li>Font: Noto Sans, Noto Serif and Noto Mono, under Look</li>
+          <li>Hplay is a beta now, not an alpha</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+
+  <div class="run">
     <div class="runhead">
       <h2>v44</h2>
       <span class="code">Alyx</span>
-      <span class="tag">current</span>
       <span class="count">3 releases &nbsp;v44.0.0&ndash;44.1.0</span>
     </div>
     <ul class="about">
       <li>Three numbers now: major, minor and patch</li>
       <li>Every kind of release says what it is</li>
     </ul>
-    <details open>
+    <details>
       <summary>All 3 releases</summary>
       <div class="rel">
         <h3>v44.1.0 <span class="kind">Default</span></h3>
@@ -1060,14 +1082,18 @@
       </div>
     </details>
   </div>
+</div>
 </main>
 
-<footer>
-  <span>Hplay v44.1.0 “Alyx”</span>
+<footer class="foot" role="contentinfo">
+  <div class="in">
+  <span>Hplay v45.0.1 “Eli”</span>
   <span>&copy; 2026 Iwo Dec</span>
   <span>HostLabo</span>
-  <span><a href="index.html" style="color:inherit">Home</a></span>
-  <span><a href="license.html" style="color:inherit">Licence</a></span>
+  <span><a href="./">Home</a></span>
+  <span><a href="license.html">Licence</a></span>
+  <span>Not affiliated with, or endorsed by, Apple Inc.</span>
+  </div>
 </footer>
 </body>
 </html>

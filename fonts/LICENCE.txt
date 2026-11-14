@@ -1,0 +1,10 @@
+The typefaces in this folder are used under the SIL Open Font Licence, version 1.1
+(https://openfontlicense.org), which allows them to be bundled and served from here.
+
+  Anton                 (c) The Anton Project Authors
+  Archivo               (c) The Archivo Project Authors (Omnibus-Type)
+  IBM Plex Sans, Mono   (c) IBM Corp.  "Plex" is a trademark of IBM Corp.
+  Permanent Marker      (c) Font Diner, Inc.  Licensed under the Apache Licence 2.0
+  UnifrakturMaguntia    (c) j. 'mach' wust, Peter Wiegel and others
+
+They are the Latin and Latin Extended subsets, as distributed by Google Fonts, unmodified.

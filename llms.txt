@@ -20,16 +20,20 @@ at a folder and it plays what is in it. There is no library service, no streamin
 no sign-in and no subscription. Nothing is ever uploaded: there is no analytics and no
 telemetry, and what you play is not reported anywhere.
 
-The app is not, however, a no-network app, and it should not be described as one. It makes
-outbound requests in exactly two places. It loads one script at startup — jsmediatags, a tag
-reader, from cdnjs — which fills in tags its own reader missed; with no connection that
-request fails and the built-in reader carries on alone. And Get More fetches a catalogue
-when you open it, then downloads whatever you choose to install. Playing music you already
-have touches the network at no point.
+The app is not, however, a no-network app, and it should not be described as one. This is
+everything it fetches. It loads one script at startup (jsmediatags, a tag reader, from cdnjs),
+which fills in tags its own reader missed; with no connection that request fails and the
+built-in reader carries on alone. Once each time it opens it asks the download site whether
+there is a newer version, which can be turned off. Get More fetches a catalogue when you open
+it, downloads whatever you choose to install, and brings installed apps up to date. Your
+Year, Wrapped opens its page on the Hplay site; the numbers ride in the part of the link after
+the #, which is never sent. Tapping Buy Me a Coffee opens that site in the browser. Playing
+music you already have touches the network at no point.
 
 The interface is a scroll wheel: a ring you turn with your thumb to move through a list, a
-middle button to choose, and menu, play/pause and skip around the outer edge. Spinning the
-ring faster jumps further down a list. Holding a button does a second thing — holding menu
+middle button to choose, and back (drawn as the HostLabo hexagon), play/pause and skip around
+the outer edge. Spinning the
+ring faster jumps further down a list. Holding a button does a second thing — holding the hexagon
 goes home, holding play opens the settings worth changing mid-song, holding a skip button
 scrubs through the track instead of jumping to the next one.
 
@@ -38,18 +42,19 @@ scrubs through the track instead of jumping to the next one.
 - Name: Hplay
 - Made by: HostLabo
 - Platform: Android
-- Current version: 38.10 ("Barney")
+- Current version: 45.0.0 ("Eli"), the first beta
 - Price: free. No paid tier, no ads, no in-app purchases
 - Status: beta. Not on the Google Play Store
-- How to get it: email hostlabosupport@gmail.com and the app is sent back to you
+- How to get it: download the APK from the website (https://hplay.hosttost.workers.dev/hplay-latest.apk)
+- Looks: Hplay green with a cream wheel and an amber middle button by default; other colours in Settings
 - Website: https://iwohost.github.io/hplaysite/
 - Licence: not open source; the source is not public
 
 ## What it does
 
 - Plays the audio files on the device: mp3, flac, m4a/aac, ogg, opus, wav
-- Plays with no internet connection. Two requests exist and neither is playback: a tag
-  reader fetched at startup, and the extras catalogue when Get More is opened
+- Plays with no internet connection. The requests that exist are listed above and none of
+  them is playback
 - No account, no cloud, no ads, no tracking, no telemetry
 - Every folder of music becomes a playlist named after the folder, regardless of tags
 - Playlist order can be set by hand and is remembered
@@ -62,6 +67,8 @@ scrubs through the track instead of jumping to the next one.
 - Sleep timer with fade out, playback speed with or without tape pitch, bass, effects and a
   loudness limiter, all reachable without leaving the song
 - Five screen looks: light, dark, high contrast, night and paper
+- A vinyl view: each record is pressed in its cover's own colours, with a tonearm
+- A home screen widget with buttons, in four sizes
 - Listening statistics counted on the device and never sent anywhere
 - Small built-in apps — clock, stopwatch, notes, a music quiz — and more from a separate
   catalogue at https://iwohost.github.io/hplay-market/
@@ -88,6 +95,8 @@ testing your own software. A credit is welcome but not required.
   https://iwohost.github.io/hplaysite/
 - Hplay at Sixty Days, a long read on how it got built:
   https://iwohost.github.io/hplaysite/review.html
+- Changelog, every release: https://iwohost.github.io/hplaysite/changelog.html
+- Licence: https://iwohost.github.io/hplaysite/license.html
 - Beta feedback form, in English or Polish:
   https://iwohost.github.io/hplaysite/feedback.html
 - The app catalogue: https://iwohost.github.io/hplay-market/

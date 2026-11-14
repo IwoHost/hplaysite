@@ -3,152 +3,36 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="color-scheme" content="light dark">
+<meta name="color-scheme" content="dark">
 <meta name="description" content="The Gold and Coffee skins are free in every copy of Hplay now. No code needed.">
-<meta name="theme-color" content="#1b6fd0">
+<meta name="theme-color" content="#0a1c15">
 <meta name="author" content="Iwo Dec (HostLabo)">
 <meta name="copyright" content="© 2026 Iwo Dec. All rights reserved.">
 <meta name="robots" content="noindex">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%231b6fd0%22/><circle cx=%2216%22 cy=%2216%22 r=%229%22 fill=%22none%22 stroke=%22white%22 stroke-width=%223%22/></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%2323845a%22/><circle cx=%2216%22 cy=%2216%22 r=%2210%22 fill=%22%23fbf6e8%22/><rect x=%2211.5%22 y=%2211.5%22 width=%229%22 height=%229%22 rx=%223%22 fill=%22%23f4ac3a%22/></svg>">
 <title>Hplay Skins</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@112,500;112,600;112,700;112,800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
-<style>
-  *{ box-sizing:border-box; }
-  html{ -webkit-text-size-adjust:100%; }
-  body{ margin:0; }
-  img{ max-width:100%; }
-  [hidden]{ display:none !important; }
-
-  :root{
-    --ground:#e9ebf0; --panel:#ffffff; --panel-2:#f3f5f9;
-    --ink:#0f131b; --ink-soft:#333c4a; --muted:#5c6674;
-    --line:#ccd2dc; --line-soft:#dfe3ea;
-    --accent:#1b6fd0; --accent-ink:#0f4fa8; --accent-soft:#dbe8f8;
-    --good:#357c14; --bad:#a32e24;
-    --shadow:0 1px 2px rgba(12,22,40,.06), 0 8px 24px -12px rgba(12,22,40,.28);
-    /* the button is a filled block, so its ink has to come from the same pair as its fill;
-       --accent-ink flips to a pale blue in the dark theme and white on that is unreadable */
-    --btn-bg:#0f4fa8; --btn-ink:#ffffff;
-    --display:"Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;
-    --body:"IBM Plex Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-    --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
-  }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      --ground:#0a0d13; --panel:#141a24; --panel-2:#101620;
-      --ink:#e6eaf1; --ink-soft:#c3cad6; --muted:#8b95a5;
-      --line:#242e3c; --line-soft:#1b232e;
-      --accent:#64a6f0; --accent-ink:#9cc8f7; --accent-soft:#132437;
-      --good:#6bc24a; --bad:#e2685a;
-      --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 30px -14px rgba(0,0,0,.8);
-      --btn-bg:#9cc8f7; --btn-ink:#08101c;
-    }
-  }
-  :root[data-theme="dark"]{
-    --ground:#0a0d13; --panel:#141a24; --panel-2:#101620;
-    --ink:#e6eaf1; --ink-soft:#c3cad6; --muted:#8b95a5;
-    --line:#242e3c; --line-soft:#1b232e;
-    --accent:#64a6f0; --accent-ink:#9cc8f7; --accent-soft:#132437;
-    --good:#6bc24a; --bad:#e2685a;
-    --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 30px -14px rgba(0,0,0,.8);
-    --btn-bg:#9cc8f7; --btn-ink:#08101c;
-  }
-
-  body{
-    background:var(--ground); color:var(--ink);
-    font-family:var(--body); font-size:16.5px; line-height:1.65;
-    -webkit-font-smoothing:antialiased;
-  }
-  .skiplink{
-    position:absolute; left:-9999px; top:0; background:#0f4fa8; color:#fff;
-    padding:10px 16px; z-index:20; border-radius:0 0 4px 0;
-  }
-  .skiplink:focus{ left:0; }
-  .backhome{
-    max-width:620px; margin:0 auto; padding:14px 22px 0;
-    font-family:var(--mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase;
-  }
-  .backhome a{
-    color:var(--accent-ink); text-decoration:none;
-    display:inline-flex; align-items:center; min-height:24px;
-  }
-  .backhome a:hover{ text-decoration:underline; }
-
-  main{ max-width:620px; margin:0 auto; padding:26px 22px 70px; }
-  .eyebrow{
-    font-family:var(--mono); font-size:12px; letter-spacing:.1em; text-transform:uppercase;
-    color:var(--muted); margin:0 0 10px;
-  }
-  h1{
-    font-family:var(--display); font-weight:800; letter-spacing:-.025em;
-    font-size:clamp(28px,6vw,42px); line-height:1.05; margin:0 0 12px; text-wrap:balance;
-  }
-  p{ margin:0 0 14px; color:var(--ink-soft); }
-  strong{ color:var(--ink); font-weight:600; }
-  a{ color:var(--accent-ink); }
-
-  /* the skin itself, drawn the way the player draws it: a body with a wheel on it */
-  .preview{
-    display:flex; align-items:center; gap:20px; flex-wrap:wrap;
-    background:var(--panel); border:1px solid var(--line); border-radius:6px;
-    padding:22px 24px; box-shadow:var(--shadow); margin:22px 0 0;
-  }
-  .chip{
-    width:104px; height:132px; border-radius:11px; flex:none; position:relative;
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.35), 0 2px 8px rgba(0,0,0,.25);
-  }
-  .chip i{
-    position:absolute; left:50%; bottom:17px; transform:translateX(-50%);
-    width:64px; height:64px; border-radius:50%;
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.25), 0 1px 3px rgba(0,0,0,.35);
-  }
-  .chip i::after{
-    content:""; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
-    width:24px; height:24px; border-radius:50%;
-  }
-  .chip b{
-    position:absolute; left:10px; right:10px; top:11px; height:52px;
-    border-radius:3px; background:#f7f8fa; border:1px solid rgba(0,0,0,.35);
-  }
-  .pname{ font-family:var(--display); font-weight:700; font-size:22px; margin:0 0 2px; }
-  .pwhat{ color:var(--muted); font-size:15px; margin:0; }
-
-  .go{
-    display:inline-flex; align-items:center; justify-content:center;
-    min-height:52px; padding:0 30px; margin:22px 0 0;
-    background:var(--btn-bg); color:var(--btn-ink); text-decoration:none;
-    font-family:var(--display); font-weight:700; font-size:17px;
-    border-radius:6px; border:1px solid transparent;
-  }
-  .go:hover{ filter:brightness(1.08); }
-  .go:focus-visible{ outline:3px solid var(--accent); outline-offset:3px; }
-
-  .fallback{
-    margin-top:26px; background:var(--panel-2); border:1px solid var(--line);
-    border-radius:6px; padding:16px 18px; font-size:15px; color:var(--ink-soft);
-  }
-  .fallback p:last-child{ margin-bottom:0; }
-  code{
-    font-family:var(--mono); font-weight:600; font-size:15px;
-    background:var(--accent-soft); color:var(--accent-ink);
-    padding:2px 7px; border-radius:4px; letter-spacing:.06em;
-  }
-  .fine{ font-size:14.5px; color:var(--muted); }
-  footer{
-    max-width:620px; margin:0 auto; padding:0 22px 60px;
-    display:flex; flex-wrap:wrap; gap:7px 22px;
-    font-family:var(--mono); font-size:11.5px; color:var(--muted);
-    border-top:1px solid var(--line); padding-top:20px;
-  }
-</style>
+<link rel="preload" href="fonts/anton.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="site.css">
 </head>
 <body>
 <a class="skiplink" href="#main">Skip to the content</a>
-<div class="backhome"><a href="index.html">&#8592; Hplay</a></div>
+<div class="poster">
+  <div class="halftone" aria-hidden="true"></div>
+  <header class="top">
+    <a class="mark" href="./" aria-label="Hplay, home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.6 20.2 7.3v9.4L12 21.4 3.8 16.7V7.3z"/><path d="M12 2.6v18.8"/></svg>Hplay</a>
+    <span class="sp"></span>
+    <nav aria-label="Site"><a href="./">Home</a><a href="changelog.html">Changelog</a><a href="feedback.html">Feedback</a><a href="license.html">Licence</a></nav>
+    <a class="pill" href="https://hplay.hosttost.workers.dev/hplay-latest.apk">Download</a>
+  </header>
+  <div class="wrap">
+    <span class="sticker">Supporter skins</span>
+    <h1 class="head">Gold and Coffee are free now</h1>
+  </div>
+</div>
 
-<main id="main">
-  <p class="eyebrow">Supporter skins</p>
-  <h1>Gold and Coffee are free now</h1>
+<main id="main" class="band plain doc">
+<div class="wrap narrow">
   <p>Both skins come with every copy of Hplay from v44.1.0. No code, no link, nothing to
     redeem: they are in <strong>Settings &rsaquo; Look &rsaquo; Body Color</strong>, finishes and all.</p>
 
@@ -161,7 +45,7 @@
     <div><p class="pname">Coffee</p><p class="pwhat">Crema body, espresso wheel</p></div>
   </div>
 
-  <a class="go" href="hplay://gift/COFFEE">Open Hplay</a>
+  <a class="btn" style="margin-top:26px" href="hplay://gift/COFFEE">Open Hplay</a>
 
   <div class="fallback">
     <p>They used to come with a coffee. A coffee buys nothing now, not even a colour: everybody
@@ -171,22 +55,17 @@
       If you already had the skin, you keep it; it is just called Gold or Coffee now.</p>
     <p class="fine">Haven't got Hplay? <a href="index.html#start">Get it here</a>.</p>
   </div>
+</div>
 </main>
 
-<footer>
-  <span>Hplay v44.1.0 &ldquo;Alyx&rdquo;</span>
+<footer class="foot" role="contentinfo">
+  <div class="in">
+  <span>Hplay v45.0.1 &ldquo;Eli&rdquo;</span>
   <span>&copy; 2026 Iwo Dec</span>
   <span>HostLabo</span>
   <span>Not affiliated with, or endorsed by, Apple Inc.</span>
+</div>
 </footer>
 
-<script>
-  // the home page's toggle writes this key; honour it so the pages agree
-  try{
-    var t = localStorage.getItem('hplaysite-theme');
-    if(t === 'dark' || t === 'light') document.documentElement.dataset.theme = t;
-  }catch(e){}
-
-</script>
 </body>
 </html>

@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="color-scheme" content="light dark">
+<meta name="color-scheme" content="dark">
 <meta name="description" content="Tester notes for the Hplay beta, in English or Polish.">
-<meta name="theme-color" content="#1b6fd0">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%231b6fd0%22/><circle cx=%2216%22 cy=%2216%22 r=%229%22 fill=%22none%22 stroke=%22white%22 stroke-width=%223%22/></svg>">
+<meta name="theme-color" content="#0a1c15">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%2323845a%22/><circle cx=%2216%22 cy=%2216%22 r=%2210%22 fill=%22%23fbf6e8%22/><rect x=%2211.5%22 y=%2211.5%22 width=%229%22 height=%229%22 rx=%223%22 fill=%22%23f4ac3a%22/></svg>">
 <style>
   *{ box-sizing:border-box; }
   html{ -webkit-text-size-adjust:100%; }
@@ -24,7 +24,8 @@
 </style>
 <link rel="canonical" href="https://iwohost.github.io/hplaysite/feedback.html">
 <title>Hplay Tester Notes</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@112,600;112,700;112,800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="preload" href="fonts/anton.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts/fonts.css">
 <script>
 /* ---------------------------------------------------------------------------
    WHERE TESTER NOTES GO.
@@ -48,42 +49,22 @@ window.HPLAY_POSTBOX = '1851de0b-3432-44a0-9c75-81463fb7beb2';
 </head>
 <body>
 <a class="skiplink" href="#main">Skip to the form</a>
-<div class="backhome"><a href="index.html">&#8592; Hplay</a></div>
+<div class="backhome"><a href="./" aria-label="Hplay, home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.6 20.2 7.3v9.4L12 21.4 3.8 16.7V7.3z"/><path d="M12 2.6v18.8"/></svg>Hplay</a></div>
 <style>
+  /* One palette. The site has one look now, the dark one the home page wears, so the
+     light and dark copies of these that used to follow the system setting are gone. */
   :root{
-    --ground:#e9ebf0; --panel:#fff; --panel-2:#f3f5f9;
-    --ink:#0f131b; --ink-soft:#333c4a; --muted:#5c6674;
-    --line:#ccd2dc; --line-soft:#dfe3ea;
-    --accent:#1b6fd0; --accent-ink:#0f4fa8; --accent-soft:#dbe8f8;
-    --good:#3d8f18; --good-soft:#e2f2da;
-    --chrome-1:#fdfdfd; --chrome-2:#dadce0; --chrome-3:#c3c7cd;
-    --chrome-line:#9aa0a8; --chrome-ink:#1c1f24;
-    --shadow:0 1px 2px rgba(12,22,40,.06), 0 8px 24px -12px rgba(12,22,40,.26);
+    --ground:#0a1c15; --panel:#102a1f; --panel-2:#0d2319;
+    --ink:#fbf6e8; --ink-soft:#dfe8dc; --muted:#a8bcae;
+    --line:rgba(251,246,232,.24); --line-soft:rgba(251,246,232,.1);
+    --accent:#ffcf63; --accent-ink:#ffcf63; --accent-soft:#3a2f12;
+    --good:#5fe0a6; --good-soft:#123826;
+    --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 30px -14px rgba(0,0,0,.8);
     --display:"Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;
     --body:"IBM Plex Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
     --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
-  }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      --ground:#0a0d13; --panel:#141a24; --panel-2:#101620;
-      --ink:#e6eaf1; --ink-soft:#c3cad6; --muted:#8b95a5;
-      --line:#242e3c; --line-soft:#1b232e;
-      --accent:#64a6f0; --accent-ink:#9cc8f7; --accent-soft:#132437;
-      --good:#6bc24a; --good-soft:#15251a;
-      --chrome-1:#2e3138; --chrome-2:#1c1f25; --chrome-3:#15171c;
-      --chrome-line:#05060a; --chrome-ink:#ced4dc;
-      --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 30px -14px rgba(0,0,0,.8);
-    }
-  }
-  :root[data-theme="dark"]{
-    --ground:#0a0d13; --panel:#141a24; --panel-2:#101620;
-    --ink:#e6eaf1; --ink-soft:#c3cad6; --muted:#8b95a5;
-    --line:#242e3c; --line-soft:#1b232e;
-    --accent:#64a6f0; --accent-ink:#9cc8f7; --accent-soft:#132437;
-    --good:#6bc24a; --good-soft:#15251a;
-    --chrome-1:#2e3138; --chrome-2:#1c1f25; --chrome-3:#15171c;
-    --chrome-line:#05060a; --chrome-ink:#ced4dc;
-    --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 30px -14px rgba(0,0,0,.8);
+    --head:"Anton",Impact,"Arial Narrow",sans-serif;
+    color-scheme:dark;
   }
 
   body{ background:var(--ground); color:var(--ink); font-family:var(--body);
@@ -185,7 +166,6 @@ window.HPLAY_POSTBOX = '1851de0b-3432-44a0-9c75-81463fb7beb2';
 
   .note{ font-size:14px; color:var(--muted); margin-top:14px; max-width:52ch; }
   .err{ color:#b3372c; font-size:14.5px; margin-top:12px; }
-  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .err{ color:#e2685a; } }
 
   /* ---- the thank-you state ---- */
   #done[hidden]{ display:none; }
@@ -244,22 +224,39 @@ window.HPLAY_POSTBOX = '1851de0b-3432-44a0-9c75-81463fb7beb2';
   }
   .skiplink:focus{ top:0; }
   :focus-visible{ outline:3px solid var(--accent); outline-offset:2px; border-radius:4px; }
-  .chrome .n{ color:#3d4550; }
-  .backhome a{ color:#0f4fa8; padding:6px 4px; display:inline-block; min-height:24px; }
-  .req{ color:#0f4fa8; }
-  .send{ background:var(--accent-ink); border-color:var(--accent-ink); }
-  :root[data-theme="dark"] .chrome .n{ color:#a2acbb; }
-  :root[data-theme="dark"] .backhome a{ color:#9cc8f7; }
-  :root[data-theme="dark"] .req{ color:#9cc8f7; }
-  :root[data-theme="dark"] .send{ background:var(--accent); border-color:var(--accent); color:#06243f; }
-  :root[data-theme="dark"] .lang button[aria-pressed="true"]{ color:#06243f; }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]) .chrome .n{ color:#a2acbb; }
-    :root:not([data-theme="light"]) .backhome a{ color:#9cc8f7; }
-    :root:not([data-theme="light"]) .req{ color:#9cc8f7; }
-    :root:not([data-theme="light"]) .send{ background:var(--accent); border-color:var(--accent); color:#06243f; }
-    :root:not([data-theme="light"]) .lang button[aria-pressed="true"]{ color:#06243f; }
-  }
+
+  /* ---- the site's look, laid over the form ----
+     The form keeps its own stylesheet, because its class names are its own and its script
+     depends on them. These rules dress it as the rest of the site: the wash and dots of the
+     home page behind the top, an Anton headline tipped over with a red and cyan edge, amber
+     for whatever is chosen. */
+  body{ background:
+      radial-gradient(70% 420px at 0% 0%, rgba(31,191,124,.5), transparent 70%),
+      radial-gradient(60% 380px at 100% 200px, rgba(255,179,0,.34), transparent 70%), var(--ground);
+    background-repeat:no-repeat; }
+  .backhome{ max-width:640px; padding:16px 18px 0; }
+  .backhome a{ color:var(--ink); font-family:var(--display); font-stretch:125%; font-weight:900; font-size:19px; letter-spacing:-.01em;
+    text-transform:none; display:inline-flex; align-items:center; gap:8px; min-height:44px; padding:0; }
+  .backhome a svg{ width:22px; height:22px; }
+  .eyebrow{ display:inline-block; background:#ffd23f; color:#1a1206; font-weight:500; font-size:12px; letter-spacing:.07em; padding:.55em .95em .5em;
+    border-radius:999px; transform:rotate(-3deg); box-shadow:0 6px 14px rgba(0,0,0,.35); margin-bottom:18px; }
+  h1{ font-family:var(--head); font-weight:400; text-transform:uppercase; font-size:clamp(46px,13.5vw,84px); line-height:.94; letter-spacing:.005em; color:#fff;
+    text-shadow:-.028em 0 0 #ff2e63, .028em 0 0 #18d8ff; transform:rotate(-2.5deg); transform-origin:0 60%; margin-bottom:24px; }
+  .intro{ color:#f6f2e6; }
+  .chrome{ background:none; border:0; border-top:2px solid var(--ink); border-radius:0; box-shadow:none; padding:14px 0 0; margin:44px 0 20px; color:var(--ink); }
+  .chrome h2{ text-align:left; font-stretch:112%; font-weight:800; font-size:22px; color:var(--ink); order:2; }
+  .chrome .n{ color:#1a1206; background:#ffd23f; border-radius:999px; padding:3px 9px; min-width:0; font-weight:500; transform:rotate(-4deg); }
+  .batt{ display:none; }
+  .req{ color:var(--accent); }
+  .lang button{ color:var(--ink-soft); }
+  .lang button[aria-pressed="true"]{ background:var(--accent); color:#22150a; }
+  .pill input:checked + span{ background:linear-gradient(180deg,#ffcf63,#f4ac3a); border-color:#ffcf63; color:#22150a; }
+  .send{ background:linear-gradient(180deg,#ffcf63,#f4ac3a); border-color:#b76f12; color:#22150a; font-family:var(--display); font-stretch:112%; font-weight:800;
+    box-shadow:0 3px 0 #b76f12; }
+  .err{ color:#ff9db3; }
+  a{ color:var(--accent); }
+  .skiplink{ background:#fbf6e8; color:#10271d; }
+  @media (max-width:480px){ h1{ font-size:13.5vw; } }
 </style>
 
 <main class="wrap" id="main">
@@ -452,7 +449,7 @@ window.HPLAY_POSTBOX = '1851de0b-3432-44a0-9c75-81463fb7beb2';
     en: {
       mailit: "Send it to me by email",
       summaryLabel: "Your notes, as text",
-      eyebrow:'Hplay · v44.1.0 “Alyx” · beta test',
+      eyebrow:'Hplay · v45.0.1 “Eli” · beta test',
       h1:'What did you actually think?',
       intro1:'This is Hplay, a music player built to work like the classic scroll-wheel players. It is a <b>beta build</b>: about two months old, unfinished on purpose, and you are one of the first people outside the project to touch it.',
       intro2:'Be blunt. “I didn\'t get it” and “this bit annoyed me” are worth more than “nice job”. Things being broken is expected at this stage. Saying <em>which</em> things is the useful part. Two questions are required, the rest you can skip. Takes about three minutes.',
@@ -504,7 +501,7 @@ window.HPLAY_POSTBOX = '1851de0b-3432-44a0-9c75-81463fb7beb2';
       manualMsg:"Press the button and your mail app opens with everything already written out, addressed to hostlabosupport@gmail.com. Or copy the text and send it however you like.",
       copy:'Copy my answers', copied:'Copied. Now paste it to Iwo',
       back:'Back to the form', change:'Change something',
-      footer:'Hplay v41.5 · beta test · September 2026 · © 2026 Iwo Dec (HostLabo) · Hplay is not affiliated with, or endorsed by, Apple Inc.',
+      footer:'Hplay · beta test · © 2026 Iwo Dec (HostLabo) · Hplay is not affiliated with, or endorsed by, Apple Inc.',
       sumTitle:'HPLAY TESTER NOTES', sumFrom:'From', sumAnon:'(anonymous)', sumPhone:'Phone',
       sumFirst:'FIRST TEN SECONDS', sumWheel:'THE WHEEL', sumFound:'FOUND ALONE', sumNothing:'nothing',
       sumRatings:'RATINGS', sumLook:'looks', sumFeel:'feels', sumSpeed:'speed',
@@ -514,7 +511,7 @@ window.HPLAY_POSTBOX = '1851de0b-3432-44a0-9c75-81463fb7beb2';
     pl: {
       mailit: "Wyślij mi to mailem",
       summaryLabel: "Twoje uwagi, jako tekst",
-      eyebrow:'Hplay · v44.1.0 „Alyx” · test beta',
+      eyebrow:'Hplay · v45.0.1 „Eli” · test beta',
       h1:'Co o tym naprawdę myślisz?',
       intro1:'To jest Hplay, odtwarzacz muzyki zrobiony tak, żeby działał jak klasyczne odtwarzacze z kółkiem. To <b>wersja beta</b>: ma jakieś dwa miesiące, jest celowo niedokończona, a Ty jesteś jedną z pierwszych osób spoza projektu, które jej dotykają.',
       intro2:'Pisz wprost. „Nie rozumiem tego” i „to mnie wkurzało” są warte więcej niż „fajne”. Na tym etapie to, że coś jest zepsute, jest normalne. Najważniejsze jest powiedzieć, <em>co dokładnie</em>. Dwa pytania są obowiązkowe, resztę możesz pominąć. Zajmie jakieś trzy minuty.',
@@ -566,7 +563,7 @@ window.HPLAY_POSTBOX = '1851de0b-3432-44a0-9c75-81463fb7beb2';
       manualMsg:"Naciśnij przycisk, a otworzy się twoja aplikacja pocztowa z już gotowym tekstem, zaadresowanym na hostlabosupport@gmail.com. Albo skopiuj tekst i wyślij go jak chcesz.",
       copy:'Skopiuj odpowiedzi', copied:'Skopiowane. Teraz wklej to Iwo',
       back:'Wróć do formularza', change:'Zmień coś',
-      footer:'Hplay v41.5 · test beta · wrzesień 2026 · © 2026 Iwo Dec (HostLabo) · Hplay nie jest powiązane z Apple Inc. ani przez nie wspierane.',
+      footer:'Hplay · test beta · © 2026 Iwo Dec (HostLabo) · Hplay nie jest powiązane z Apple Inc. ani przez nie wspierane.',
       sumTitle:'HPLAY: UWAGI TESTERA', sumFrom:'Od', sumAnon:'(anonimowo)', sumPhone:'Telefon',
       sumFirst:'PIERWSZE DZIESIĘĆ SEKUND', sumWheel:'KÓŁKO', sumFound:'ZNALEZIONE SAMODZIELNIE', sumNothing:'nic',
       sumRatings:'OCENY', sumLook:'wygląd', sumFeel:'obsługa', sumSpeed:'szybkość',
@@ -700,7 +697,7 @@ window.HPLAY_POSTBOX = '1851de0b-3432-44a0-9c75-81463fb7beb2';
   function collect(){
     return {
       submittedAt: new Date().toISOString(),
-      appVersion: 'v44.1.0 Alyx (beta)',
+      appVersion: 'v45.0.1 Eli (beta)',
       language: lang,
       first: val('first'), wheel: val('wheel'), found: checked('found'),
       look: val('look'), feel: val('feel'), speed: val('speed'),
