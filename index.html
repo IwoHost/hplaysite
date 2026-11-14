@@ -866,22 +866,67 @@
   <!-- An honest statement of where this page stands, and a way to tell me when it does not
        work for you. Written as what was actually measured, not as a claim of compliance. -->
   <section class="band plain" id="access">
-    <div class="wrap narrow">
+    <div class="wrap">
       <div class="sec"><span class="sticker cream">07</span><h2 class="head">Accessibility</h2></div>
-      <p class="lede">This page aims to meet WCAG 2.2 level AA. Here is honestly where it stands.</p>
+      <p class="lede">A click wheel asks a lot of hands, eyes and ears. So Hplay has a whole screen for making it work for you: <b>Settings &rsaquo; Feel &rsaquo; Accessibility</b>.</p>
       <div class="prose">
-        <h3>What has been checked</h3>
-        <p>Every piece of text on this site was measured against what is actually behind it, and all of it clears the contrast the standard asks for: 4.5:1 for ordinary text and 3:1 for large headlines, measured against the worst pixel behind each line and not an average. The colour washes, dots and grain stay behind pictures and at the edges, away from anything you are meant to read. Everything you can operate has a name a screen reader can read out, a visible focus ring, and a target at least 24 by 24 pixels. Each page has one main heading, headings in order, a skip link, and proper landmarks. The pages work at 320 pixels wide, which is what 400% zoom comes to, without scrolling sideways. Nothing is conveyed by colour alone. Nothing on the page moves by itself, and the few things that move when you touch them stay still if your device asks for reduced motion. The marker notes and the newspaper cutting are decoration, hidden from screen readers, and only repeat what the page says in ordinary words.</p>
+        <p>Everything below is in the app now, and none of it needs an account or a connection. Hold the middle button on any setting and Hplay tells you what it does before you change it.</p>
+      </div>
 
-        <h3>What has not</h3>
-        <p>None of the above was tested with a real screen reader by somebody who uses one every day, and that is the test that counts. The photographs have written descriptions, but a description is somebody&rsquo;s opinion of a picture and mine may not be the useful one. The demo tracks are music with no words, so there are no captions or transcripts; if that is wrong, tell me. The site has one look, a dark one, and does not offer a light one. This is a one-person beta, so it is checked by a script and not audited by anyone qualified.</p>
+      <div class="a11y">
+        <div class="a11y-g">
+          <h3>Seeing it</h3>
+          <dl>
+            <dt>Display Size</dt><dd>Normal, Large or Larger. Every word on the screen grows, not just some of them.</dd>
+            <dt>Bold Text</dt><dd>Heavier letters everywhere, without making them bigger.</dd>
+            <dt>High Contrast</dt><dd>Black and white, at the strongest difference the screen can manage. Turning it off puts back the screen you had, not a bright white one.</dd>
+            <dt>Screen</dt><dd>Five looks: Light, Dark, Paper (off-white), Night (warm and dim) and High Contrast. New phones start on Dark.</dd>
+            <dt>Font</dt><dd>Noto Sans, Noto Serif or Noto Mono, built into the app, so they look the same on every phone.</dd>
+            <dt>Scrolling Names</dt><dd>A long name walks across and back. Off leaves it still.</dd>
+          </dl>
+        </div>
+        <div class="a11y-g">
+          <h3>Hearing it</h3>
+          <dl>
+            <dt>Speak Selection</dt><dd>Reads the highlighted row out loud as you move, and with Menus and songs it also says each song as it starts. It uses your phone&rsquo;s own text-to-speech voice, and says so if there is none.</dd>
+            <dt>Mono Audio</dt><dd>Both channels into one, so nothing is only in the ear you cannot hear with.</dd>
+            <dt>Balance</dt><dd>Left, Mostly left, Centre, Mostly right or Right, for when one ear hears better than the other.</dd>
+            <dt>Chimes</dt><dd>Two notes when a new song starts, and two falling ones when the list runs out.</dd>
+            <dt>Clicker</dt><dd>Six click sounds for the wheel, with Click Volume at Quiet, Normal or Loud, or no clicks at all.</dd>
+          </dl>
+        </div>
+        <div class="a11y-g">
+          <h3>Holding it steady</h3>
+          <dl>
+            <dt>Wheel Sensitivity</dt><dd>Precise, Normal or Quick. Precise asks for more turn per row, so a shaky hand does not walk the list on its own.</dd>
+            <dt>Hold Delay</dt><dd>Short, Normal or Long: how long a press lasts before it counts as holding.</dd>
+            <dt>Haptics</dt><dd>A small buzz for each step of the wheel, at Light, Normal or Strong, or off.</dd>
+            <dt>Reduce Motion</dt><dd>Stops everything that moves on its own: the drifting artwork, the turning record, screens sliding in, names walking across.</dd>
+            <dt>Volume buttons</dt><dd>They only change the volume, held down or not. Skipping songs with them is a separate choice you turn on.</dd>
+          </dl>
+        </div>
+        <div class="a11y-g">
+          <h3>Finding your way</h3>
+          <dl>
+            <dt>Ask what it does</dt><dd>Hold the middle button on a setting for a plain explanation of it.</dd>
+            <dt>A tour</dt><dd>The first start walks you through the wheel, one press at a time.</dd>
+            <dt>Big letters</dt><dd>Scrolling a long list shows the letter you are on, large, in the middle of the screen.</dd>
+            <dt>Nothing lost by accident</dt><dd>Anything that deletes asks first, with Keep already chosen.</dd>
+          </dl>
+        </div>
+      </div>
 
-        <h3>The app itself</h3>
-        <p>Hplay the Android app is a separate thing from this page and has not been through the same check. It has a text size setting, a high-contrast screen mode, a reduced-motion setting and a haptics switch, but it is driven by a scroll wheel, which is a demanding thing to operate. If it does not work for you I would genuinely like to know, because that is fixable and worth fixing.</p>
+      <div class="prose" style="margin-top:36px">
+        <h3>What is not there yet</h3>
+        <p>Hplay draws its own screen and is steered by its own wheel, and it has not been tested with TalkBack, Android&rsquo;s screen reader, by somebody who uses one every day. Speak Selection is Hplay&rsquo;s own way of reading things out until then. If any of this does not work for you, I would genuinely like to know: that is fixable, and worth fixing.</p>
+
+        <h3>This website</h3>
+        <p>This page aims to meet WCAG 2.2 level AA. Every piece of text was measured against what is actually behind it and clears 4.5:1 for ordinary text and 3:1 for large headlines, against the worst pixel behind each line. Everything you can operate has a name a screen reader can read, a visible focus ring, and a target at least 24 by 24 pixels. Each page has one main heading, headings in order, a skip link and proper landmarks, and works at 320 pixels wide without scrolling sideways. Nothing is conveyed by colour alone, nothing moves by itself, and the marker notes and the newspaper cutting are decoration, hidden from screen readers, that only repeat what the page says in ordinary words.</p>
+        <p>What has not been done: a test with a real screen reader by somebody who uses one every day, which is the test that counts. The photo descriptions are one person&rsquo;s opinion of a picture. The demo tracks have no words, so there are no captions. The site has one look, a dark one. This is a one-person beta, checked by a script and not audited by anyone qualified.</p>
 
         <h3>Tell me when something does not work</h3>
-        <p>Email <a href="mailto:hostlabosupport@gmail.com">hostlabosupport@gmail.com</a> with what you were trying to do and what got in the way. You will get a reply from a person. If something here stops you using the page, say so and it goes to the front of the queue.</p>
-        <p class="fine">Last checked 14 November 2026, against WCAG 2.2 AA, using automated measurement of the rendered pages.</p>
+        <p>Email <a href="mailto:hostlabosupport@gmail.com">hostlabosupport@gmail.com</a> with what you were trying to do and what got in the way. You will get a reply from a person, and anything that stops you using Hplay or this page goes to the front of the queue.</p>
+        <p class="fine">The website was last checked 14 November 2026, against WCAG 2.2 AA, using automated measurement of the rendered pages.</p>
       </div>
     </div>
   </section>

@@ -390,3 +390,17 @@ footer.foot a{ color:var(--ink-soft); }
 .pname{ font-family:var(--head); text-transform:uppercase; font-size:34px; line-height:1; margin:0 0 4px; color:var(--ink) !important; }
 .pwhat{ font-size:15.5px; margin:0; }
 .fallback{ margin-top:30px; background:var(--night2); border:1px solid var(--line); border-radius:16px; padding:18px 20px 4px; font-size:16px; }
+
+/* The app's accessibility settings, four groups as cards: what each setting is called in the
+   app, then what it does. Names first and in full, so somebody can find the same row on the
+   phone. One column on a phone, two from 800px. */
+.a11y{ display:grid; grid-template-columns:minmax(0,1fr); gap:16px; margin-top:28px; }
+@media (min-width:800px){ .a11y{ grid-template-columns:repeat(2, minmax(0,1fr)); } }
+.a11y-g{ background:var(--night2); border:1px solid var(--line); border-radius:16px; padding:20px 20px 8px; }
+.a11y-g h3{ margin:0 0 12px; font-family:var(--display); font-stretch:118%; font-weight:900; font-size:22px; line-height:1.1; color:var(--ink); }
+.a11y-g dl{ margin:0; }
+.a11y-g dt{ font-family:var(--body); font-weight:600; font-size:16px; color:var(--ink); margin-top:12px; }
+.a11y-g dt:first-child{ margin-top:0; }
+.a11y-g dd{ margin:3px 0 12px; font-size:15.5px; line-height:1.5; color:var(--muted); }
+.a11y-g dd:last-child{ margin-bottom:12px; }
+
