@@ -42,7 +42,7 @@ scrubs through the track instead of jumping to the next one.
 - Name: Hplay
 - Made by: HostLabo
 - Platform: Android
-- Current version: 46.0.0 ("Kleiner"), the first beta
+- Current version: 46.0.0 ("Kleiner"); the beta began with 45.0.0 ("Eli")
 - Price: free. No paid tier, no ads, no in-app purchases
 - Status: beta. Not on the Google Play Store
 - How to get it: download the APK from the website (https://hplay.hosttost.workers.dev/hplay-latest.apk)
